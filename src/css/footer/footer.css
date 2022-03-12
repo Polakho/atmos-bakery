@@ -1,0 +1,18 @@
+footer {
+  height: 100px;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.socials li img {
+  width: 20px;
+}
