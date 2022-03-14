@@ -4,7 +4,7 @@
   </head>
   <footer>
     <ul class="content-link">
-      <li><a href="">À propos</a></li>
+      <li><a href="/about">À propos</a></li>
       <li><a href="">Contacter</a></li>
       <li><a href="https://gitlab.com/a8979/atmos-bakery-front" target="_blank">Code source</a></li>
     </ul>
