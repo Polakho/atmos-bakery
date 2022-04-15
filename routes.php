@@ -1,6 +1,6 @@
 <?php
 
-require_once("{$_SERVER['DOCUMENT_ROOT']}/router.php");
+require_once("{$_SERVER['DOCUMENT_ROOT']}/atmos/router.php");
 
 // Static GET
 // In the URL -> http://localhost

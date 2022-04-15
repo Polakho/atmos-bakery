@@ -6,8 +6,8 @@
     <mask>
       <img src="" alt="" class="item-dessert">
     </mask>
-    <h3>Nom du dessert</h3>
-    <h3>Prix du dessert</h3>
-    <p>Description du dessert.</p>
+    <h3 class="dessert-name">Nom du dessert</h3>
+    <h3 class="dessert-price">Prix du dessert</h3>
+    <p class="dessert-description">Description du dessert.</p>
   </div>
 </html>
