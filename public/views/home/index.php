@@ -1,3 +1,7 @@
+<?php
+use App\Autoloader;
+use App\Product;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +13,23 @@
 </head>
 <body>
   <?php
-    require 'src/components/header/header.php';
+  require 'src/components/header/header.php';
   ?>
   <section class="main-section-background">
     C'est la homepage la
+      <br>
+
+      <?php
+      require "src/classes/Autoloader.php";
+      Autoloader::register();
+
+      $Product = new Product();
+      $data = $Product->getAllProduct();
+      var_dump($data);
+
+
+
+      ?>
   </section>
   <section>
     <?php
