@@ -8,8 +8,16 @@
   <title>Atmos Bakery</title>
 </head>
 <body>
+  <?php
+    require 'src/components/header/header.php';
+  ?>
   <section class="main-section-background">
     C'est la homepage la
+  </section>
+  <section>
+    <?php
+      require 'src/components/footer/footer.php';
+    ?>
   </section>
 </body>
 </html>
