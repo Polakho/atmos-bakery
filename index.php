@@ -1,6 +1,7 @@
 <?php
+$server_root = $_SERVER['DOCUMENT_ROOT'];
 
-require_once("{$_SERVER['DOCUMENT_ROOT']}/atmos/router.php");
+require("{$_SERVER['DOCUMENT_ROOT']}/router.php");
 
 // Static GET
 // In the URL -> http://localhost
@@ -11,4 +12,4 @@ get('/about', 'public/views/about/index.php');
 
 
 // The 404.php has access to $_GET and $_POST
-any('/404','public/errors/404.php');
+any('/404',"public/errors/404.php");
