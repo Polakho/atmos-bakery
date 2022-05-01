@@ -8,12 +8,6 @@
   <title>Atmos Bakery | À propos</title>
 </head>
 <body>
-  <?php
-    require 'src/components/header/header.php';
-  ?>
   LE A PROPOS LA
-  <?php
-    require 'src/components/footer/footer.php';
-  ?>
 </body>
 </html>
