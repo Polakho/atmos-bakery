@@ -1,6 +1,8 @@
 <?php
 use App\Classes\Autoloader;
 use App\Models\ProductModel;
+use App\Models\ScheduleModel;
+use App\Models\UserModel;
 
 require "../src/classes/Autoloader.php";
 Autoloader::register();
@@ -23,11 +25,8 @@ Autoloader::register();
       <br>
 
       <?php
-      $pdo = new \App\Classes\Database();
-      var_dump($pdo);
-
-      //var_dump($product);
-
+      $productModel = new ProductModel();
+      var_dump($productModel->getAllProduct(1));
       ?>
   </section>
   <section>
