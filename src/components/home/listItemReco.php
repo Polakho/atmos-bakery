@@ -1,6 +1,6 @@
 <html>
   <head>
-    <link rel="stylesheet" href="../../../public/css/home/listItemReco.css">
+    <link rel="stylesheet" href="css/home/listItemReco.css">
   </head>
   <div class="item-card">
     <mask>
