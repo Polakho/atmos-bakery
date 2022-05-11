@@ -1,8 +1,8 @@
 <?php
-use App\Classes\Autoloader;
 use App\Models\ProductModel;
 use App\Models\ScheduleModel;
 use App\Models\UserModel;
+use App\Classes\Autoloader;
 
 require "../src/classes/Autoloader.php";
 Autoloader::register();
@@ -26,7 +26,7 @@ Autoloader::register();
 
       <?php
       $productModel = new ProductModel();
-      var_dump($productModel->getAllProduct(1));
+      var_dump($productModel->getAllProduct());
       ?>
   </section>
   <section>
