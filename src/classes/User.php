@@ -12,6 +12,11 @@ class User
     private $client_id;
     private $roles;
 
+    public function __construct(){
+        $this->setRoles("Client");
+        $this->trash = false;
+    }
+
     /**
      * @return mixed
      */

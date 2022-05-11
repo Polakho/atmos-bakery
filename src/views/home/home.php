@@ -1,12 +1,16 @@
 <?php
+
 use App\Classes\Autoloader;
 use App\Models\ProductModel;
+use App\Models\ScheduleModel;
+use App\Models\UserModel;
 
 require "../src/classes/Autoloader.php";
 Autoloader::register();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,26 +18,25 @@ Autoloader::register();
   <link rel="stylesheet" href="css/home/home.css">
   <title>Atmos Bakery</title>
 </head>
+
 <body>
   <?php
   include '../src/components/header/header.php';
   ?>
   <section class="main-section-background">
     C'est la homepage la
-      <br>
+    <br>
 
-      <?php
-      $pdo = new \App\Classes\Database();
-      var_dump($pdo);
+    <?php
 
-      //var_dump($product);
 
-      ?>
+    ?>
   </section>
   <section>
     <?php
-      include '../src/components/footer/footer.php';
+    include '../src/components/footer/footer.php';
     ?>
   </section>
 </body>
+
 </html>
