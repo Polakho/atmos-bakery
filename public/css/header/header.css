@@ -1,0 +1,11 @@
+header {
+  width: 100vw;
+  height: 202px;
+  position: fixed;
+  background: transparent;
+}
+
+header img {
+  height: 202px;
+  margin: 0 50px;
+}
