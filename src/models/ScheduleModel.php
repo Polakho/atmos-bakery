@@ -23,6 +23,7 @@ class ScheduleModel
      * @return array|null
      */
     public function getSchedulesByStoreId($id){
+
         $pdo = $this->db->getPDO();
         if($id !== null && !empty($id)){
 
