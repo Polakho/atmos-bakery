@@ -1,8 +1,8 @@
 <html>
   <head>
-    <link rel="stylesheet" href="src/css/header/header.css ">
+    <link rel="stylesheet" href="css/header/header.css">
   </head>
   <header>
-    <img src="assets/Logos/logoAC2.png" alt="top">
+    <img src="assets/img/Logos/logoAC2.png" alt="top">
   </header>
 </html>

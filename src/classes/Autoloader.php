@@ -12,7 +12,7 @@ class Autoloader
         $class = str_replace("App\\", "", $class);
         $class = str_replace("\\", "/", $class);
 
-        require 'src/classes/'.$class.'.php';
+        require '../src/classes/'.$class.'.php';
     }
 
 }
