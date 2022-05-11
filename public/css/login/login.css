@@ -17,13 +17,14 @@ section {
 }
 
 header {
-    border: 2px solid red;
+    z-index: 0;
 }
 
 form {
     border: 2px solid Blue;
+    z-index: 1;
 }
 
 footer {
-    border: 2px solid red;
+    z-index: 0;
 }
