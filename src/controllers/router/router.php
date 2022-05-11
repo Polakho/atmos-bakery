@@ -9,11 +9,11 @@ switch ($action) {
   case 'register':
     require "../src/controllers/register.controller.php";
     break;
-    case 'auth':
-        require "../src/controllers/auth.controller.php";
-        break;
+  case 'auth':
+    require "../src/controllers/auth.controller.php";
+    break;
 
-    default:
+  default:
     require "../src/controllers/home.controller.php";
     break;
 }
