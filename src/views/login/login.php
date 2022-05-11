@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +18,10 @@
         <?php
         require '../src/components/header/header.php';
         ?>
-        <form action="/login" method="post">
+        <?php
+        var_dump(var_dump(substr(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), 1)));
+        ?>
+        <form action="/auth" method="post">
             <label for="mail">Email:</label>
             <input type="text" name="mail" id="mail">
             <label for="password">Mot de passe:</label>
