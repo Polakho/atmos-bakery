@@ -14,7 +14,7 @@
     ?>
     <div class="form-container">
       <h2>Création de compte</h2>
-      <form class="register-form" action="/register" method="post">
+      <form class="register-form" action="/auth/register" method="post">
         <?php
           if (isset($errorMsg)) {
             echo "<div class='alert alert-warning' role='alert'>$errorMsg</div>";

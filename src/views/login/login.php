@@ -16,7 +16,7 @@
         ?>
         <div class="form-container">
             <h2>Connectez-vous</h2>
-            <form class="login-form" action="/auth" method="post">
+            <form class="login-form" action="/Auth/login" method="post">
                 <?php
                 if (isset($errorMsg)) {
                     echo "<div class='alert alert-warning' role='alert'>$errorMsg</div>";
