@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,20 +10,25 @@ session_start();
 </head>
 
 <body>
-    <section>
+    <section class="main">
         <?php
         require '../src/components/header/header.php';
         ?>
-        <?php
-        var_dump(var_dump(substr(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), 1)));
-        ?>
-        <form action="/auth" method="post">
-            <label for="mail">Email:</label>
-            <input type="text" name="mail" id="mail">
-            <label for="password">Mot de passe:</label>
-            <input type="password" name="password" id="password">
-            <input type="submit" value="Connexion">
-        </form>
+        <div class="form-container">
+            <h2>Connectez-vous</h2>
+            <form class="login-form" action="/auth" method="post">
+                <?php
+                if (isset($errorMsg)) {
+                    echo "<div class='alert alert-warning' role='alert'>$errorMsg</div>";
+                }
+                ?>
+                <label for="mail">Email :</label>
+                <input type="text" name="mail" id="mail">
+                <label for="password">Mot de passe :</label>
+                <input type="password" name="password" id="password">
+                <button type="submit">Connexion</button>
+            </form>
+        </div>
         <?php
         require '../src/components/footer/footer.php';
         ?>

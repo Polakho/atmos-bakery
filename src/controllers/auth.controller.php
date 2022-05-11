@@ -1,12 +1,7 @@
 <?php
 
 use App\Classes\Autoloader;
-
-require "../src/classes/Autoloader.php";
-Autoloader::register();
-
 use App\Models\UserModel;
-
 
 if (isset($_SESSION['userId'])) {
     unset($_SESSION['userId']);
@@ -18,7 +13,7 @@ if (isset($_SESSION['userId'])) {
     if (isset($_POST['mail']) && isset($_POST['password'])) {
         $userId = $UserModel->GetUserIdFromMailAndPassword($_POST['mail'], $_POST['password']);
         if ($userId > 0) {
-            $_SESSION['userId'] = $userId;
+            $_SESSION['userId'] = $userId['id'];
             header('Location: /');
         } else {
             $errorMsg = "Wrong login and/or password.";
