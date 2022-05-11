@@ -20,6 +20,8 @@
             echo "<div class='alert alert-warning' role='alert'>$errorMsg</div>";
           }
         ?>
+        <label for="name">Nom, prénom :</label>
+        <input type="text" placeholder="" name="name" required>
         <label for="mail">Adresse mail :</label>
         <input type="text" placeholder="adresse mail" name="mail" required>
         <label for="password">Mot de passe :</label>
@@ -27,6 +29,7 @@
 
         <label for="retypePassword">Tapez votre mot de passe à nouveau :</label>
         <input type="password" placeholder="mot de passe" name="retypePassword" required>
+        <button type="submit">CRÉER</button>
       </form>
     </div>
     <?php
