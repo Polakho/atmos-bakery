@@ -6,6 +6,9 @@ switch ($action) {
   case 'about':
     require "../src/controllers/about.controller.php";
     break;
+  case 'login':
+    require "../src/controllers/login.controller.php";
+    break;
   default:
     require "../src/controllers/home.controller.php";
     break;
