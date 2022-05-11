@@ -1,6 +1,9 @@
 <?php
-use App\Autoloader;
-use App\Product;
+use App\Classes\Autoloader;
+use App\Models\ProductModel;
+
+require "../src/classes/Autoloader.php";
+Autoloader::register();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,14 +23,10 @@ use App\Product;
       <br>
 
       <?php
-      require "../src/classes/Autoloader.php";
-      Autoloader::register();
+      $pdo = new \App\Classes\Database();
+      var_dump($pdo);
 
-      $Product = new Product();
-      $data = $Product->getAllProduct();
-      var_dump($data);
-
-
+      //var_dump($product);
 
       ?>
   </section>

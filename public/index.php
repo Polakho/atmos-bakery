@@ -1,4 +1,4 @@
 <?php
 session_start();
 
-include "../controllers/router/router.php";
+include "../src/controllers/router/router.php";

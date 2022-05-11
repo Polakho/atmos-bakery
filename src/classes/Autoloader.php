@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Classes;
 
 class Autoloader
 {
@@ -9,10 +9,18 @@ class Autoloader
     }
 
     static function autoload($class){
-        $class = str_replace("App\\", "", $class);
-        $class = str_replace("\\", "/", $class);
 
-        require '../src/classes/'.$class.'.php';
+        if(strpos($class, "App\Models") !== false){
+            $class = str_replace("App\\Models", "", $class);
+            $class = str_replace("\\", "/", $class);
+            require 'src/service/'.$class.'.php';
+        }else{
+            $class = str_replace("App\\Classes", "", $class);
+            $class = str_replace("\\", "/", $class);
+
+            require 'src/classes/'.$class.'.php';
+        }
+
     }
 
 }
