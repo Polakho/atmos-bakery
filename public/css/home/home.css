@@ -6,9 +6,21 @@
 
 section {
   height: 100vh;
+  position: relative;
+}
+
+header {
+  position: absolute;
+  top: 0;
+  z-index: 150;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
 }
 
 .main-section-background {
-  background-image: url(../../assets/homepagepres/mainvisual01.jpg);
+  background-image: url(../../assets/img/homepagepres/mainvisual01.jpg);
   background-size: cover;
 }

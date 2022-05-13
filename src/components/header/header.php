@@ -1,9 +1,11 @@
 <html>
   <head>
-    <link rel="stylesheet" href="css/header/header.css">
+    <link rel="stylesheet" href="../../css/header/header.css">
   </head>
   <header>
-    <img src="assets/img/Logos/logoAC2.png" alt="top">
+    <a href="/">
+      <img src="../../assets/img/Logos/logoAC2.png" alt="top">
+    </a>
     <nav>
       <?php
         if (isset($_SESSION['userId'])) {

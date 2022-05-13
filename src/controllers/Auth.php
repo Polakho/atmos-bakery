@@ -6,16 +6,7 @@ use App\Classes\Controller;
 use App\Models\UserModel;
 
 class Auth extends Controller {
-    /**
-     * Classe par défaut si aucune méthode n'est appellée
-     */
-    public function index() {
-        if (isset($_SESSION['userId'])) {
-            $this->logout();
-        } else {
-            $this->login();
-        }
-    }
+    //Pas d'index ici
 
     /**
      * Page de login, connecte le user
@@ -32,7 +23,6 @@ class Auth extends Controller {
                 include '../src/views/login/login.php';
             }
         } else {
-            echo "on est dans le else";
             include '../src/views/login/login.php';
         }
     }

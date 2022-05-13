@@ -1,6 +1,6 @@
 <html>
   <head>
-    <link rel="stylesheet" href="css/footer/footer.css">
+    <link rel="stylesheet" href="../../css/footer/footer.css">
   </head>
   <footer>
     <ul class="content-link">
@@ -10,9 +10,9 @@
     </ul>
 
     <ul class="socials">
-      <li><img src="assets/img/socials/facebook-brands.svg" alt="facebook"></li>
-      <li><img src="assets/img/socials/twitter-brands.svg" alt="twitter"></li>
-      <li><img src="assets/img/socials/instagram-brands.svg" alt="instagram"></li>
+      <li><img src="../../assets/img/socials/facebook-brands.svg" alt="facebook"></li>
+      <li><img src="../../assets/img/socials/twitter-brands.svg" alt="twitter"></li>
+      <li><img src="../../assets/img/socials/instagram-brands.svg" alt="instagram"></li>
     </ul>
   </footer>
 </html>
