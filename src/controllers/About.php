@@ -1,7 +1,5 @@
 <?php
 
-// include '../src/classes/Autoloader.php';
-include '../src/classes/Controller.php';
 use App\Classes\Controller;
 
 class About extends Controller {

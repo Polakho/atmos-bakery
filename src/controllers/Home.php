@@ -1,6 +1,5 @@
 <?php
 
-include '../src/classes/Controller.php';
 use App\Classes\Controller;
 
 class Home extends Controller {

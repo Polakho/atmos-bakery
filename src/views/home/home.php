@@ -1,12 +1,3 @@
-<?php
-use App\Models\ProductModel;
-use App\Models\ScheduleModel;
-use App\Models\UserModel;
-use App\Classes\Autoloader;
-
-require "../src/classes/Autoloader.php";
-Autoloader::register();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,9 +1,8 @@
 <?php
 
-include '../src/classes/Controller.php';
-require "../src/models/UserModel.php";
 use App\Classes\Controller;
 use App\Models\UserModel;
+
 
 class Auth extends Controller {
     //Pas d'index ici
