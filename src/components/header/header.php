@@ -3,20 +3,25 @@
     <link rel="stylesheet" href="../../css/header/header.css">
   </head>
   <header>
-    <a href="/">
-      <img src="../../assets/img/Logos/logoAC2.png" alt="top">
-    </a>
+    <div class="main-nav">
+      <a href="/">
+        <img src="../../assets/img/Logos/logoAC2.png" alt="top">
+      </a>
+      <a href="">Les produits</a>
+      <a href="">Code source</a>
+      <a href="">À propos</a>
+    </div>
     <nav>
       <?php
         if (isset($_SESSION['userId'])) {
       ?>
-        <p>ID USER : <?= $_SESSION['userId'] /* TODO Récupérer le nom du user */?></p>
-        <a href="/auth/logout">Déconnectez-vous</a>
+        <p class="profile-name">Bonjour, <span class="bold-name"><?= $_SESSION['userId'] /* TODO Récupérer le nom du user */?></span></p>
+        <a href="/auth/logout">Déconnexion</a>
       <?php
         } else {
       ?>
-        <a href="/auth/login">Connectez-vous</a>
-        <a href="/auth/register">Créez un compte</a>
+        <a href="/auth/login">Connection</a>
+        <a href="/auth/register" class="btn-wrapper"><span class="btn-content">Inscription</span></a>
       <?php
         }
       ?>
