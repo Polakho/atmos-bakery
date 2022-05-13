@@ -1,16 +1,14 @@
 <?php
-
-use App\Classes\Autoloader;
 use App\Models\ProductModel;
 use App\Models\ScheduleModel;
 use App\Models\UserModel;
+use App\Classes\Autoloader;
 
 require "../src/classes/Autoloader.php";
 Autoloader::register();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,14 +16,13 @@ Autoloader::register();
   <link rel="stylesheet" href="css/home/home.css">
   <title>Atmos Bakery</title>
 </head>
-
 <body>
   <?php
   include '../src/components/header/header.php';
   ?>
   <section class="main-section-background">
     C'est la homepage la
-    <br>
+      <br>
 
     <?php
 
