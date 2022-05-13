@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/register/register.css">
+  <link rel="stylesheet" href="../../css/register/register.css">
   <title>Atmos Bakery | Nouveau compte</title>
 </head>
 <body>
@@ -14,7 +14,7 @@
     ?>
     <div class="form-container">
       <h2>Création de compte</h2>
-      <form class="register-form" action="/register" method="post">
+      <form class="register-form" action="/auth/register" method="post">
         <?php
           if (isset($errorMsg)) {
             echo "<div class='alert alert-warning' role='alert'>$errorMsg</div>";

@@ -22,12 +22,7 @@ Autoloader::register();
   ?>
   <section class="main-section-background">
     C'est la homepage la
-      <br>
-
-    <?php
-
-
-    ?>
+    <br>
   </section>
   <section>
     <?php
