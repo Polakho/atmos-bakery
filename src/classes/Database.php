@@ -15,7 +15,7 @@ class Database
     public function getPDO()
     {
 
-        $pdo = new PDO("mysql:dbname=Atmos_Bakery;host=localhost", "proot", "zozo");
+        $pdo = new PDO("mysql:dbname=Atmos_Bakery;host=localhost", "root", "root");
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         return $pdo;

@@ -172,4 +172,18 @@ class Product
     {
         $this->category_id = $category_id;
     }
+
+    public function jsonify(){
+        return  [
+            "id" => $this->getId(),
+            "name" => $this->getName(),
+            "price" => $this->getPrice(),
+            "description" => $this->getDescription(),
+            "compo" => $this->getCompo(),
+            "tash" => $this->isTrash(),
+            "image" => $this->getImage(),
+            "weight" =>$this->getWeight(),
+            "category_id" => $this->getCategoryId()
+        ];
+    }
 }

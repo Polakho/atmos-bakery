@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titre{
+    color: indianred;
+}
+
+.listing{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card {
+    display: block;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 300px;
+    margin:40px 40px 40px 40px;
+    text-align: center;
+    font-family: arial, Serif;
+}
+
+[class^="page"]{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin : 0 100px 100px 100px;
+
+}
+
+#navigation{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    width: 100px;
+}
+.hidden{
+display: none
+}
+
+.price {
+    color: grey;
+    font-size: 22px;
+}
+
+.card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+.card button:hover {
+    opacity: 0.7;
+}
