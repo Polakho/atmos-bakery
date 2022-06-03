@@ -5,21 +5,45 @@
 }
 
 section {
-    height: 100vh;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titre{
+    color: indianred;
 }
 
 .listing{
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    flex-direction: column;
+    align-items: center;
 }
 .card {
+    display: block;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    margin: auto;
+    width: 300px;
+    margin:40px 40px 40px 40px;
     text-align: center;
     font-family: arial, Serif;
+}
+
+[class^="page"]{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin : 0 100px 100px 100px;
+
+}
+
+#navigation{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    width: 100px;
+}
+.hidden{
+display: none
 }
 
 .price {

@@ -18,7 +18,10 @@ class Product extends Controller
     public function index() {
 
         $products = $this->productModel->getAllProduct();
-
+        $perPage = 6;
+        $count = count($products);
+        $pages = ceil($count/$perPage);
+        $list = array_chunk($products, $perPage);
         include '../src/views/product/list.php';
     }
 }
