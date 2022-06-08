@@ -14,7 +14,7 @@ class User
 
     public function __construct(){
         $this->setRoles("Client");
-        $this->trash = false;
+        $this->trash = 0;
     }
 
     /**
