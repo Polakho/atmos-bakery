@@ -7,7 +7,7 @@ use App\Models\UserModel;
 class Api extends Controller{
 
     private function params(){
-        return (json_decode(file_get_contents('php://input'), true));;
+        return (json_decode(file_get_contents('php://input'), true));
     }
 
     public function login(){
@@ -24,7 +24,8 @@ class Api extends Controller{
             if ($userId > 0) {
                 echo json_encode(
                     [   "message" => 'Good login',
-                        "user_id" => $userId["id"]]
+                        "user_id" => $userId['id']
+                    ]
                 );
                 exit();
             } else {
