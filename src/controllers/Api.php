@@ -4,26 +4,32 @@ use App\Classes\Controller;
 use App\Models\ProductModel;
 use App\Models\UserModel;
 
-class Api extends Controller{
+class Api extends Controller
+{
 
-    private function params(){
+    private function params()
+    {
         return (json_decode(file_get_contents('php://input'), true));
     }
 
-    public function login(){
-       $params = $this->params();
+    public function login()
+    {
+        $params = $this->params();
 
-       $userModel = new UserModel();
+        $userModel = new UserModel();
         $mail = htmlspecialchars($params['mail']);
         $password = htmlspecialchars($params['password']);
 
+
         if (isset($mail) && isset($password)) {
+            header("Access-Control-Allow-Origin: *");
             header('Content-Type: application/json');
 
             $userId = $userModel->GetUserIdFromMailAndPassword($mail, $password);
             if ($userId > 0) {
                 echo json_encode(
-                    [   "message" => 'Good login',
+                    [
+                        "message" => 'Good login',
                         "user_id" => $userId['id']
                     ]
                 );
@@ -40,7 +46,8 @@ class Api extends Controller{
         }
     }
 
-    public function register(){
+    public function register()
+    {
         $params = $this->params();
         $userModel = new UserModel();
 
@@ -50,7 +57,7 @@ class Api extends Controller{
         $retypePassword = htmlspecialchars($params['retypePassword']);
         $roles = $params['roles'];
 
-        if (empty($roles)){
+        if (empty($roles)) {
             $roles = [
                 "CLIENT"
             ];
@@ -80,10 +87,11 @@ class Api extends Controller{
         }
     }
 
-    public function getAllProducts(){
+    public function getAllProducts()
+    {
         header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
         $productModel = new ProductModel();
         echo json_encode($productModel->getAllProductJson());
     }
-
 }
