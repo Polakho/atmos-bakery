@@ -14,7 +14,7 @@ class Autoloader
             $class = str_replace("App\\Models", "", $class);
             $class = str_replace("\\", "/", $class);
             require '../src/models/'.$class.'.php';
-        }else{
+        } else {
             $class = str_replace("App\\Classes", "", $class);
             $class = str_replace("\\", "/", $class);
 
