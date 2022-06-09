@@ -1,6 +1,7 @@
 <?php
 
 use App\Classes\Controller;
+use App\Models\ProductModel;
 use App\Models\UserModel;
 
 class Api extends Controller{
@@ -76,6 +77,12 @@ class Api extends Controller{
             echo json_encode(["message" => 'Pas de paramètres']);
             exit();
         }
+    }
+
+    public function getAllProducts(){
+        header('Content-Type: application/json');
+        $productModel = new ProductModel();
+        echo json_encode($productModel->getAllProduct());
     }
 
 }
