@@ -1,6 +1,7 @@
 <?php
 
 use App\Classes\Controller;
+use App\Controllers\FrontController;
 use App\Models\ProductModel;
 
 
@@ -13,6 +14,7 @@ class Product extends Controller
 
     public function __construct(){
         $this->productModel = new ProductModel();
+        $this->frontController = new FrontController();
     }
 
     public function index() {

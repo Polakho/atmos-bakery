@@ -1,5 +1,7 @@
 <?php
 
+use App\Controllers\Home;
+
 $params = explode('/', $_GET['p']);
 
 if ($params[0] != '') {

@@ -1,8 +1,9 @@
 <?php
+namespace App\Controllers;
 
 use App\Classes\Controller;
 
-class Home extends Controller {
+class Home  {
   /**
    * Retourne la home page
    */

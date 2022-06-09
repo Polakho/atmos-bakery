@@ -14,13 +14,13 @@ class ContainModel
         $this->db = new Database();
     }
 
-    public function ajouterContain($quantity, $userId, $cartId){
+    public function ajouterContain($quantity, $productId, $cartId){
         $pdo = $this->db->getPDO();
         $sql = "INSERT INTO  contain (quantity, trash, product_id, cart_id) VALUES (:quantity, 0, :productId, :cartId)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             "quantity" => $quantity,
-            "userId" => $userId,
+            "productId" => $productId,
             "cartId" => $cartId
         ]);
 
