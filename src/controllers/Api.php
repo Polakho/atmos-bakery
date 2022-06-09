@@ -2,7 +2,6 @@
 
 use App\Classes\Controller;
 use App\Models\UserModel;
-use http\Env\Request;
 
 class Api extends Controller{
 
@@ -24,7 +23,7 @@ class Api extends Controller{
             if ($userId > 0) {
                 echo json_encode(
                     [   "message" => 'Good login',
-                        "user_id" => $userId]
+                        "user_id" => $userId["id"]]
                 );
                 exit();
             } else {
@@ -49,8 +48,12 @@ class Api extends Controller{
         $retypePassword = htmlspecialchars($params['retypePassword']);
         $roles = $params['roles'];
 
-
-        if (isset($mail) && isset($name) && isset($password) && isset($retypePassword)) {
+        if (empty($roles)){
+            $roles = [
+                "CLIENT"
+            ];
+        }
+        if (isset($mail) && isset($name) && isset($password) && isset($retypePassword) && isset($roles)) {
             header('Content-Type: application/json');
             $errorMsg = NULL;
             if (!$userModel->IsMailAlreadyUsed($mail)) {
