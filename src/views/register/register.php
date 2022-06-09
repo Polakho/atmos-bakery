@@ -20,7 +20,9 @@
             echo "<div class='alert alert-warning' role='alert'>$errorMsg</div>";
           }
         ?>
-        <label for="name">Nom, prénom :</label>
+        <label for="f_name">Nom :</label>
+        <input type="text" placeholder="" name="f_name" required>
+        <label for="name">Prénom :</label>
         <input type="text" placeholder="" name="name" required>
         <label for="mail">Adresse mail :</label>
         <input type="text" placeholder="adresse mail" name="mail" required>
