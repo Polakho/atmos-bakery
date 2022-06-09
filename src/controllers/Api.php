@@ -83,7 +83,7 @@ class Api extends Controller{
     public function getAllProducts(){
         header('Content-Type: application/json');
         $productModel = new ProductModel();
-        echo json_encode($productModel->getAllProduct());
+        echo json_encode($productModel->getAllProductJson());
     }
 
 }
