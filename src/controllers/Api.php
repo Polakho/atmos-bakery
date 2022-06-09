@@ -7,10 +7,7 @@ use http\Env\Request;
 class Api extends Controller{
 
     private function params(){
-        $URL = $_SERVER['REQUEST_URI'];
-        $params = parse_url($URL);
-        parse_str($params['query'], $params);
-        return $params;
+        return (json_decode(file_get_contents('php://input'), true));;
     }
 
     public function login(){
@@ -50,6 +47,7 @@ class Api extends Controller{
         $name = htmlspecialchars($params['name']);
         $password = htmlspecialchars($params['password']);
         $retypePassword = htmlspecialchars($params['retypePassword']);
+        $roles = $params['roles'];
 
 
         if (isset($mail) && isset($name) && isset($password) && isset($retypePassword)) {
@@ -66,9 +64,9 @@ class Api extends Controller{
                 echo json_encode(["message" => $errorMsg]);
                 exit();
             } else {
-                $userId = $userModel->CreateNewUser($name, $mail, $password);
+                $userId = $userModel->CreateNewUser($name, $mail, $password, $roles);
                 $_SESSION['userId'] = $userId;
-                echo json_encode(["user_id" => $userId]);
+                echo json_encode(["userId" => $userId]);
                 exit();
             }
         } else {
