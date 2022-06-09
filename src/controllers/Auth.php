@@ -52,7 +52,7 @@ class Auth extends Controller {
         if ($errorMsg) {
             include '../src/views/register/register.php';
         } else {
-            $userId = $userModel->CreateNewUser($_POST['name'], $_POST['mail'], $_POST['password']);
+            $userId = $userModel->CreateNewUser($_POST['name'], $_POST['mail'], $_POST['password'], ["CLIENT"]);
             $_SESSION['userId'] = $userId;
             header('Location: /');
         }
