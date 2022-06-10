@@ -1,11 +1,26 @@
 <?php
+namespace App\Controllers;
 
 use App\Classes\Controller;
 use App\Models\ProductModel;
 use App\Models\UserModel;
 
+use OpenApi\Annotations as OA;
+
+
+/**
+ * @OA\Info(title="Atmose Bakery API", version="1.0.0")
+ * @OA\Server(
+ *    url="http://atmos/api/v1",
+ *    description="Superbe API Antoine"
+ * )
+ */
 class Api extends Controller
 {
+    public function __construct()
+    {
+
+    }
 
     private function params()
     {

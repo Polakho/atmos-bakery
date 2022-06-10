@@ -1,8 +1,14 @@
 <?php
+namespace App\Controllers;
 
 use App\Classes\Controller;
 
-class Home extends Controller {
+class HomeController extends Controller {
+
+    public function __construct(){
+
+    }
+
   /**
    * Retourne la home page
    */

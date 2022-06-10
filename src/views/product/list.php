@@ -15,6 +15,12 @@ include '../src/components/header/header.php';
 <h1 class="titre">Nos Produits</h1>
 <div class="listing" data-pages="<?= $pages ?>">
     <?php
+    require("../vendor/autoload.php");
+
+    $openapi = \OpenApi\Generator::scan(['./src']);
+
+    header('Content-Type: application/x-yaml');
+    echo $openapi->toYaml();
     foreach ($list as $key => $array){
         echo '<div class="page" data-page="page-'.($key+1).'">';
                /** @var \App\Classes\Product $product */

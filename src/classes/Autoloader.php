@@ -13,12 +13,18 @@ class Autoloader
         if(strpos($class, "App\Models") !== false){
             $class = str_replace("App\\Models", "", $class);
             $class = str_replace("\\", "/", $class);
-            require '../src/models/'.$class.'.php';
-        } else {
+            require_once '../src/models/'.$class.'.php';
+        } else
+            if(strpos($class, "App\Classes") !== false) {
             $class = str_replace("App\\Classes", "", $class);
             $class = str_replace("\\", "/", $class);
 
-            require '../src/classes/'.$class.'.php';
+            require_once '../src/classes/'.$class.'.php';
+        }else
+            if(strpos($class, "App\Controllers") !== false){
+            $class = str_replace("App\\Controllers", "", $class);
+            $class = str_replace("\\", "/", $class);
+            require_once '../src/controllers/'.$class.'.php';
         }
 
     }
