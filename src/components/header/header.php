@@ -7,6 +7,9 @@
   <a href="/">
     <img src="../../assets/img/Logos/logoAC2.png" alt="top">
   </a>
+  <a href="">Les produits</a>
+  <a href="">Commander</a>
+  <a href="">À propos</a>
   <nav>
     <?php
     if (isset($_SESSION['userId'])) {
@@ -54,4 +57,5 @@
     console.log("coucou")
     modalCart.classList.remove("hidden")
   }
+</script>
 </script>
