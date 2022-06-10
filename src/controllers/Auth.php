@@ -1,8 +1,8 @@
 <?php
 namespace App\Controllers;
-
 use App\Classes\Controller;
 use App\Models\UserModel;
+
 
 
 class Auth extends Controller {

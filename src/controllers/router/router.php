@@ -3,6 +3,8 @@ namespace App\Controllers;
 
 // On appelle le modèle et le contrôleur principaux
 
+use App\Controllers\Home;
+
 $params = explode('/', $_GET['p']);
 if ($params[0] != '') {
   // Stockage des variables controller et action (controller et methode)

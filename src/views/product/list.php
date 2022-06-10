@@ -9,7 +9,7 @@
 </head>
 <body>
 <?php
-include '../src/components/header/header.php';
+$this->frontController->header();
 ?>
 <section class="main-section-background">
 <h1 class="titre">Nos Produits</h1>
@@ -46,7 +46,7 @@ include '../src/components/header/header.php';
 </section>
 <section>
     <?php
-    include '../src/components/footer/footer.php';
+    $this->frontController->footer();
     ?>
 </section>
 </body>

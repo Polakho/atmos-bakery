@@ -9,10 +9,22 @@
     <nav>
       <?php
         if (isset($_SESSION['userId'])) {
+            var_dump($cart);
       ?>
         <p>ID USER : <?= $_SESSION['userId'] /* TODO Récupérer le nom du user */?></p>
         <a href="/auth/logout">Déconnectez-vous</a>
-      <?php
+            <button onClick="showCart()"><img class="cart-icone" src="../../assets/img/cart/cart.png" alt="icone panier"></button>
+            <div class="modal-cart hidden">
+                <div class="modal">
+                    <div class="modal-header">
+                        <h1>Mon panier</h1>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                </div>
+            </div>
+            <?php
         } else {
       ?>
         <a href="/auth/login">Connectez-vous</a>
@@ -23,3 +35,10 @@
     </nav>
   </header>
 </html>
+<script>
+    let modalCart = document.querySelector('.modal-cart')
+    function showCart(){
+        console.log("coucou")
+        modalCart.classList.remove("hidden")
+    }
+</script>
