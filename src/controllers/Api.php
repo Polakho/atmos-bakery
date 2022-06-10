@@ -2,6 +2,8 @@
 namespace App\Controllers;
 
 use App\Classes\Controller;
+use App\Models\CartModel;
+use App\Models\ContainModel;
 use App\Models\ProductModel;
 use App\Models\UserModel;
 
@@ -229,5 +231,110 @@ class Api extends Controller
         header("Access-Control-Allow-Origin: *");
         $productModel = new ProductModel();
         echo json_encode($productModel->getAllProductJson());
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/getActiveCartForUser",
+     *     @OA\Parameter(
+     *     name="request",
+     *     in="header",
+     *        @OA\Schema(
+     *            type="object",
+     *            @OA\Property(
+     *                type="integer",
+     *                property="user_id",
+     *                example="2"
+     *            ),
+     *        )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Récupère un panier actif ou renvoie null",
+     *          @OA\JsonContent(
+     *              @OA\Schema(
+     *                   type="string",
+     *                   description="cart"),
+     *                   example={"cart": {"id": "1","user_id": "2","status": "1"}}
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function getActiveCartForUser(){
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+
+        $params = $this->params();
+        $cartModel = new cartModel();
+        $userId = htmlspecialchars($params['user_id']);
+        if (isset($userId)){
+            $cart = $cartModel->getActiveCartForUser($userId);
+            echo json_encode(["cart" => $cart->jsonify()]);
+            exit();
+        }
+
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/addToCart",
+     *     @OA\Parameter(
+     *     name="request",
+     *     in="header",
+     *        @OA\Schema(
+     *            type="object",
+     *            @OA\Property(
+     *                type="integer",
+     *                property="cart_id",
+     *                example="2"
+     *            ),
+     *            @OA\Property(
+     *                type="integer",
+     *                property="quantity",
+     *                example="1"
+     *            ),
+     *            @OA\Property(
+     *                type="integer",
+     *                property="product_id",
+     *                example="34"
+     *            ),
+     *        )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Permet d'ajouter un produit en quantité (ou pas) au panier.",
+     *          @OA\JsonContent(
+     *              @OA\Schema(
+     *                   type="string",
+     *                   description="cart"),
+     *                   example={"message": "bravo tu as réussis !","contain_id": "3"}
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function addToCart(){
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+
+        $params = $this->params();
+
+        $containModel = new containModel();
+
+        $cartId = htmlspecialchars($params['cart_id']);
+        $quantity = htmlspecialchars($params['quantity']);
+        $productId = htmlspecialchars($params['product_id']);
+
+        if (isset($cartId) && isset($quantity) && isset($productId)){
+            $contain = $containModel->ajouterContain($quantity, $productId, $cartId);
+            if (is_numeric($contain)){
+                echo json_encode(["message" => "bravo tu as réussis !",
+                                  "contain_id" => $contain  ]);
+            }else{
+                echo json_encode(["message" => "Sale merde !",
+                                  "error" => $contain  ]);
+            }
+        }
     }
 }
