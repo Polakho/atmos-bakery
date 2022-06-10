@@ -7,9 +7,8 @@
   <a href="/">
     <img src="../../assets/img/Logos/logoAC2.png" alt="top">
   </a>
-  <a href="">Les produits</a>
-  <a href="">Commander</a>
-  <a href="">À propos</a>
+  <a href="/product">Les produits</a>
+  <a href="/about">À propos</a>
   <nav>
     <?php
     if (isset($_SESSION['userId'])) {

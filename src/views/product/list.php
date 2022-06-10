@@ -24,7 +24,7 @@
                 /** @var \App\Classes\Product $product */
                 foreach ($array as $product) {
                     echo '<div class="card">
-                  <img src="https://mapetiteassiette.com/wp-content/uploads/2019/05/shutterstock_553887610-e1557046359887-800x601.jpg" 
+                  <img src="' . $product->getImage() . '" 
                   alt="Image Produit" style="width:200px; height:auto">
                   <h1>' . $product->getName() . '</h1>
                   <p class="price">' . $product->getPrice() . ' $</p>
