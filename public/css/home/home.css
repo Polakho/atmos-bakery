@@ -2,11 +2,15 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
 
 section {
   height: 100vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 header {
@@ -20,7 +24,34 @@ footer {
   bottom: 0;
 }
 
-.main-section-background {
-  background-image: url(../../assets/img/homepagepres/mainvisual01.jpg);
-  background-size: cover;
+.mask {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 80vh;
+  width: 100%;
+  border-radius: 0 0 3em 3em;
+  overflow: hidden;
+}
+
+.mask img {
+  position: absolute;
+  width: 100%;
+}
+
+h1 {
+  font-size: 5em;
+  margin-top: 4vh;
+  color: #f8cdc7;
+}
+
+.arrow-down {
+  position: absolute;
+  bottom: 1vh;
+}
+
+.arrow-down img {
+  height: 40px;
+  filter: invert(81%) sepia(30%) saturate(216%) hue-rotate(318deg) brightness(100%) contrast(95%);
 }

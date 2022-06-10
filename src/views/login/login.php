@@ -12,7 +12,7 @@
 <body>
     <section class="main">
         <?php
-        require '../src/components/header/header.php';
+        $this->frontController->header();
         ?>
         <div class="form-container">
             <h2>Connectez-vous</h2>
@@ -30,8 +30,9 @@
             </form>
         </div>
         <?php
-        require '../src/components/footer/footer.php';
+        $this->frontController->footer();
         ?>
+
     </section>
 </body>
 
