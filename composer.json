@@ -1,8 +1,7 @@
 {
-    "require": {
-        "zircote/swagger-php": "^4.2",
-        "doctrine/annotations": "^1.13",
-        "psr/log": "^1.1"
-    }
-
+  "require": {
+    "zircote/swagger-php": "^4.2",
+    "doctrine/annotations": "^1.13",
+    "psr/log": "^1.1"
+  }
 }
