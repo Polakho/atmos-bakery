@@ -60,7 +60,19 @@ header img {
   margin: 0 50px;
 }
 
-.cart-icone{
-  height: 40px ;
+.cart-icone {
+  height: 40px;
   width: 40px;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-cart {
+  position: absolute;
+  height: 200px;
+  width: 450px;
+  background-color: red;
+  left: 0;
 }

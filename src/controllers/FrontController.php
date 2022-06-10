@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Classes\Controller;
@@ -12,20 +13,23 @@ class FrontController extends Controller
      */
     private $cartModel;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->cartModel = new CartModel();
     }
 
-     public function header(){
+    public function header()
+    {
         if (isset($_SESSION['userId'])) {
             $cart = $this->cartModel->getActiveCartForUser($_SESSION['userId']);
-            var_dump($cart);
+            // var_dump($cart);
         }
 
-        include __DIR__.'/../components/header/header.php';
+        include __DIR__ . '/../components/header/header.php';
     }
 
-    public function footer(){
-        include __DIR__.'/../components/footer/footer.php';
+    public function footer()
+    {
+        include __DIR__ . '/../components/footer/footer.php';
     }
 }

@@ -29,7 +29,8 @@
                   <h1>' . $product->getName() . '</h1>
                   <p class="price">' . $product->getPrice() . ' $</p>
                   <p>' . $product->getDescription() . '</p>
-            </div>';
+                  <button onClick="addModal(' . $product->getId() . ')">Ajouter au panier</button>
+                  </div>';
                 }
                 echo '</div>';
             }
@@ -102,6 +103,34 @@
             visibleBtn()
         }
     })
+
+    function addModal(pId) {
+
+    }
+
+    function cartExist({
+        pId,
+        pQuantity
+    }, uId) {
+        if () {
+            addCart({
+                pId,
+                pQuantity
+            }, uId, cId)
+        } else {
+            const panier = await createCart(uId)
+            if (panier) {
+                addCart({
+                    pId,
+                    pQuantity
+                }, uId, cId)
+            }
+        }
+    }
+
+    function createCart(uId) {
+
+    }
 </script>
 
 </html>

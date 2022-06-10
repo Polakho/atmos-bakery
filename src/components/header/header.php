@@ -12,22 +12,13 @@
   <nav>
     <?php
     if (isset($_SESSION['userId'])) {
-      var_dump($cart);
+      // var_dump($cart);
     ?>
       <p>ID USER : <?= $_SESSION['userId'] /* TODO Récupérer le nom du user */ ?></p>
       <a href="/auth/logout">Déconnectez-vous</a>
       <button onClick="showCart()"><img class="cart-icone" src="../../assets/img/cart/cart.png" alt="icone panier"></button>
-      <div class="modal-cart hidden">
-        <div class="modal">
-          <div class="modal-header">
-            <h1>Mon panier</h1>
-          </div>
-          <div class="modal-body">
-
-          </div>
-        </div>
-      </div>
     <?php
+      include '../src/components/modales/cartModale.php';
     } else if ($_SERVER['REQUEST_URI'] === '/auth/login') {
     ?>
       <a href="/auth/register">Créez un compte</a>
@@ -51,10 +42,15 @@
 </html>
 <script>
   let modalCart = document.querySelector('.modal-cart')
+  let cartState = false;
 
   function showCart() {
-    console.log("coucou")
-    modalCart.classList.remove("hidden")
+    cartState = !cartState;
+    if (cartState == false) {
+      modalCart.classList.add("hidden")
+    } else {
+      modalCart.classList.remove("hidden")
+    }
   }
 </script>
 </script>
