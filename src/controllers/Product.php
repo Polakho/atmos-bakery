@@ -1,8 +1,7 @@
 <?php
  namespace App\Controllers;
 
-use App\Classes\Controller;
-use App\Controllers\FrontController;
+
 use App\Models\ProductModel;
 
 
