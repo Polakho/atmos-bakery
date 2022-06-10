@@ -10,6 +10,7 @@
       <a href="">Les produits</a>
       <a href="">Commander</a>
       <a href="">À propos</a>
+      nice
     </div>
     <nav>
       <?php
