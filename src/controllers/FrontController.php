@@ -19,6 +19,7 @@ class FrontController extends Controller
      public function header(){
         if (isset($_SESSION['userId'])) {
             $cart = $this->cartModel->getActiveCartForUser($_SESSION['userId']);
+            var_dump($cart);
         }
 
         include __DIR__.'/../components/header/header.php';
