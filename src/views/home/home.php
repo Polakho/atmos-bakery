@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,9 +8,11 @@
   <link rel="stylesheet" href="css/home/home.css">
   <title>Atmos Bakery</title>
 </head>
+
 <body>
   <?php
-  include '../src/components/header/header.php';
+  $this->frontController->header();
+
   ?>
   <section class="main-section-background">
     C'est la homepage la
@@ -17,7 +20,7 @@
   </section>
   <section>
     <?php
-    include '../src/components/footer/footer.php';
+    $this->frontController->footer();
     ?>
   </section>
 </body>
