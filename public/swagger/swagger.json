@@ -1,0 +1,144 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Atmose Bakery API",
+        "version": "1.0.8"
+    },
+    "servers": [
+        {
+            "url": "http://atmos/api",
+            "description": "Superbe API Atmos pour l'application mobile."
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "operationId": "3538faba4efdf3b92e0320b7092c2ad9",
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "header",
+                        "schema": {
+                            "properties": {
+                                "mail": {
+                                    "type": "string",
+                                    "example": "toto@uyb.fr"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "monmdp"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Permet de vérifier les logins transmis",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "Good login",
+                                    "user_id": "3"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "operationId": "25003b1b0a6a37be5aa8a7ff35232b19",
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "header",
+                        "schema": {
+                            "properties": {
+                                "mail": {
+                                    "type": "string",
+                                    "example": "david@uyb.fr"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "monmdp"
+                                },
+                                "retypePassword": {
+                                    "type": "string",
+                                    "example": "monmdp"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "example": "David"
+                                },
+                                "roles": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "example": "CLIENT"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Permet de créer un user et renvoie son id",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "user_id": "9"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/getAllProducts": {
+            "get": {
+                "operationId": "361ca35ed2f7e1272bd91dcf8c93ff20",
+                "responses": {
+                    "200": {
+                        "description": "Renvoie la liste des produits.",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": [
+                                    {
+                                        "id": "1",
+                                        "name": "Tradition",
+                                        "price": "1.20",
+                                        "description": "La baguette tradition au levain naturel et farine bio.",
+                                        "compo": "",
+                                        "tash": false,
+                                        "image": "",
+                                        "weight": "",
+                                        "category_id": "2"
+                                    },
+                                    {
+                                        "id": "2",
+                                        "name": "Tradi-graine",
+                                        "price": "1,30",
+                                        "description": "Une baguette tradition avec un petit twist.",
+                                        "compo": "",
+                                        "tash": false,
+                                        "image": "",
+                                        "weight": "",
+                                        "category_id": "2"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

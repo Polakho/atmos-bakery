@@ -1,16 +1,21 @@
 <?php
+namespace App\Controllers;
+
+// On appelle le modèle et le contrôleur principaux
+
+use App\Controllers\Home;
 
 $params = explode('/', $_GET['p']);
-
 if ($params[0] != '') {
   // Stockage des variables controller et action (controller et methode)
   $controller = ucfirst($params[0]);
   $action = isset($params[1]) ? $params[1] : 'index';
-
   // Appel controller
   require_once('../src/controllers/'.$controller.'.php');
   // Instancie le controller
-  $controller = new $controller();
+        $className= "App\\Controllers\\$controller";
+
+    $controller = new $className();
 
   if (method_exists($controller, $action)) {
     // Appel de la methode
@@ -20,8 +25,8 @@ if ($params[0] != '') {
     echo "La page recherchée n'existe pas";
   }
 } else {
-  require_once('../src/controllers/Home.php');
-  $controller = new Home();
+
+    $controller = new HomeController();
   $controller->index();
 }
 

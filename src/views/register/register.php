@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,20 +8,23 @@
   <link rel="stylesheet" href="../../css/register/register.css">
   <title>Atmos Bakery | Nouveau compte</title>
 </head>
+
 <body>
   <section class="main">
     <?php
-      include '../src/components/header/header.php';
+    $this->frontController->header();
     ?>
     <div class="form-container">
       <h2>Création de compte</h2>
       <form class="register-form" action="/auth/register" method="post">
         <?php
-          if (isset($errorMsg)) {
-            echo "<div class='alert alert-warning' role='alert'>$errorMsg</div>";
-          }
+        if (isset($errorMsg)) {
+          echo "<div class='alert alert-warning' role='alert'>$errorMsg</div>";
+        }
         ?>
-        <label for="name">Nom, prénom :</label>
+        <label for="f_name">Nom :</label>
+        <input type="text" placeholder="" name="f_name" required>
+        <label for="name">Prénom :</label>
         <input type="text" placeholder="" name="name" required>
         <label for="mail">Adresse mail :</label>
         <input type="text" placeholder="adresse mail" name="mail" required>
@@ -33,8 +37,9 @@
       </form>
     </div>
     <?php
-      include '../src/components/footer/footer.php';
+    $this->frontController->footer();
     ?>
   </section>
 </body>
+
 </html>

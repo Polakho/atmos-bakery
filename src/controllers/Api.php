@@ -1,17 +1,65 @@
 <?php
+namespace App\Controllers;
 
 use App\Classes\Controller;
 use App\Models\ProductModel;
 use App\Models\UserModel;
 
+use OpenApi\Annotations as OA;
+
+
+/**
+ * @OA\Info(title="Atmose Bakery API", version="1.0.8")
+ * @OA\Server(
+ *    url="http://atmos/api",
+ *    description="Superbe API Antoine"
+ * )
+ */
 class Api extends Controller
 {
+    public function __construct()
+    {
+
+    }
 
     private function params()
     {
         return (json_decode(file_get_contents('php://input'), true));
     }
 
+    /**
+     * @OA\Post(
+     *     path="/login",
+     *     @OA\Parameter(
+     *     name="request",
+     *     in="header",
+     *        @OA\Schema(
+     *            type="object",
+     *            @OA\Property(
+     *                type="string",
+     *                property="mail",
+     *                example="toto@uyb.fr"
+     *            ),
+     *            @OA\Property(
+     *                type="string",
+     *                property="password",
+     *                example="monmdp"
+     *            ),
+     *        )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Permet de vérifier les logins transmis",
+     *          @OA\JsonContent(
+     *              @OA\Schema(
+     *                   type="string",
+     *                   description="user_id"),
+     *                   example={"message":"Good login","user_id":"3"}
+     *              )
+     *          )
+     *      )
+     * )
+     */
     public function login()
     {
         $params = $this->params();
@@ -46,6 +94,57 @@ class Api extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     *     path="/register",
+     *     @OA\Parameter(
+     *     name="request",
+     *     in="header",
+     *        @OA\Schema(
+     *            type="object",
+     *            @OA\Property(
+     *                type="string",
+     *                property="mail",
+     *                example="david@uyb.fr"
+     *            ),
+     *            @OA\Property(
+     *                type="string",
+     *                property="password",
+     *                example="monmdp"
+     *            ),
+     *            @OA\Property(
+     *                type="string",
+     *                property="retypePassword",
+     *                example="monmdp"
+     *            ),
+     *            @OA\Property(
+     *                type="string",
+     *                property="name",
+     *                example="David"
+     *            ),
+     *            @OA\Property(
+     *                type="array",
+     *                property="roles",
+     *                @OA\Items(
+     *                 type="string",
+     *                 example="CLIENT"
+     *                )
+     *            ),
+     *        )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Permet de créer un user et renvoie son id",
+     *          @OA\JsonContent(
+     *              @OA\Schema(
+     *                   type="string",
+     *                   description="user_id"),
+     *                   example={"user_id": "9"}
+     *              )
+     *          )
+     *      )
+     * )
+     */
     public function register()
     {
         $params = $this->params();
@@ -78,7 +177,7 @@ class Api extends Controller
             } else {
                 $userId = $userModel->CreateNewUser($name, $mail, $password, $roles);
                 $_SESSION['userId'] = $userId;
-                echo json_encode(["userId" => $userId]);
+                echo json_encode(["user_id" => $userId]);
                 exit();
             }
         } else {
@@ -87,6 +186,43 @@ class Api extends Controller
         }
     }
 
+    /**
+     * @OA\Get(
+     *     path="/getAllProducts",
+     *     @OA\Response(
+     *          response="200",
+     *          description="Renvoie la liste des produits.",
+     *          @OA\JsonContent(
+     *              @OA\Schema(
+     *                   type="string",
+     *                   description="liste"),
+     *                   example={{
+    "id": "1",
+    "name": "Tradition",
+    "price": "1.20",
+    "description": "La baguette tradition au levain naturel et farine bio.",
+    "compo": "",
+    "tash": false,
+    "image": "",
+    "weight": "",
+    "category_id": "2"
+    },
+    {
+    "id": "2",
+    "name": "Tradi-graine",
+    "price": "1,30",
+    "description": "Une baguette tradition avec un petit twist.",
+    "compo": "",
+    "tash": false,
+    "image": "",
+    "weight": "",
+    "category_id": "2"
+    }}
+     *              )
+     *          )
+     *      )
+     * )
+     */
     public function getAllProducts()
     {
         header('Content-Type: application/json');
