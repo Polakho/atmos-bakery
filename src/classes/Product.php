@@ -9,7 +9,7 @@ class Product
 
     private $name;
 
-    private  $price;
+    private $price;
 
     private $description;
 
@@ -180,7 +180,7 @@ class Product
             "price" => $this->getPrice(),
             "description" => $this->getDescription(),
             "compo" => $this->getCompo(),
-            "tash" => $this->isTrash(),
+            "trash" => $this->isTrash(),
             "image" => $this->getImage(),
             "weight" =>$this->getWeight(),
             "category_id" => $this->getCategoryId()

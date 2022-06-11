@@ -7,7 +7,7 @@
     "servers": [
         {
             "url": "http://atmos/api",
-            "description": "Superbe API Atmos pour l'application mobile."
+            "description": "Superbe API Antoine"
         }
     ],
     "paths": {
@@ -134,6 +134,85 @@
                                         "category_id": "2"
                                     }
                                 ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/getActiveCartForUser": {
+            "post": {
+                "operationId": "7c97b5eae77677c410edf87ac88d3543",
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "header",
+                        "schema": {
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": "2"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Récupère un panier actif ou renvoie null",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "cart": {
+                                        "id": "1",
+                                        "user_id": "2",
+                                        "status": "1"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/addToCart": {
+            "post": {
+                "operationId": "c200be9d322a0310e2a47207769d66cc",
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "header",
+                        "schema": {
+                            "properties": {
+                                "cart_id": {
+                                    "type": "integer",
+                                    "example": "2"
+                                },
+                                "quantity": {
+                                    "type": "integer",
+                                    "example": "1"
+                                },
+                                "product_id": {
+                                    "type": "integer",
+                                    "example": "34"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Permet d'ajouter un produit en quantité (ou pas) au panier.",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "bravo tu as réussis !",
+                                    "contain_id": "3"
+                                }
                             }
                         }
                     }

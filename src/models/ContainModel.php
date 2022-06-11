@@ -16,6 +16,7 @@ class ContainModel
 
     public function ajouterContain($quantity, $productId, $cartId){
         $pdo = $this->db->getPDO();
+        try {
         $sql = "INSERT INTO  contain (quantity, trash, product_id, cart_id) VALUES (:quantity, 0, :productId, :cartId)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
@@ -25,6 +26,9 @@ class ContainModel
         ]);
 
         return $pdo->lastInsertId();
+        }catch (PDOException $e) {
+            return  "error :". $e->getMessage();
+        }
     }
 
     public function deleteContain($containId){

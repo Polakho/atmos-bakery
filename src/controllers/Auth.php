@@ -51,9 +51,10 @@ class Auth extends Controller
      */
     public function register()
     {
+        var_dump($_POST['f_name']);
         $userModel = new UserModel();
-
-        if (isset($_POST['name']) && isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['retypePassword'])) {
+        var_dump($_POST['f_name']); 
+        if (isset($_POST['name']) && isset($_POST['f_name']) && isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['retypePassword'])) {
             $errorMsg = NULL;
             if (!$userModel->IsMailAlreadyUsed($_POST['mail'])) {
                 $errorMsg = "Cette adresse mail est déjà utilisée.";
@@ -65,7 +66,7 @@ class Auth extends Controller
             if ($errorMsg) {
                 include '../src/views/register/register.php';
             } else {
-                $userId = $userModel->CreateNewUser($_POST['name'], $_POST['mail'], $_POST['password'], ["CLIENT"]);
+                $userId = $userModel->CreateNewUser($_POST['name'], $_POST['f_name'], $_POST['mail'], $_POST['password'], ["CLIENT"]);
                 $_SESSION['userId'] = $userId;
                 header('Location: /');
             }

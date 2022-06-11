@@ -4,6 +4,10 @@
 use App\Classes\Controller;
 
 class About extends Controller {
+
+    public function __construct(){
+        $this->frontController = new FrontController();
+    }
   /**
    * Cette méthode renvoie la page About
    * 

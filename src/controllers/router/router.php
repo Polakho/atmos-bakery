@@ -9,13 +9,20 @@ $params = explode('/', $_GET['p']);
 if ($params[0] != '') {
   // Stockage des variables controller et action (controller et methode)
   $controller = ucfirst($params[0]);
+
+  //Acces pour l'api créer par Swagger
+  if($controller == "Swagger"){
+      require_once "../public/swagger/swagger.json";
+      exit();
+  }
+
   $action = isset($params[1]) ? $params[1] : 'index';
   // Appel controller
   require_once('../src/controllers/'.$controller.'.php');
   // Instancie le controller
-        $className= "App\\Controllers\\$controller";
+  $className= "App\\Controllers\\$controller";
 
-    $controller = new $className();
+  $controller = new $className();
 
   if (method_exists($controller, $action)) {
     // Appel de la methode
