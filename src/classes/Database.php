@@ -3,19 +3,29 @@
 namespace App\Classes;
 
 use PDO;
-
+use Dotenv\Dotenv;
 class Database
 {
 
 
+    private $dotenv;
+
     public function __construct()
     {
+
+        $this->dotenv  = Dotenv::createImmutable(__DIR__."/../../");
     }
 
     public function getPDO()
     {
 
-        $pdo = new PDO("mysql:dbname=Atmos_Bakery;host=localhost", "root", "root");
+        $this->dotenv->load();
+        $dbName= $_ENV["DB_NAME"];
+        $username = $_ENV["PDO_USERNAME"];
+        $password = $_ENV["PDO_PASSWORD"];
+        $server = $_ENV["SERVER"];
+
+        $pdo = new PDO("mysql:dbname=$dbName;host=$server", "$username", "$password");
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         return $pdo;

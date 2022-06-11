@@ -29,6 +29,10 @@ class Api extends Controller
         return (json_decode(file_get_contents('php://input'), true));
     }
 
+    public function doc(){
+        require_once "../public/swagger/index.html";
+    }
+
     /**
      * @OA\Post(
      *     path="/login",
