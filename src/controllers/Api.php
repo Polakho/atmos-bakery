@@ -129,12 +129,14 @@ class Api extends Controller
      *                example="David"
      *            ),
      *            @OA\Property(
-     *                type="array",
+     *                type="string",
+     *                property="f_name",
+     *                example="Mouret"
+     *            ),
+     *            @OA\Property(
+     *                type="string",
      *                property="roles",
-     *                @OA\Items(
-     *                 type="string",
-     *                 example="CLIENT"
-     *                )
+     *                example="CLIENT"
      *            ),
      *        )
      *     ),
@@ -158,6 +160,7 @@ class Api extends Controller
 
         $mail = htmlspecialchars($params['mail']);
         $name = htmlspecialchars($params['name']);
+        $f_name = htmlspecialchars($params['f_name']);
         $password = htmlspecialchars($params['password']);
         $retypePassword = htmlspecialchars($params['retypePassword']);
         $roles = $params['roles'];
@@ -165,7 +168,7 @@ class Api extends Controller
         if (empty($roles)) {
             $roles ="CLIENT";
         }
-        if (isset($mail) && isset($name) && isset($password) && isset($retypePassword) && isset($roles)) {
+        if (isset($mail) && isset($name) && isset($f_name) && isset($password) && isset($retypePassword) && isset($roles)) {
             header('Content-Type: application/json');
             $errorMsg = NULL;
             if (!$userModel->IsMailAlreadyUsed($mail)) {
@@ -179,7 +182,7 @@ class Api extends Controller
                 echo json_encode(["message" => $errorMsg]);
                 exit();
             } else {
-                $userId = $userModel->CreateNewUser($name, $mail, $password, $roles);
+                $userId = $userModel->CreateNewUser($name, $f_name, $mail, $password, $roles);
                 $_SESSION['userId'] = $userId;
                 echo json_encode(["user_id" => $userId]);
                 exit();

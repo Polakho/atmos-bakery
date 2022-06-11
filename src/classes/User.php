@@ -7,6 +7,7 @@ class User
     private $id;
     private $mail;
     private $name;
+    private $f_name;
     private $password;
     private $trash;
     private $client_id;
@@ -63,6 +64,20 @@ class User
     public function setName($name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @param mixed
+     */
+    public function getFname() {
+        return $this->f_name;
+    }
+
+    /**
+     * @param mixed $f_name
+     */
+    public function setFname($f_name) : void {
+        $this->f_name = $f_name;
     }
 
     /**
