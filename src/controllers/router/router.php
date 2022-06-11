@@ -20,9 +20,9 @@ if ($params[0] != '') {
   // Appel controller
   require_once('../src/controllers/'.$controller.'.php');
   // Instancie le controller
-        $className= "App\\Controllers\\$controller";
+  $className= "App\\Controllers\\$controller";
 
-    $controller = new $className();
+  $controller = new $className();
 
   if (method_exists($controller, $action)) {
     // Appel de la methode
