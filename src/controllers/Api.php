@@ -163,9 +163,7 @@ class Api extends Controller
         $roles = $params['roles'];
 
         if (empty($roles)) {
-            $roles = [
-                "CLIENT"
-            ];
+            $roles ="CLIENT";
         }
         if (isset($mail) && isset($name) && isset($password) && isset($retypePassword) && isset($roles)) {
             header('Content-Type: application/json');
