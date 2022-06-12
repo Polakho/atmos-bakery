@@ -66,3 +66,18 @@ display: none
 .card button:hover {
     opacity: 0.7;
 }
+
+.notification-add-product{
+    position: fixed;
+    top: -8rem;
+    color: #ff4754;
+    background: #000;
+    padding: 1.2rem 2.4rem;
+    border-radius: 0.2rem;
+    box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s;
+}
+
+.show{
+    top: 2rem;
+}

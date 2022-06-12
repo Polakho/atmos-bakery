@@ -44,6 +44,9 @@
         </div>
     </section>
     <section>
+        <div class="notification-add-product">
+            Le produit a bien été ajouté
+        </div>
         <?php
         include "../src/components/modales/addProductModal.php";
 
@@ -187,6 +190,7 @@
     let cart = document.querySelector(".data-cart")
     let btnAddProduct = document.querySelector(".add-product-action")
     let quantity = document.querySelector("#product-quantity").textContent
+    let notif = document.querySelector('.notification-add-product');
     btnAddProduct.addEventListener("click", function (){
         let product_id = modalHeader.getAttribute("data-product-id")
         let post = {
@@ -206,6 +210,12 @@
             return response.json()
         }).then((res) => {
             console.log(res)
+            if (res.contain_id){
+                notif.classList.add("show");
+                setTimeout(() => {
+                    notif.classList.remove("show");
+                }, 3000);
+            }
         }).catch((error) => {
             console.log(error)
         })
