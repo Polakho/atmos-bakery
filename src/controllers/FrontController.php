@@ -23,8 +23,10 @@ class FrontController extends Controller
         if (isset($_SESSION['userId'])) {
             $cart = $this->cartModel->getActiveCartForUser($_SESSION['userId']);
             // var_dump($cart);
+            if ($cart == false){
+                $cart = $this->cartModel->createActiveCart($_SESSION['userId']);
+            }
         }
-
         include __DIR__ . '/../components/header/header.php';
     }
 

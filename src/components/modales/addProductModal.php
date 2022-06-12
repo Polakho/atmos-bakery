@@ -1,11 +1,20 @@
-<div class="modal modal-add-product hidden" data-product-id="<?php echo  $product->getId() ?>">
+<div class="modal modal-add-product hidden">
     <div class="modal-header">
 
     </div>
     <div class="modal-body">
-        <div class="quantity"></div>
+
+
     </div>
     <div class="modal-footer">
-        <button onClick="addModal()">Ajouter au panier</button>
+        <div class="quantity">
+            Quantité :
+            <div>
+                <button id="btn-less">-</button>
+                <p id="product-quantity">1</p>
+                <button id="btn-more">+</button>
+            </div>
+        </div>
+        <button class="add-product-action">Ajouter au panier</button>
     </div>
 </div>

@@ -14,7 +14,8 @@
     if (isset($_SESSION['userId'])) {
       // var_dump($cart);
     ?>
-      <p>ID USER : <?= $_SESSION['userId'] /* TODO Récupérer le nom du user */ ?></p>
+      <p>ID USER : <?= $_SESSION['userId']; /* TODO Récupérer le nom du user */ ?></p>
+        <span class="data-cart" data-cart-id="<?= $cart->getId()?>" data-user-id="<?= $_SESSION['userId'] ?>"></span>
       <a href="/auth/logout">Déconnectez-vous</a>
       <button onClick="showCart()"><img class="cart-icone" src="../../assets/img/cart/cart.png" alt="icone panier"></button>
     <?php

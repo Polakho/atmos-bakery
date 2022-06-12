@@ -239,6 +239,58 @@ class Api extends Controller
     }
 
     /**
+     * @OA\Get(
+     *     path="/getProductById",
+     *      @OA\Parameter(
+     *      name="request",
+     *      in="header",
+     *        @OA\Schema(
+     *            type="object",
+     *            @OA\Property(
+     *                type="integer",
+     *                property="product_id",
+     *                example="9"
+     *            ),
+     *        )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Renvoie un produit.",
+     *          @OA\JsonContent(
+     *              @OA\Schema(
+     *                   type="string",
+     *                   description="product"),
+     *                   example={
+    "id": "1",
+    "name": "Tradition",
+    "price": "1.20",
+    "description": "La baguette tradition au levain naturel et farine bio.",
+    "compo": "",
+    "tash": false,
+    "image": "",
+    "weight": "",
+    "category_id": "2"
+    }
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function getProductById()
+    {
+        $params = $this->params();
+
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+
+        $productId = htmlspecialchars($params['product_id']);
+
+        $productModel = new ProductModel();
+
+        echo json_encode($productModel->getProductById($productId)->jsonify());
+    }
+
+    /**
      * @OA\Post(
      *     path="/getActiveCartForUser",
      *     @OA\Parameter(

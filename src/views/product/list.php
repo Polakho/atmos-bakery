@@ -104,21 +104,110 @@
     })
 </script>
 <script>
+    let currentQuantity = document.querySelector("#product-quantity").textContent
+    let btnMore = document.querySelector("#btn-more")
+    let btnLess = document.querySelector("#btn-less")
+
+    function visibleBtnQuantity() {
+        if (currentQuantity == 1) {
+            btnLess.style.visibility = "hidden";
+        } else {
+            btnLess.style.visibility = "visible";
+        }
+    }
+
+    visibleBtnQuantity()
+
+    btnMore.addEventListener("click", function() {
+            currentQuantity++;
+            document.querySelector("#product-quantity").innerHTML = (currentQuantity)
+            visibleBtnQuantity()
+    })
+
+    btnLess.addEventListener("click", function() {
+        if (currentQuantity > 1) {
+            currentQuantity--;
+            document.querySelector("#product-quantity").innerHTML = (currentQuantity)
+            visibleBtnQuantity()
+        }
+    })
+</script>
+<script>
     let modalState = false;
     let modal = document.querySelector('.modal-add-product');
+    let modalHeader = document.querySelector('.modal-add-product .modal-header');
+    function clearBox(elementClass) {
+        var div = document.getElementById(elementClass);
+
+        while(div.firstChild) {
+            div.removeChild(div.firstChild);
+        }
+        div.removeAttribute("data-product-id")
+    }
     function showModal() {
         modalState = !modalState;
         if (modalState == false) {
             modal.classList.add("hidden")
+            clearBox('.modal-add-product .modal-header')
         } else {
             modal.classList.remove("hidden")
         }
     }
 
     let AllBtnAdd = document.querySelectorAll(".add-product")
+
     AllBtnAdd.forEach(function (btn, index){
         btn.addEventListener("click", function () {
             showModal()
+            let product_id = btn.getAttribute("data-product-id")
+            let post = {
+                product_id : product_id,
+
+            }
+            fetch("http://atmos:8888/api/getProductById", {
+                method: 'post',
+                body: JSON.stringify(post),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            }).then((response) => {
+                return response.json()
+            }).then((res) => {
+                console.log(res)
+                modalHeader.textContent = res.name
+                modalHeader.setAttribute("data-product-id", product_id)
+            }).catch((error) => {
+                console.log(error)
+            })
+        })
+    })
+
+
+    let cart = document.querySelector(".data-cart")
+    let btnAddProduct = document.querySelector(".add-product-action")
+    let quantity = document.querySelector("#product-quantity").textContent
+    btnAddProduct.addEventListener("click", function (){
+        let product_id = modalHeader.getAttribute("data-product-id")
+        let post = {
+            product_id : product_id,
+            cart_id : cart.getAttribute("data-cart-id"),
+            quantity : quantity
+        }
+        console.log(quantity)
+        fetch("http://atmos:8888/api/addToCart", {
+            method: 'post',
+            body: JSON.stringify(post),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((res) => {
+            console.log(res)
+        }).catch((error) => {
+            console.log(error)
         })
     })
 </script>
