@@ -29,7 +29,7 @@
                   <h1>' . $product->getName() . '</h1>
                   <p class="price">' . $product->getPrice() . ' $</p>
                   <p>' . $product->getDescription() . '</p>
-                  <button onClick="addModal(' . $product->getId() . ')">Ajouter au panier</button>
+                  <button class="add-product" data-product-id="'. $product->getId() .'">+</button>
                   </div>';
                 }
                 echo '</div>';
@@ -45,6 +45,8 @@
     </section>
     <section>
         <?php
+        include "../src/components/modales/addProductModal.php";
+
         $this->frontController->footer();
         ?>
     </section>
@@ -54,11 +56,9 @@
     let btnNext = document.querySelector("#btn-next")
     let btnPrev = document.querySelector("#btn-prev")
     let totalPages = document.querySelector(".listing").getAttribute("data-pages")
-    //console.log(totalPages)
 
     function visibleBtn() {
         let currentPage = document.querySelector("#page-nbr").textContent
-        // console.log(currentPage)
         if (currentPage == 1) {
             btnPrev.style.visibility = "hidden";
         } else {
@@ -75,7 +75,6 @@
     function changePage(number) {
         let pages = document.querySelectorAll("*[data-page^=\"page-\"]")
         pages.forEach((value, key) => {
-            console.log(value.getAttribute("data-page"))
             if (value.getAttribute("data-page") != ("page-" + number)) {
                 value.classList.add("hidden")
             } else {
@@ -103,34 +102,25 @@
             visibleBtn()
         }
     })
-
-    function addModal(pId) {
-
-    }
-
-    function cartExist({
-        pId,
-        pQuantity
-    }, uId) {
-        if () {
-            addCart({
-                pId,
-                pQuantity
-            }, uId, cId)
+</script>
+<script>
+    let modalState = false;
+    let modal = document.querySelector('.modal-add-product');
+    function showModal() {
+        modalState = !modalState;
+        if (modalState == false) {
+            modal.classList.add("hidden")
         } else {
-            const panier = await createCart(uId)
-            if (panier) {
-                addCart({
-                    pId,
-                    pQuantity
-                }, uId, cId)
-            }
+            modal.classList.remove("hidden")
         }
     }
 
-    function createCart(uId) {
-
-    }
+    let AllBtnAdd = document.querySelectorAll(".add-product")
+    AllBtnAdd.forEach(function (btn, index){
+        btn.addEventListener("click", function () {
+            showModal()
+        })
+    })
 </script>
 
 </html>

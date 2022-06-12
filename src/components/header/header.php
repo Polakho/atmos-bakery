@@ -19,6 +19,7 @@
       <button onClick="showCart()"><img class="cart-icone" src="../../assets/img/cart/cart.png" alt="icone panier"></button>
     <?php
       include '../src/components/modales/cartModale.php';
+
     } else if ($_SERVER['REQUEST_URI'] === '/auth/login') {
     ?>
       <a href="/auth/register">Créez un compte</a>
@@ -52,5 +53,4 @@
       modalCart.classList.remove("hidden")
     }
   }
-</script>
 </script>
