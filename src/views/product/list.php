@@ -139,22 +139,25 @@
     let modalState = false;
     let modal = document.querySelector('.modal-add-product');
     let modalHeader = document.querySelector('.modal-add-product .modal-header');
-    function clearBox(elementClass) {
-        var div = document.getElementById(elementClass);
 
-        while(div.firstChild) {
-            div.removeChild(div.firstChild);
-        }
-        div.removeAttribute("data-product-id")
-    }
     function showModal() {
         modalState = !modalState;
         if (modalState == false) {
             modal.classList.add("hidden")
-            clearBox('.modal-add-product .modal-header')
+            clearBox(modalHeader)
         } else {
             modal.classList.remove("hidden")
         }
+    }
+
+    function clearBox(div) {
+        while(div.firstChild) {
+            div.removeChild(div.firstChild);
+        }
+        div.removeAttribute("data-product-id")
+        document.querySelector("#product-quantity").innerHTML="1"
+        currentQuantity = 1
+        visibleBtnQuantity()
     }
 
     let AllBtnAdd = document.querySelectorAll(".add-product")
@@ -215,6 +218,7 @@
                 setTimeout(() => {
                     notif.classList.remove("show");
                 }, 3000);
+                showModal()
             }
         }).catch((error) => {
             console.log(error)
