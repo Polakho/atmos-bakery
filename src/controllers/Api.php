@@ -394,4 +394,65 @@ class Api extends Controller
             }
         }
     }
+
+    /**
+     * @OA\Post(
+     *     path="/getContainsForCart",
+     *     @OA\Parameter(
+     *     name="request",
+     *     in="header",
+     *        @OA\Schema(
+     *            type="object",
+     *            @OA\Property(
+     *                type="integer",
+     *                property="cart_id",
+     *                example="2"
+     *            ),
+     *        )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Recupère le contenu d'un panier.",
+     *          @OA\JsonContent(
+     *              @OA\Schema(
+     *                   type="string",
+     *                   description="cart"),
+     *                   example={"message": "bravo tu as réussis !","contain_id": "3"}
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function getContainsForCart(){
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+
+        $params = $this->params();
+
+        $containModel = new containModel();
+        $productModel = new productModel();
+
+        $cartId = htmlspecialchars($params['cart_id']);
+
+        if (isset($cartId)){
+            $contains = $containModel->getContainsForCart($cartId);
+
+            if (empty($contains)){
+                echo json_encode(["message" => "the cart is empty."]);
+            }
+
+            $containWithProduct = array();
+            foreach ($contains as $contain){
+                $productId = $contain["product_id"];
+                $containWithProduct[]=[
+                    "id" => $contain["id"],
+                    "cart_id" => $contain["cart_id"],
+                    "quantity" => $contain["quantity"],
+                    "trash" => $contain["trash"],
+                    "product" => $productModel->getProductById($productId)->jsonify()
+                ];
+            }
+            echo json_encode(array_values($containWithProduct));
+        }
+    }
 }

@@ -44,14 +44,46 @@
 </html>
 <script>
   let modalCart = document.querySelector('.modal-cart')
+  let modalBody = document.querySelector('.modal-cart .modal-body')
   let cartState = false;
-
-  function showCart() {
+  let cartId = document.querySelector(".data-cart").getAttribute("data-cart-id")
+  function  showCart() {
     cartState = !cartState;
     if (cartState == false) {
       modalCart.classList.add("hidden")
+        clearBox(modalBody)
+
     } else {
       modalCart.classList.remove("hidden")
+
+        let post = {
+            cart_id : cartId,
+
+        }
+         fetch("http://atmos:8888/api/getContainsForCart", {
+            method: 'post',
+            body: JSON.stringify(post),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((res) => {
+            res.map( function (contain){
+                console.log(contain.product.id)
+                let div = document.createElement("div")
+                let h3 = document.createElement("h3")
+                h3.innerHTML= contain.product.name
+                let p = document.createElement("p")
+                p.innerHTML= "quantité: "+contain.quantity
+                div.appendChild(h3)
+                div.appendChild(p)
+                modalBody.appendChild(div)
+            })
+        }).catch((error) => {
+            console.log(error)
+        })
     }
   }
 </script>

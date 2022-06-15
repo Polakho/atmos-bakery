@@ -192,16 +192,15 @@
 
     let cart = document.querySelector(".data-cart")
     let btnAddProduct = document.querySelector(".add-product-action")
-    let quantity = document.querySelector("#product-quantity").textContent
     let notif = document.querySelector('.notification-add-product');
     btnAddProduct.addEventListener("click", function (){
         let product_id = modalHeader.getAttribute("data-product-id")
+        let quantity = document.querySelector("#product-quantity").textContent
         let post = {
             product_id : product_id,
             cart_id : cart.getAttribute("data-cart-id"),
             quantity : quantity
         }
-        console.log(quantity)
         fetch("http://atmos:8888/api/addToCart", {
             method: 'post',
             body: JSON.stringify(post),
@@ -212,8 +211,7 @@
         }).then((response) => {
             return response.json()
         }).then((res) => {
-            console.log(res)
-            if (res.contain_id){
+            if (res.contain_id || res.quantity){
                 notif.classList.add("show");
                 setTimeout(() => {
                     notif.classList.remove("show");
