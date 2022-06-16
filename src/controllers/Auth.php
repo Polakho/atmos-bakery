@@ -51,9 +51,7 @@ class Auth extends Controller
      */
     public function register()
     {
-        var_dump($_POST['f_name']);
         $userModel = new UserModel();
-        var_dump($_POST['f_name']); 
         if (isset($_POST['name']) && isset($_POST['f_name']) && isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['retypePassword'])) {
             $errorMsg = NULL;
             if (!$userModel->IsMailAlreadyUsed($_POST['mail'])) {

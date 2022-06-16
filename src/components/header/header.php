@@ -70,17 +70,25 @@
         }).then((response) => {
             return response.json()
         }).then((res) => {
-            res.map( function (contain){
-                console.log(contain.product.id)
+            if (res.list){
+                res.list.map( function (contain){
+                    let div = document.createElement("div")
+                    let h3 = document.createElement("h3")
+                    h3.innerHTML= contain.product.name
+                    let p = document.createElement("p")
+                    p.innerHTML= "quantité: "+contain.quantity
+                    div.appendChild(h3)
+                    div.appendChild(p)
+                    modalBody.appendChild(div)
+                })
+            }else if(res.message){
                 let div = document.createElement("div")
-                let h3 = document.createElement("h3")
-                h3.innerHTML= contain.product.name
                 let p = document.createElement("p")
-                p.innerHTML= "quantité: "+contain.quantity
-                div.appendChild(h3)
+                p.innerHTML= "Panier vide"
                 div.appendChild(p)
                 modalBody.appendChild(div)
-            })
+            }
+
         }).catch((error) => {
             console.log(error)
         })

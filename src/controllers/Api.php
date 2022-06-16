@@ -439,6 +439,7 @@ class Api extends Controller
 
             if (empty($contains)){
                 echo json_encode(["message" => "the cart is empty."]);
+                exit();
             }
 
             $containWithProduct = array();
@@ -452,7 +453,7 @@ class Api extends Controller
                     "product" => $productModel->getProductById($productId)->jsonify()
                 ];
             }
-            echo json_encode(array_values($containWithProduct));
+            echo json_encode(["list" => $containWithProduct]);
         }
     }
 }
