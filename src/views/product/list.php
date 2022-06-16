@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script>
+    //Penser à changer l'url de l'api selon le vhost
+    //Bien mettre un / après le api
+    let baseUrl = "http://atmosdev.com/api/"
+</script>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,7 +35,7 @@
                   <h1>' . $product->getName() . '</h1>
                   <p class="price">' . $product->getPrice() . ' $</p>
                   <p>' . $product->getDescription() . '</p>
-                  <button class="add-product" data-product-id="'. $product->getId() .'">+</button>
+                  <button class="add-product" data-product-id="' . $product->getId() . '">+</button>
                   </div>';
                 }
                 echo '</div>';
@@ -122,9 +128,9 @@
     visibleBtnQuantity()
 
     btnMore.addEventListener("click", function() {
-            currentQuantity++;
-            document.querySelector("#product-quantity").innerHTML = (currentQuantity)
-            visibleBtnQuantity()
+        currentQuantity++;
+        document.querySelector("#product-quantity").innerHTML = (currentQuantity)
+        visibleBtnQuantity()
     })
 
     btnLess.addEventListener("click", function() {
@@ -151,26 +157,26 @@
     }
 
     function clearBox(div) {
-        while(div.firstChild) {
+        while (div.firstChild) {
             div.removeChild(div.firstChild);
         }
         div.removeAttribute("data-product-id")
-        document.querySelector("#product-quantity").innerHTML="1"
+        document.querySelector("#product-quantity").innerHTML = "1"
         currentQuantity = 1
         visibleBtnQuantity()
     }
 
     let AllBtnAdd = document.querySelectorAll(".add-product")
 
-    AllBtnAdd.forEach(function (btn, index){
-        btn.addEventListener("click", function () {
+    AllBtnAdd.forEach(function(btn, index) {
+        btn.addEventListener("click", function() {
             showModal()
             let product_id = btn.getAttribute("data-product-id")
             let post = {
-                product_id : product_id,
+                product_id: product_id,
 
             }
-            fetch("http://atmos:8888/api/getProductById", {
+            fetch(baseUrl + "getProductById", {
                 method: 'post',
                 body: JSON.stringify(post),
                 headers: {
@@ -193,15 +199,15 @@
     let cart = document.querySelector(".data-cart")
     let btnAddProduct = document.querySelector(".add-product-action")
     let notif = document.querySelector('.notification-add-product');
-    btnAddProduct.addEventListener("click", function (){
+    btnAddProduct.addEventListener("click", function() {
         let product_id = modalHeader.getAttribute("data-product-id")
         let quantity = document.querySelector("#product-quantity").textContent
         let post = {
-            product_id : product_id,
-            cart_id : cart.getAttribute("data-cart-id"),
-            quantity : quantity
+            product_id: product_id,
+            cart_id: cart.getAttribute("data-cart-id"),
+            quantity: quantity
         }
-        fetch("http://atmos:8888/api/addToCart", {
+        fetch(baseUrl + "addToCart", {
             method: 'post',
             body: JSON.stringify(post),
             headers: {
@@ -211,7 +217,7 @@
         }).then((response) => {
             return response.json()
         }).then((res) => {
-            if (res.contain_id || res.quantity){
+            if (res.contain_id || res.quantity) {
                 notif.classList.add("show");
                 setTimeout(() => {
                     notif.classList.remove("show");

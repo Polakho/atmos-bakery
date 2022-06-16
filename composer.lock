@@ -388,20 +388,23 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v6.0.8",
+            "version": "v6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "af7edab28d17caecd1f40a9219fc646ae751c21f"
+                "reference": "45b8beb69d6eb3b05a65689ebfd4222326773f8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/af7edab28d17caecd1f40a9219fc646ae751c21f",
-                "reference": "af7edab28d17caecd1f40a9219fc646ae751c21f",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/45b8beb69d6eb3b05a65689ebfd4222326773f8f",
+                "reference": "45b8beb69d6eb3b05a65689ebfd4222326773f8f",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.2"
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "symfony/filesystem": "^6.0"
             },
             "type": "library",
             "autoload": {
@@ -429,7 +432,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v6.0.8"
+                "source": "https://github.com/symfony/finder/tree/v6.1.0"
             },
             "funding": [
                 {
@@ -445,7 +448,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-15T08:07:58+00:00"
+            "time": "2022-04-15T08:08:08+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -697,20 +700,20 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v6.0.3",
+            "version": "v6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "e77f3ea0b21141d771d4a5655faa54f692b34af5"
+                "reference": "84ce4f9d2d68f306f971a39d949d8f4b5550dba2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/e77f3ea0b21141d771d4a5655faa54f692b34af5",
-                "reference": "e77f3ea0b21141d771d4a5655faa54f692b34af5",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/84ce4f9d2d68f306f971a39d949d8f4b5550dba2",
+                "reference": "84ce4f9d2d68f306f971a39d949d8f4b5550dba2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.2",
+                "php": ">=8.1",
                 "symfony/polyfill-ctype": "^1.8"
             },
             "conflict": {
@@ -751,7 +754,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v6.0.3"
+                "source": "https://github.com/symfony/yaml/tree/v6.1.0"
             },
             "funding": [
                 {
@@ -767,7 +770,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-26T17:23:29+00:00"
+            "time": "2022-04-15T14:25:02+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -935,5 +938,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
