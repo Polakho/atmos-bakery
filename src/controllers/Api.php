@@ -81,12 +81,34 @@ class Api extends Controller
 
             $userId = $userModel->GetUserIdFromMailAndPassword($mail, $password);
             if ($userId > 0) {
-                echo json_encode(
+                /*echo json_encode(
                     [
                         "message" => 'Good login',
                         "user_id" => $userId['id']
                     ]
-                );
+                );*/
+                // Create token header as a JSON string
+                $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
+
+// Create token payload as a JSON string
+                $payload = json_encode(['user_id' => $userId['id']]);
+
+// Encode Header to Base64Url String
+                $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
+
+// Encode Payload to Base64Url String
+                $base64UrlPayload = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($payload));
+
+// Create Signature Hash
+                $signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, 'abC123!', true);
+
+// Encode Signature to Base64Url String
+                $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
+
+// Create JWT
+                $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
+
+                echo $jwt;
                 exit();
             } else {
                 $errorMsg = "Wrong login and/or password.";
@@ -183,8 +205,28 @@ class Api extends Controller
                 exit();
             } else {
                 $userId = $userModel->CreateNewUser($name, $f_name, $mail, $password, $roles);
-                $_SESSION['userId'] = $userId;
-                echo json_encode(["user_id" => $userId]);
+                //$_SESSION['userId'] = $userId;
+                /*echo json_encode(["user_id" => $userId]);*/
+                // Create token header as a JSON string
+                $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
+
+// Create token payload as a JSON string
+                $payload = json_encode(['user_id' => $userId]);
+
+// Encode Header to Base64Url String
+                $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
+
+// Encode Payload to Base64Url String
+                $base64UrlPayload = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($payload));
+
+// Create Signature Hash
+                $signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, 'abC123!', true);
+
+// Encode Signature to Base64Url String
+                $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
+
+// Create JWT
+                $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
                 exit();
             }
         } else {
