@@ -7,7 +7,7 @@
     "servers": [
         {
             "url": "http://atmos/api",
-            "description": "Superbe API Antoine"
+            "description": "The best API"
         }
     ],
     "paths": {
@@ -183,8 +183,8 @@
             }
         },
         "/getActiveCartForUser": {
-            "post": {
-                "operationId": "7c97b5eae77677c410edf87ac88d3543",
+            "get": {
+                "operationId": "2d1a88ca0d452c130cf11e87be3e6fe7",
                 "parameters": [
                     {
                         "name": "request",
@@ -262,8 +262,8 @@
             }
         },
         "/getContainsForCart": {
-            "post": {
-                "operationId": "debf2ed3361972772a392efae040490d",
+            "get": {
+                "operationId": "b3d3aaf630193894d33fd81b3a7ff081",
                 "parameters": [
                     {
                         "name": "request",
@@ -356,6 +356,76 @@
                                             }
                                         }
                                     ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/changeQuantityOfContain": {
+            "put": {
+                "operationId": "290fc4e76c5dd550c3efb7736bc67875",
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "header",
+                        "schema": {
+                            "properties": {
+                                "contain_id": {
+                                    "type": "integer",
+                                    "example": "2"
+                                },
+                                "quantity": {
+                                    "type": "integer",
+                                    "example": "1"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Changer la quantité d'un produit du panier.",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "La quantité a été changé"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deleteContain": {
+            "post": {
+                "operationId": "0d9d11479d9514ec1cfc9b0c7b0ca218",
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "header",
+                        "schema": {
+                            "properties": {
+                                "contain_id": {
+                                    "type": "integer",
+                                    "example": "2"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Supprime un produit du panier.",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "Le produit a été supprimé du panier"
                                 }
                             }
                         }

@@ -14,7 +14,7 @@ use OpenApi\Annotations as OA;
  * @OA\Info(title="Atmose Bakery API", version="1.0.8")
  * @OA\Server(
  *    url="http://atmos/api",
- *    description="Superbe API Antoine"
+ *    description="The best API"
  * )
  */
 class Api extends Controller
@@ -333,7 +333,7 @@ class Api extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\Get(
      *     path="/getActiveCartForUser",
      *     @OA\Parameter(
      *     name="request",
@@ -438,7 +438,7 @@ class Api extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\Get(
      *     path="/getContainsForCart",
      *     @OA\Parameter(
      *     name="request",
@@ -565,6 +565,106 @@ class Api extends Controller
                 ];
             }
             echo json_encode(["list" => $containWithProduct]);
+        }
+    }
+
+    /**
+     * @OA\Put(
+     *     path="/changeQuantityOfContain",
+     *     @OA\Parameter(
+     *     name="request",
+     *     in="header",
+     *        @OA\Schema(
+     *            type="object",
+     *            @OA\Property(
+     *                type="integer",
+     *                property="contain_id",
+     *                example="2"
+     *            ),
+     *            @OA\Property(
+     *                type="integer",
+     *                property="quantity",
+     *                example="1"
+     *            )
+     *        )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Changer la quantité d'un produit du panier.",
+     *          @OA\JsonContent(
+     *              @OA\Schema(
+     *                   type="string",
+     *                   description="cart"),
+     *                   example={"message": "La quantité a été changé"}
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function changeQuantityOfContain(){
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+
+        $params = $this->params();
+
+        $containModel = new containModel();
+
+        $containId = htmlspecialchars($params['contain_id']);
+        $quantity = htmlspecialchars($params['quantity']);
+
+        if (isset($containId) && isset($quantity)){
+            $contain = $containModel->changeQuantityOfContain($containId, $quantity);
+            if ($contain == true ){
+                echo json_encode(["message" => "La quantité a été changé"]);
+            }else{
+                echo json_encode(["message" => "Sale merde !",
+                    "error" => $contain  ]);
+            }
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/deleteContain",
+     *     @OA\Parameter(
+     *     name="request",
+     *     in="header",
+     *        @OA\Schema(
+     *            type="object",
+     *            @OA\Property(
+     *                type="integer",
+     *                property="contain_id",
+     *                example="2"
+     *            )
+     *        )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Supprime un produit du panier.",
+     *          @OA\JsonContent(
+     *              @OA\Schema(
+     *                   type="string",
+     *                   description="cart"),
+     *                   example={"message": "Le produit a été supprimé du panier"}
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function deleteContain(){
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+
+        $params = $this->params();
+
+        $containModel = new containModel();
+
+        $containId = htmlspecialchars($params['contain_id']);
+
+        if (isset($containId)){
+             $containModel->deleteContain($containId);
+             echo json_encode(["message" => "Le produit a été supprimé du panier"]);
+
         }
     }
 }

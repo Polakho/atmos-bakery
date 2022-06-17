@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Classes\Database;
 use PDOException;
-use function Symfony\Component\String\s;
 
 class ContainModel
 {
