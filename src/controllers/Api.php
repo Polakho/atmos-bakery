@@ -417,7 +417,76 @@ class Api extends Controller
      *              @OA\Schema(
      *                   type="string",
      *                   description="cart"),
-     *                   example={"message": "bravo tu as réussis !","contain_id": "3"}
+     *                   example={"list": {
+    {
+    "id": "21",
+    "cart_id": "2",
+    "quantity": "4",
+    "trash": 0,
+    "product": {
+    "id": "5",
+    "name": "Barbu du Roussillon",
+    "price": "11,30",
+    "description": "Pain semi complet au levain naturel et ancienne farine (prix au kilo).",
+    "compo": "",
+    "trash": false,
+    "image": "",
+    "weight": "",
+    "category_id": "2"
+    }
+    },
+    {
+    "id": "22",
+    "cart_id": "2",
+    "quantity": "25",
+    "trash": 0,
+    "product": {
+    "id": "4",
+    "name": "Complet",
+    "price": "4,00",
+    "description": "Pain complet au levain naturel et faire bio (prix au kilo).",
+    "compo": "",
+    "trash": false,
+    "image": "",
+    "weight": "",
+    "category_id": "2"
+    }
+    },
+    {
+    "id": "23",
+    "cart_id": "2",
+    "quantity": "4",
+    "trash": 0,
+    "product": {
+    "id": "1",
+    "name": "Tradition",
+    "price": "1.20",
+    "description": "La baguette tradition au levain naturel et farine bio.",
+    "compo": "",
+    "trash": false,
+    "image": "",
+    "weight": "",
+    "category_id": "2"
+    }
+    },
+    {
+    "id": "24",
+    "cart_id": "2",
+    "quantity": "2",
+    "trash": 0,
+    "product": {
+    "id": "2",
+    "name": "Tradi-graine",
+    "price": "1,30",
+    "description": "Une baguette tradition avec un petit twist.",
+    "compo": "",
+    "trash": false,
+    "image": "",
+    "weight": "",
+    "category_id": "2"
+    }
+    }
+    }}
      *              )
      *          )
      *      )

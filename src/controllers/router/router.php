@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 // On appelle le modèle et le contrôleur principaux
 
-use App\Controllers\Home;
+use App\Controllers\HomeController;
 
 $params = explode('/', $_GET['p']);
 if ($params[0] != '') {
