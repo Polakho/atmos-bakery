@@ -236,7 +236,7 @@ class Api extends Controller
                 json_encode(
                     [
                         "message" => 'Good Register',
-                        "user_id" => $userId['id'],
+                        "user_id" => $userId,
                         "jwtoken" => $jwt
                     ]
                 );
