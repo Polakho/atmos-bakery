@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Classes\Controller;
@@ -14,14 +15,13 @@ use OpenApi\Annotations as OA;
  * @OA\Info(title="Atmose Bakery API", version="1.0.8")
  * @OA\Server(
  *    url="http://atmos/api",
- *    description="Superbe API Antoine"
+ *    description="The best API"
  * )
  */
 class Api extends Controller
 {
     public function __construct()
     {
-
     }
 
     private function params()
@@ -29,7 +29,8 @@ class Api extends Controller
         return (json_decode(file_get_contents('php://input'), true));
     }
 
-    public function doc(){
+    public function doc()
+    {
         require_once "../public/swagger/index.html";
     }
 
@@ -81,12 +82,34 @@ class Api extends Controller
 
             $userId = $userModel->GetUserIdFromMailAndPassword($mail, $password);
             if ($userId > 0) {
-                echo json_encode(
+                /*echo json_encode(
                     [
                         "message" => 'Good login',
                         "user_id" => $userId['id']
                     ]
-                );
+                );*/
+                // Create token header as a JSON string
+                $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
+
+                // Create token payload as a JSON string
+                $payload = json_encode(['user_id' => $userId['id']]);
+
+                // Encode Header to Base64Url String
+                $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
+
+                // Encode Payload to Base64Url String
+                $base64UrlPayload = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($payload));
+
+                // Create Signature Hash
+                $signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, 'abC123!', true);
+
+                // Encode Signature to Base64Url String
+                $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
+
+                // Create JWT
+                $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
+
+                echo $jwt;
                 exit();
             } else {
                 $errorMsg = "Wrong login and/or password.";
@@ -166,7 +189,7 @@ class Api extends Controller
         $roles = $params['roles'];
 
         if (empty($roles)) {
-            $roles ="CLIENT";
+            $roles = "CLIENT";
         }
         if (isset($mail) && isset($name) && isset($f_name) && isset($password) && isset($retypePassword) && isset($roles)) {
             header('Content-Type: application/json');
@@ -183,8 +206,28 @@ class Api extends Controller
                 exit();
             } else {
                 $userId = $userModel->CreateNewUser($name, $f_name, $mail, $password, $roles);
-                $_SESSION['userId'] = $userId;
-                echo json_encode(["user_id" => $userId]);
+                //$_SESSION['userId'] = $userId;
+                /*echo json_encode(["user_id" => $userId]);*/
+                // Create token header as a JSON string
+                $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
+
+                // Create token payload as a JSON string
+                $payload = json_encode(['user_id' => $userId]);
+
+                // Encode Header to Base64Url String
+                $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
+
+                // Encode Payload to Base64Url String
+                $base64UrlPayload = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($payload));
+
+                // Create Signature Hash
+                $signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, 'abC123!', true);
+
+                // Encode Signature to Base64Url String
+                $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
+
+                // Create JWT
+                $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
                 exit();
             }
         } else {
@@ -239,7 +282,59 @@ class Api extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\Get(
+     *     path="/getProductById",
+     *      @OA\Parameter(
+     *      name="request",
+     *      in="header",
+     *        @OA\Schema(
+     *            type="object",
+     *            @OA\Property(
+     *                type="integer",
+     *                property="product_id",
+     *                example="9"
+     *            ),
+     *        )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Renvoie un produit.",
+     *          @OA\JsonContent(
+     *              @OA\Schema(
+     *                   type="string",
+     *                   description="product"),
+     *                   example={
+    "id": "1",
+    "name": "Tradition",
+    "price": "1.20",
+    "description": "La baguette tradition au levain naturel et farine bio.",
+    "compo": "",
+    "tash": false,
+    "image": "",
+    "weight": "",
+    "category_id": "2"
+    }
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function getProductById()
+    {
+        $params = $this->params();
+
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+
+        $productId = htmlspecialchars($params['product_id']);
+
+        $productModel = new ProductModel();
+
+        echo json_encode($productModel->getProductById($productId)->jsonify());
+    }
+
+    /**
+     * @OA\Get(
      *     path="/getActiveCartForUser",
      *     @OA\Parameter(
      *     name="request",
@@ -266,19 +361,19 @@ class Api extends Controller
      *      )
      * )
      */
-    public function getActiveCartForUser(){
+    public function getActiveCartForUser()
+    {
         header('Content-Type: application/json');
         header("Access-Control-Allow-Origin: *");
 
         $params = $this->params();
         $cartModel = new cartModel();
         $userId = htmlspecialchars($params['user_id']);
-        if (isset($userId)){
+        if (isset($userId)) {
             $cart = $cartModel->getActiveCartForUser($userId);
             echo json_encode(["cart" => $cart->jsonify()]);
             exit();
         }
-
     }
 
     /**
@@ -319,7 +414,8 @@ class Api extends Controller
      *      )
      * )
      */
-    public function addToCart(){
+    public function addToCart()
+    {
         header('Content-Type: application/json');
         header("Access-Control-Allow-Origin: *");
 
@@ -331,15 +427,254 @@ class Api extends Controller
         $quantity = htmlspecialchars($params['quantity']);
         $productId = htmlspecialchars($params['product_id']);
 
-        if (isset($cartId) && isset($quantity) && isset($productId)){
+        if (isset($cartId) && isset($quantity) && isset($productId)) {
             $contain = $containModel->ajouterContain($quantity, $productId, $cartId);
-            if (is_numeric($contain)){
-                echo json_encode(["message" => "bravo tu as réussis !",
-                                  "contain_id" => $contain  ]);
-            }else{
-                echo json_encode(["message" => "Sale merde !",
-                                  "error" => $contain  ]);
+            if (is_numeric($contain)) {
+                echo json_encode([
+                    "message" => "bravo tu as réussis !",
+                    "contain_id" => $contain
+                ]);
+            } else {
+                echo json_encode([
+                    "message" => "Sale merde !",
+                    "error" => $contain
+                ]);
             }
+        }
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/getContainsForCart",
+     *     @OA\Parameter(
+     *     name="request",
+     *     in="header",
+     *        @OA\Schema(
+     *            type="object",
+     *            @OA\Property(
+     *                type="integer",
+     *                property="cart_id",
+     *                example="2"
+     *            ),
+     *        )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Recupère le contenu d'un panier.",
+     *          @OA\JsonContent(
+     *              @OA\Schema(
+     *                   type="string",
+     *                   description="cart"),
+     *                   example={"list": {
+    {
+    "id": "21",
+    "cart_id": "2",
+    "quantity": "4",
+    "trash": 0,
+    "product": {
+    "id": "5",
+    "name": "Barbu du Roussillon",
+    "price": "11,30",
+    "description": "Pain semi complet au levain naturel et ancienne farine (prix au kilo).",
+    "compo": "",
+    "trash": false,
+    "image": "",
+    "weight": "",
+    "category_id": "2"
+    }
+    },
+    {
+    "id": "22",
+    "cart_id": "2",
+    "quantity": "25",
+    "trash": 0,
+    "product": {
+    "id": "4",
+    "name": "Complet",
+    "price": "4,00",
+    "description": "Pain complet au levain naturel et faire bio (prix au kilo).",
+    "compo": "",
+    "trash": false,
+    "image": "",
+    "weight": "",
+    "category_id": "2"
+    }
+    },
+    {
+    "id": "23",
+    "cart_id": "2",
+    "quantity": "4",
+    "trash": 0,
+    "product": {
+    "id": "1",
+    "name": "Tradition",
+    "price": "1.20",
+    "description": "La baguette tradition au levain naturel et farine bio.",
+    "compo": "",
+    "trash": false,
+    "image": "",
+    "weight": "",
+    "category_id": "2"
+    }
+    },
+    {
+    "id": "24",
+    "cart_id": "2",
+    "quantity": "2",
+    "trash": 0,
+    "product": {
+    "id": "2",
+    "name": "Tradi-graine",
+    "price": "1,30",
+    "description": "Une baguette tradition avec un petit twist.",
+    "compo": "",
+    "trash": false,
+    "image": "",
+    "weight": "",
+    "category_id": "2"
+    }
+    }
+    }}
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function getContainsForCart()
+    {
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+
+        $params = $this->params();
+
+        $containModel = new containModel();
+        $productModel = new productModel();
+
+        $cartId = htmlspecialchars($params['cart_id']);
+
+        if (isset($cartId)) {
+            $contains = $containModel->getContainsForCart($cartId);
+
+            if (empty($contains)) {
+                echo json_encode(["message" => "the cart is empty."]);
+                exit();
+            }
+
+            $containWithProduct = array();
+            foreach ($contains as $contain) {
+                $productId = $contain["product_id"];
+                $containWithProduct[] = [
+                    "id" => $contain["id"],
+                    "cart_id" => $contain["cart_id"],
+                    "quantity" => $contain["quantity"],
+                    "trash" => $contain["trash"],
+                    "product" => $productModel->getProductById($productId)->jsonify()
+                ];
+            }
+            echo json_encode(["list" => $containWithProduct]);
+        }
+    }
+
+    /**
+     * @OA\Put(
+     *     path="/changeQuantityOfContain",
+     *     @OA\Parameter(
+     *     name="request",
+     *     in="header",
+     *        @OA\Schema(
+     *            type="object",
+     *            @OA\Property(
+     *                type="integer",
+     *                property="contain_id",
+     *                example="2"
+     *            ),
+     *            @OA\Property(
+     *                type="integer",
+     *                property="quantity",
+     *                example="1"
+     *            )
+     *        )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Changer la quantité d'un produit du panier.",
+     *          @OA\JsonContent(
+     *              @OA\Schema(
+     *                   type="string",
+     *                   description="cart"),
+     *                   example={"message": "La quantité a été changé"}
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function changeQuantityOfContain()
+    {
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+
+        $params = $this->params();
+
+        $containModel = new containModel();
+
+        $containId = htmlspecialchars($params['contain_id']);
+        $quantity = htmlspecialchars($params['quantity']);
+
+        if (isset($containId) && isset($quantity)) {
+            $contain = $containModel->changeQuantityOfContain($containId, $quantity);
+            if ($contain == true) {
+                echo json_encode(["message" => "La quantité a été changé"]);
+            } else {
+                echo json_encode([
+                    "message" => "Sale merde !",
+                    "error" => $contain
+                ]);
+            }
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/deleteContain",
+     *     @OA\Parameter(
+     *     name="request",
+     *     in="header",
+     *        @OA\Schema(
+     *            type="object",
+     *            @OA\Property(
+     *                type="integer",
+     *                property="contain_id",
+     *                example="2"
+     *            )
+     *        )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Supprime un produit du panier.",
+     *          @OA\JsonContent(
+     *              @OA\Schema(
+     *                   type="string",
+     *                   description="cart"),
+     *                   example={"message": "Le produit a été supprimé du panier"}
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function deleteContain()
+    {
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+
+        $params = $this->params();
+
+        $containModel = new containModel();
+
+        $containId = htmlspecialchars($params['contain_id']);
+
+        if (isset($containId)) {
+            $containModel->deleteContain($containId);
+            echo json_encode(["message" => "Le produit a été supprimé du panier"]);
         }
     }
 }

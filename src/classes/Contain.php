@@ -94,4 +94,15 @@ class Contain
     {
         $this->cart_id = $cart_id;
     }
+
+    public function jsonify()
+    {
+        return [
+            "id" => $this->getId(),
+            "quantity" => $this->getQuantity(),
+            "trash" => $this->getTrash(),
+            "product_id" => $this->getProductId(),
+            "cart_id" => $this->getCartId()
+        ];
+    }
 }

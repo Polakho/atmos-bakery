@@ -12,22 +12,14 @@
   <nav>
     <?php
     if (isset($_SESSION['userId'])) {
-      var_dump($cart);
+      // var_dump($cart);
     ?>
-      <p>ID USER : <?= $_SESSION['userId'] /* TODO Récupérer le nom du user */ ?></p>
+      <p>ID USER : <?= $_SESSION['userId']; /* TODO Récupérer le nom du user */ ?></p>
+      <span class="data-cart" data-cart-id="<?= $cart->getId() ?>" data-user-id="<?= $_SESSION['userId'] ?>"></span>
       <a href="/auth/logout">Déconnectez-vous</a>
       <button onClick="showCart()"><img class="cart-icone" src="../../assets/img/cart/cart.png" alt="icone panier"></button>
-      <div class="modal-cart hidden">
-        <div class="modal">
-          <div class="modal-header">
-            <h1>Mon panier</h1>
-          </div>
-          <div class="modal-body">
-
-          </div>
-        </div>
-      </div>
     <?php
+      include '../src/components/modales/cartModale.php';
     } else if ($_SERVER['REQUEST_URI'] === '/auth/login') {
     ?>
       <a href="/auth/register">Créez un compte</a>
@@ -46,15 +38,144 @@
     }
     ?>
   </nav>
+
 </header>
+<section>
+  <div class="notification-del-contain">
+    Le produit a bien été supprimé du panier.
+  </div>
+  <div class="notification-change-contain">
+    Le quantité a été changé.
+  </div>
+</section>
 
 </html>
 <script>
   let modalCart = document.querySelector('.modal-cart')
+  let modalBody = document.querySelector('.modal-cart .modal-body')
+  let cartState = false;
+  let cartId = document.querySelector(".data-cart").getAttribute("data-cart-id")
+  let notifDel = document.querySelector('.notification-del-contain');
+  let notifQuantityChanged = document.querySelector('.notification-change-contain');
+
 
   function showCart() {
-    console.log("coucou")
-    modalCart.classList.remove("hidden")
+    cartState = !cartState;
+    if (cartState == false) {
+      modalCart.classList.add("hidden")
+      clearBox(modalBody)
+
+    } else {
+      modalCart.classList.remove("hidden")
+
+      let post = {
+        cart_id: cartId,
+
+      }
+      fetch(baseUrl + "getContainsForCart", {
+        method: 'post',
+        body: JSON.stringify(post),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }
+      }).then((response) => {
+        return response.json()
+      }).then((res) => {
+        if (res.list) {
+          res.list.map(function(contain) {
+            let div = document.createElement("div")
+            let h3 = document.createElement("h3")
+            let btn = document.createElement("button");
+            btn.classList.add("delete-contain");
+            btn.setAttribute("data-id", contain.id)
+            h3.innerHTML = contain.product.name
+            btn.innerHTML = "Supprimer";
+            let label = document.createElement("label")
+            label.innerHTML = "Quantité: "
+            div.appendChild(h3)
+            div.appendChild(btn)
+            btn.onclick = function() {
+              let post = {
+                contain_id: btn.getAttribute("data-id")
+              }
+              console.log(post);
+              fetch(baseUrl + "deleteContain", {
+                method: 'post',
+                body: JSON.stringify(post),
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                }
+              }).then((response) => {
+                return response.json()
+              }).then((res) => {
+                notifDel.classList.add("show");
+                setTimeout(() => {
+                  notifDel.classList.remove("show");
+                }, 3000);
+                console.log(post)
+                // location.reload();
+              }).catch((error) => {
+                console.log(error)
+              })
+            }
+            let btnQuantity = document.createElement("button");
+            let input = document.createElement("input");
+            input.classList.add("contain-quantity")
+            btnQuantity.classList.add("change-quantity");
+            btnQuantity.innerHTML = "Changer";
+            input.value = contain.quantity;
+            div.appendChild(label)
+
+            div.appendChild(input)
+            div.appendChild(btnQuantity)
+
+            input.onchange = function() {
+              let quantityChanged = input.value
+              console.log(quantityChanged);
+
+              btnQuantity.onclick = function() {
+                let post = {
+                  contain_id: contain.id,
+                  quantity: quantityChanged
+                }
+                console.log(post);
+                fetch(baseUrl + "changeQuantityOfContain", {
+                  method: 'post',
+                  body: JSON.stringify(post),
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                  }
+                }).then((response) => {
+                  return response.json()
+                }).then((res) => {
+                  notifQuantityChanged.classList.add("show");
+                  setTimeout(() => {
+                    notifQuantityChanged.classList.remove("show");
+                  }, 3000);
+                  console.log('changedQtity')
+                  // location.reload();
+                }).catch((error) => {
+                  console.log(error)
+                })
+              }
+            }
+            console.log('test')
+            modalBody.appendChild(div)
+          })
+        } else if (res.message) {
+          let div = document.createElement("div")
+          let p = document.createElement("p")
+          p.innerHTML = "Panier vide"
+          div.appendChild(p)
+          modalBody.appendChild(div)
+        }
+
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
   }
-</script>
 </script>
