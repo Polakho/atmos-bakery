@@ -44,6 +44,9 @@
   <div class="notification-del-contain">
     Le produit a bien été supprimé du panier.
   </div>
+  <div class="notification-change-contain">
+    Le quantité a été changé.
+  </div>
 </section>
 
 </html>
@@ -53,7 +56,7 @@
   let cartState = false;
   let cartId = document.querySelector(".data-cart").getAttribute("data-cart-id")
   let notifDel = document.querySelector('.notification-del-contain');
-
+  let notifQuantityChanged = document.querySelector('.notification-change-contain');
 
 
   function showCart() {
@@ -88,8 +91,8 @@
             btn.setAttribute("data-id", contain.id)
             h3.innerHTML = contain.product.name
             btn.innerHTML = "Supprimer";
-            let p = document.createElement("p")
-            p.innerHTML = "quantité: " + contain.quantity
+            let label = document.createElement("label")
+            label.innerHTML = "Quantité: "
             div.appendChild(h3)
             div.appendChild(btn)
             btn.onclick = function() {
@@ -117,8 +120,49 @@
                 console.log(error)
               })
             }
+            let btnQuantity = document.createElement("button");
+            let input = document.createElement("input");
+            input.classList.add("contain-quantity")
+            btnQuantity.classList.add("change-quantity");
+            btnQuantity.innerHTML = "Changer";
+            input.value = contain.quantity;
+            div.appendChild(label)
+
+            div.appendChild(input)
+            div.appendChild(btnQuantity)
+
+            input.onchange = function() {
+              let quantityChanged = input.value
+              console.log(quantityChanged);
+
+              btnQuantity.onclick = function() {
+                let post = {
+                  contain_id: contain.id,
+                  quantity: quantityChanged
+                }
+                console.log(post);
+                fetch(baseUrl + "changeQuantityOfContain", {
+                  method: 'post',
+                  body: JSON.stringify(post),
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                  }
+                }).then((response) => {
+                  return response.json()
+                }).then((res) => {
+                  notifQuantityChanged.classList.add("show");
+                  setTimeout(() => {
+                    notifQuantityChanged.classList.remove("show");
+                  }, 3000);
+                  console.log('changedQtity')
+                  // location.reload();
+                }).catch((error) => {
+                  console.log(error)
+                })
+              }
+            }
             console.log('test')
-            div.appendChild(p)
             modalBody.appendChild(div)
           })
         } else if (res.message) {
