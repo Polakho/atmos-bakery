@@ -59,16 +59,25 @@
   let notifDel = document.querySelector('.notification-del-contain');
   let notifQuantityChanged = document.querySelector('.notification-change-contain');
 
+  let btnClose = document.querySelector(".close");
+  btnClose.onclick = function() {
+    cartState = !cartState
+    modalCart.classList.remove("displayFlex")
+    modalCart.classList.add("hidden")
+    clearBox(modalBody)
+  }
+
 
   function showCart() {
     cartState = !cartState;
     if (cartState == false) {
       modalCart.classList.add("hidden")
+      modalCart.classList.remove("displayFlex")
       clearBox(modalBody)
 
     } else {
       modalCart.classList.remove("hidden")
-
+      modalCart.classList.add("displayFlex")
       let post = {
         cart_id: cartId,
 

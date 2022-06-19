@@ -91,6 +91,10 @@ header img {
   transition: all 0.4s;
 }
 
+.displayFlex {
+  display: flex;
+}
+
 .show {
   top: 2rem;
 }
