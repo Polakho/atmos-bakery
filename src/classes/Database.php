@@ -25,7 +25,7 @@ class Database
         $username = $_ENV["PDO_USERNAME"];
         $password = $_ENV["PDO_PASSWORD"];
         $server = $_ENV["SERVER"];
-        $dbPort = $_ENV['DB_PORT'];
+        $dbPort = $_ENV["DB_PORT"];
 
         $pdo = new PDO("mysql:dbname=$dbName;host=$server;port=$dbPort", "$username", "$password");
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

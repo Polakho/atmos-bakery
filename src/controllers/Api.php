@@ -108,8 +108,13 @@ class Api extends Controller
 
                 // Create JWT
                 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
-
-                echo $jwt;
+                json_encode(
+                    [
+                        "message" => 'Good login',
+                        "user_id" => $userId['id'],
+                        "jwtoken" => $jwt
+                    ]
+                );
                 exit();
             } else {
                 $errorMsg = "Wrong login and/or password.";
@@ -228,6 +233,13 @@ class Api extends Controller
 
                 // Create JWT
                 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
+                json_encode(
+                    [
+                        "message" => 'Good Register',
+                        "user_id" => $userId['id'],
+                        "jwtoken" => $jwt
+                    ]
+                );
                 exit();
             }
         } else {
