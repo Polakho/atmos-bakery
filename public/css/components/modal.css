@@ -1,7 +1,29 @@
 .modal {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
     position: absolute;
-    height: 200px;
+    height: 300px;
     width: 450px;
     background-color: red;
     left: 0;
+    margin-top: 20px;
+}
+
+.close {
+    position: absolute;
+    color: black;
+    right: 0.5vw;
+    top: 4vh;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    flex-wrap: wrap;
+    padding: 10px;
 }

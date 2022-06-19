@@ -2,6 +2,7 @@
 
 <head>
   <link rel="stylesheet" href="../../css/header/header.css">
+
 </head>
 <header>
   <a href="/">
@@ -45,7 +46,7 @@
     Le produit a bien été supprimé du panier.
   </div>
   <div class="notification-change-contain">
-    Le quantité a été changé.
+    La quantité a été changé.
   </div>
 </section>
 
@@ -115,7 +116,7 @@
                   notifDel.classList.remove("show");
                 }, 3000);
                 console.log(post)
-                // location.reload();
+                showCart()
               }).catch((error) => {
                 console.log(error)
               })
@@ -130,39 +131,41 @@
 
             div.appendChild(input)
             div.appendChild(btnQuantity)
-
             input.onchange = function() {
               let quantityChanged = input.value
-              console.log(quantityChanged);
 
-              btnQuantity.onclick = function() {
-                let post = {
-                  contain_id: contain.id,
-                  quantity: quantityChanged
-                }
-                console.log(post);
-                fetch(baseUrl + "changeQuantityOfContain", {
-                  method: 'post',
-                  body: JSON.stringify(post),
-                  headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+              console.log(contain.quantity + ' | ' + quantityChanged)
+
+              if (quantityChanged !== contain.quantity) {
+                btnQuantity.onclick = function() {
+                  let post = {
+                    contain_id: contain.id,
+                    quantity: quantityChanged
                   }
-                }).then((response) => {
-                  return response.json()
-                }).then((res) => {
-                  notifQuantityChanged.classList.add("show");
-                  setTimeout(() => {
-                    notifQuantityChanged.classList.remove("show");
-                  }, 3000);
-                  console.log('changedQtity')
-                  // location.reload();
-                }).catch((error) => {
-                  console.log(error)
-                })
+                  console.log(post);
+                  fetch(baseUrl + "changeQuantityOfContain", {
+                    method: 'post',
+                    body: JSON.stringify(post),
+                    headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json',
+                    }
+                  }).then((response) => {
+                    return response.json()
+                  }).then((res) => {
+                    notifQuantityChanged.classList.add("show");
+                    setTimeout(() => {
+                      notifQuantityChanged.classList.remove("show");
+                    }, 3000);
+                    btnQuantity.removeAttribute("onclick");
+                    showCart()
+                  }).catch((error) => {
+                    console.log(error)
+                  })
+                }
               }
+
             }
-            console.log('test')
             modalBody.appendChild(div)
           })
         } else if (res.message) {
