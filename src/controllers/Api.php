@@ -108,7 +108,7 @@ class Api extends Controller
 
                 // Create JWT
                 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
-                json_encode(
+                echo json_encode(
                     [
                         "message" => 'Good login',
                         "user_id" => $userId['id'],
@@ -233,7 +233,7 @@ class Api extends Controller
 
                 // Create JWT
                 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
-                json_encode(
+                echo json_encode(
                     [
                         "message" => 'Good Register',
                         "user_id" => $userId,
