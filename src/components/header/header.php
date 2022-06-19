@@ -38,7 +38,13 @@
     }
     ?>
   </nav>
+
 </header>
+<section>
+  <div class="notification-del-contain">
+    Le produit a bien été supprimé du panier.
+  </div>
+</section>
 
 </html>
 <script>
@@ -46,6 +52,9 @@
   let modalBody = document.querySelector('.modal-cart .modal-body')
   let cartState = false;
   let cartId = document.querySelector(".data-cart").getAttribute("data-cart-id")
+  let notifDel = document.querySelector('.notification-del-contain');
+
+
 
   function showCart() {
     cartState = !cartState;
@@ -60,7 +69,7 @@
         cart_id: cartId,
 
       }
-      fetch(baseUrl + "/getContainsForCart", {
+      fetch(baseUrl + "getContainsForCart", {
         method: 'post',
         body: JSON.stringify(post),
         headers: {
@@ -74,10 +83,41 @@
           res.list.map(function(contain) {
             let div = document.createElement("div")
             let h3 = document.createElement("h3")
+            let btn = document.createElement("button");
+            btn.classList.add("delete-contain");
+            btn.setAttribute("data-id", contain.id)
             h3.innerHTML = contain.product.name
+            btn.innerHTML = "Supprimer";
             let p = document.createElement("p")
             p.innerHTML = "quantité: " + contain.quantity
             div.appendChild(h3)
+            div.appendChild(btn)
+            btn.onclick = function() {
+              let post = {
+                contain_id: btn.getAttribute("data-id")
+              }
+              console.log(post);
+              fetch(baseUrl + "deleteContain", {
+                method: 'post',
+                body: JSON.stringify(post),
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                }
+              }).then((response) => {
+                return response.json()
+              }).then((res) => {
+                notifDel.classList.add("show");
+                setTimeout(() => {
+                  notifDel.classList.remove("show");
+                }, 3000);
+                console.log(post)
+                // location.reload();
+              }).catch((error) => {
+                console.log(error)
+              })
+            }
+            console.log('test')
             div.appendChild(p)
             modalBody.appendChild(div)
           })

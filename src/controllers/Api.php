@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Classes\Controller;
@@ -21,7 +22,6 @@ class Api extends Controller
 {
     public function __construct()
     {
-
     }
 
     private function params()
@@ -29,7 +29,8 @@ class Api extends Controller
         return (json_decode(file_get_contents('php://input'), true));
     }
 
-    public function doc(){
+    public function doc()
+    {
         require_once "../public/swagger/index.html";
     }
 
@@ -90,22 +91,22 @@ class Api extends Controller
                 // Create token header as a JSON string
                 $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
 
-// Create token payload as a JSON string
+                // Create token payload as a JSON string
                 $payload = json_encode(['user_id' => $userId['id']]);
 
-// Encode Header to Base64Url String
+                // Encode Header to Base64Url String
                 $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
 
-// Encode Payload to Base64Url String
+                // Encode Payload to Base64Url String
                 $base64UrlPayload = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($payload));
 
-// Create Signature Hash
+                // Create Signature Hash
                 $signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, 'abC123!', true);
 
-// Encode Signature to Base64Url String
+                // Encode Signature to Base64Url String
                 $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
 
-// Create JWT
+                // Create JWT
                 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
                 echo $jwt;
@@ -188,7 +189,7 @@ class Api extends Controller
         $roles = $params['roles'];
 
         if (empty($roles)) {
-            $roles ="CLIENT";
+            $roles = "CLIENT";
         }
         if (isset($mail) && isset($name) && isset($f_name) && isset($password) && isset($retypePassword) && isset($roles)) {
             header('Content-Type: application/json');
@@ -210,22 +211,22 @@ class Api extends Controller
                 // Create token header as a JSON string
                 $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
 
-// Create token payload as a JSON string
+                // Create token payload as a JSON string
                 $payload = json_encode(['user_id' => $userId]);
 
-// Encode Header to Base64Url String
+                // Encode Header to Base64Url String
                 $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
 
-// Encode Payload to Base64Url String
+                // Encode Payload to Base64Url String
                 $base64UrlPayload = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($payload));
 
-// Create Signature Hash
+                // Create Signature Hash
                 $signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, 'abC123!', true);
 
-// Encode Signature to Base64Url String
+                // Encode Signature to Base64Url String
                 $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
 
-// Create JWT
+                // Create JWT
                 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
                 exit();
             }
@@ -360,19 +361,19 @@ class Api extends Controller
      *      )
      * )
      */
-    public function getActiveCartForUser(){
+    public function getActiveCartForUser()
+    {
         header('Content-Type: application/json');
         header("Access-Control-Allow-Origin: *");
 
         $params = $this->params();
         $cartModel = new cartModel();
         $userId = htmlspecialchars($params['user_id']);
-        if (isset($userId)){
+        if (isset($userId)) {
             $cart = $cartModel->getActiveCartForUser($userId);
             echo json_encode(["cart" => $cart->jsonify()]);
             exit();
         }
-
     }
 
     /**
@@ -413,7 +414,8 @@ class Api extends Controller
      *      )
      * )
      */
-    public function addToCart(){
+    public function addToCart()
+    {
         header('Content-Type: application/json');
         header("Access-Control-Allow-Origin: *");
 
@@ -425,14 +427,18 @@ class Api extends Controller
         $quantity = htmlspecialchars($params['quantity']);
         $productId = htmlspecialchars($params['product_id']);
 
-        if (isset($cartId) && isset($quantity) && isset($productId)){
+        if (isset($cartId) && isset($quantity) && isset($productId)) {
             $contain = $containModel->ajouterContain($quantity, $productId, $cartId);
-            if (is_numeric($contain)){
-                echo json_encode(["message" => "bravo tu as réussis !",
-                                  "contain_id" => $contain  ]);
-            }else{
-                echo json_encode(["message" => "Sale merde !",
-                                  "error" => $contain  ]);
+            if (is_numeric($contain)) {
+                echo json_encode([
+                    "message" => "bravo tu as réussis !",
+                    "contain_id" => $contain
+                ]);
+            } else {
+                echo json_encode([
+                    "message" => "Sale merde !",
+                    "error" => $contain
+                ]);
             }
         }
     }
@@ -534,7 +540,8 @@ class Api extends Controller
      *      )
      * )
      */
-    public function getContainsForCart(){
+    public function getContainsForCart()
+    {
         header('Content-Type: application/json');
         header("Access-Control-Allow-Origin: *");
 
@@ -545,18 +552,18 @@ class Api extends Controller
 
         $cartId = htmlspecialchars($params['cart_id']);
 
-        if (isset($cartId)){
+        if (isset($cartId)) {
             $contains = $containModel->getContainsForCart($cartId);
 
-            if (empty($contains)){
+            if (empty($contains)) {
                 echo json_encode(["message" => "the cart is empty."]);
                 exit();
             }
 
             $containWithProduct = array();
-            foreach ($contains as $contain){
+            foreach ($contains as $contain) {
                 $productId = $contain["product_id"];
-                $containWithProduct[]=[
+                $containWithProduct[] = [
                     "id" => $contain["id"],
                     "cart_id" => $contain["cart_id"],
                     "quantity" => $contain["quantity"],
@@ -601,7 +608,8 @@ class Api extends Controller
      *      )
      * )
      */
-    public function changeQuantityOfContain(){
+    public function changeQuantityOfContain()
+    {
         header('Content-Type: application/json');
         header("Access-Control-Allow-Origin: *");
 
@@ -612,13 +620,15 @@ class Api extends Controller
         $containId = htmlspecialchars($params['contain_id']);
         $quantity = htmlspecialchars($params['quantity']);
 
-        if (isset($containId) && isset($quantity)){
+        if (isset($containId) && isset($quantity)) {
             $contain = $containModel->changeQuantityOfContain($containId, $quantity);
-            if ($contain == true ){
+            if ($contain == true) {
                 echo json_encode(["message" => "La quantité a été changé"]);
-            }else{
-                echo json_encode(["message" => "Sale merde !",
-                    "error" => $contain  ]);
+            } else {
+                echo json_encode([
+                    "message" => "Sale merde !",
+                    "error" => $contain
+                ]);
             }
         }
     }
@@ -651,7 +661,8 @@ class Api extends Controller
      *      )
      * )
      */
-    public function deleteContain(){
+    public function deleteContain()
+    {
         header('Content-Type: application/json');
         header("Access-Control-Allow-Origin: *");
 
@@ -661,10 +672,9 @@ class Api extends Controller
 
         $containId = htmlspecialchars($params['contain_id']);
 
-        if (isset($containId)){
-             $containModel->deleteContain($containId);
-             echo json_encode(["message" => "Le produit a été supprimé du panier"]);
-
+        if (isset($containId)) {
+            $containModel->deleteContain($containId);
+            echo json_encode(["message" => "Le produit a été supprimé du panier"]);
         }
     }
 }

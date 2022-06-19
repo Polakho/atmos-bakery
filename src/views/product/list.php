@@ -50,6 +50,7 @@
         </div>
     </section>
     <section>
+        <!-- Reprendre -->
         <div class="notification-add-product">
             Le produit a bien été ajouté
         </div>
@@ -166,6 +167,7 @@
         visibleBtnQuantity()
     }
 
+
     let AllBtnAdd = document.querySelectorAll(".add-product")
 
     AllBtnAdd.forEach(function(btn, index) {
@@ -194,6 +196,7 @@
             })
         })
     })
+
 
 
     let cart = document.querySelector(".data-cart")
