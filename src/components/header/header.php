@@ -18,7 +18,7 @@
       <p>ID USER : <?= $_SESSION['userId']; /* TODO Récupérer le nom du user */ ?></p>
       <span class="data-cart" data-cart-id="<?= $cart->getId() ?>" data-user-id="<?= $_SESSION['userId'] ?>"></span>
       <a href="/auth/logout">Déconnectez-vous</a>
-      <button onClick="showCart()"><img class="cart-icone" src="../../assets/img/cart/cart.png" alt="icone panier"></button>
+      <button class="show-cart" onClick="showCart()"><img class="cart-icone" src="../../assets/img/cart/cart.png" alt="icone panier"></button>
     <?php
       include '../src/components/modales/cartModale.php';
     } else if ($_SERVER['REQUEST_URI'] === '/auth/login') {
@@ -58,7 +58,6 @@
   let cartId = document.querySelector(".data-cart").getAttribute("data-cart-id")
   let notifDel = document.querySelector('.notification-del-contain');
   let notifQuantityChanged = document.querySelector('.notification-change-contain');
-
   let btnClose = document.querySelector(".close");
   btnClose.onclick = function() {
     cartState = !cartState
@@ -66,6 +65,8 @@
     modalCart.classList.add("hidden")
     clearBox(modalBody)
   }
+
+
 
 
   function showCart() {
@@ -78,6 +79,14 @@
     } else {
       modalCart.classList.remove("hidden")
       modalCart.classList.add("displayFlex")
+
+
+
+      let div = document.createElement("div")
+      div.classList.add("body-contain")
+      let p2 = document.createElement("p")
+      let btnCheckout = document.createElement("button");
+      let totalPrice = 0;
       let post = {
         cart_id: cartId,
 
@@ -94,13 +103,19 @@
       }).then((res) => {
         if (res.list) {
           res.list.map(function(contain) {
-            let div = document.createElement("div")
             let h3 = document.createElement("h3")
             let btn = document.createElement("button");
+            let p = document.createElement("p");
+            let br = document.createElement("br");
             btn.classList.add("delete-contain");
             btn.setAttribute("data-id", contain.id)
             h3.innerHTML = contain.product.name
             btn.innerHTML = "Supprimer";
+            let priceVerif = "" + contain.product.price + "";
+            let price = priceVerif.replace(/,/g, ".");
+            price = (price * contain.quantity);
+            totalPrice = totalPrice + price;
+            p.innerHTML = "Prix: " + price + " €";
             let label = document.createElement("label")
             label.innerHTML = "Quantité: "
             div.appendChild(h3)
@@ -137,9 +152,10 @@
             btnQuantity.innerHTML = "Changer";
             input.value = contain.quantity;
             div.appendChild(label)
-
+            div.appendChild(p);
             div.appendChild(input)
             div.appendChild(btnQuantity)
+            div.appendChild(br);
             input.onchange = function() {
               let quantityChanged = input.value
 
@@ -176,18 +192,25 @@
 
             }
             modalBody.appendChild(div)
+
           })
+          p2.innerHTML = "Total: " + totalPrice + " €";
+          btnCheckout.innerHTML = "Checkout";
+          modalBody.appendChild(p2)
+          modalBody.appendChild(btnCheckout)
         } else if (res.message) {
           let div = document.createElement("div")
           let p = document.createElement("p")
           p.innerHTML = "Panier vide"
           div.appendChild(p)
           modalBody.appendChild(div)
+
         }
 
       }).catch((error) => {
         console.log(error)
       })
+
     }
   }
 </script>
