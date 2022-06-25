@@ -1,4 +1,5 @@
 .modal {
+    z-index: 5;
     overflow: auto;
     justify-content: center;
     flex-direction: row;
@@ -7,20 +8,24 @@
     position: fixed;
     height: 500px;
     width: 500px;
+    max-width: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: red;
-    border: 2px solid black;
+    background-color: rgb(255, 199, 199);
+    /* border: 2px solid black; */
     /* column-gap: 10px; */
     border-radius: 25px;
     padding-top: 2%;
+    transition: display 2s linear 1s;
     padding-bottom: 2%;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.395);
+
 }
 
-/* .modal::-webkit-scrollbar {
+.modal::-webkit-scrollbar {
     display: none;
-} */
+}
 
 .close {
     position: absolute;

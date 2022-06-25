@@ -18,11 +18,13 @@
       <p>ID USER : <?= $_SESSION['userId']; /* TODO Récupérer le nom du user */ ?></p>
       <span class="data-cart" data-cart-id="<?= $cart->getId() ?>" data-user-id="<?= $_SESSION['userId'] ?>"></span>
       <a href="/auth/logout">Déconnectez-vous</a>
-      <button class="show-cart" onClick="showCart()"><img class="cart-icone" src="../../assets/img/cart/cart.png" alt="icone panier"></button>
-    <?php
+      <?php if ($_SERVER['REQUEST_URI'] <> '/checkout') { ?>
+        <button class="show-cart" onClick="showCart()"><img class="cart-icone" src="../../assets/img/cart/cart.png" alt="icone panier"></button>
+      <?php
+      }
       include '../src/components/modales/cartModale.php';
     } else if ($_SERVER['REQUEST_URI'] === '/auth/login') {
-    ?>
+      ?>
       <a href="/auth/register">Créez un compte</a>
 
     <?php
@@ -48,7 +50,11 @@
   <div class="notification-change-contain">
     La quantité a été changé.
   </div>
+  <div class="blur">
+    <span></span>
+  </div>
 </section>
+
 
 </html>
 <script>
@@ -59,14 +65,29 @@
   let notifDel = document.querySelector('.notification-del-contain');
   let notifQuantityChanged = document.querySelector('.notification-change-contain');
   let btnClose = document.querySelector(".close");
+  let blurBg = document.querySelector(".blur");
+
   btnClose.onclick = function() {
     cartState = !cartState
+    blurBg.classList.remove("displayVisible");
+    blurBg.classList.add("hidden");
     modalCart.classList.remove("displayFlex")
     modalCart.classList.add("hidden")
     clearBox(modalBody)
   }
 
+  blurBg.onclick = function() {
+    if (blurBg.classList.contains("hidden")) {
 
+    } else {
+      blurBg.classList.remove("displayVisible");
+      blurBg.classList.add("hidden");
+      cartState = !cartState
+      modalCart.classList.remove("displayFlex")
+      modalCart.classList.add("hidden")
+      clearBox(modalBody)
+    }
+  }
 
 
   function showCart() {
@@ -74,13 +95,15 @@
     if (cartState == false) {
       modalCart.classList.add("hidden")
       modalCart.classList.remove("displayFlex")
+      blurBg.classList.remove("displayVisible");
+      blurBg.classList.add("hidden");
       clearBox(modalBody)
 
     } else {
       modalCart.classList.remove("hidden")
       modalCart.classList.add("displayFlex")
-
-
+      blurBg.classList.remove("hidden");
+      blurBg.classList.add("displayVisible");
 
       let div = document.createElement("div")
       div.classList.add("body-contain")
@@ -198,6 +221,9 @@
           btnCheckout.innerHTML = "Checkout";
           modalBody.appendChild(p2)
           modalBody.appendChild(btnCheckout)
+          btnCheckout.onclick = function() {
+            window.location.replace("/checkout");
+          }
         } else if (res.message) {
           let div = document.createElement("div")
           let p = document.createElement("p")
