@@ -20,18 +20,25 @@
     transition: display 2s linear 1s;
     padding-bottom: 2%;
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.395);
-
 }
 
 .modal::-webkit-scrollbar {
     display: none;
 }
 
+.modal-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
 .close {
     position: absolute;
     color: black;
-    right: 0.5vw;
-    top: 0;
+    top: -.7em;
+    right: .5em;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
@@ -51,4 +58,42 @@
     overflow: auto;
     flex-wrap: wrap;
     padding: 10px;
+}
+
+.item-container {
+    display: flex;
+    flex-direction: column;
+}
+.item-container-head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* .quantity-sector {
+    
+} */
+
+.item-price {
+    text-align: end;
+}
+
+.delete-contain {
+    background-color: red; /* Green */
+    border: none;
+    border-radius: 2em;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: all .3s linear;
+}
+.delete-contain:hover {
+    background-color: rgb(124, 15, 15);
+}
+.delete-contain:active {
+    background-color: rgb(124, 15, 15);
 }

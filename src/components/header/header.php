@@ -1,119 +1,119 @@
 <html>
+  <head>
+    <link rel="stylesheet" href="../../css/header/header.css">
 
-<head>
-  <link rel="stylesheet" href="../../css/header/header.css">
+  </head>
 
-</head>
-<header>
-  <a href="/">
-    <img src="../../assets/img/Logos/logoAC2.png" alt="top">
-  </a>
-  <a href="/product">Les produits</a>
-  <a href="/about">À propos</a>
-  <nav>
-    <?php
-    if (isset($_SESSION['userId'])) {
-      // var_dump($cart);
-    ?>
-      <p>ID USER : <?= $_SESSION['userId']; /* TODO Récupérer le nom du user */ ?></p>
-      <span class="data-cart" data-cart-id="<?= $cart->getId() ?>" data-user-id="<?= $_SESSION['userId'] ?>"></span>
-      <a href="/auth/logout">Déconnectez-vous</a>
-      <?php if ($_SERVER['REQUEST_URI'] <> '/checkout') { ?>
-        <button class="show-cart" onClick="showCart()"><img class="cart-icone" src="../../assets/img/cart/cart.png" alt="icone panier"></button>
+  <header>
+    <a href="/">
+      <img src="../../assets/img/Logos/logoAC2.png" alt="top">
+    </a>
+    <a href="/product">Les produits</a>
+    <a href="/about">À propos</a>
+    <nav>
+      <?php
+      if (isset($_SESSION['userId'])) {
+        // var_dump($cart);
+      ?>
+        <p>ID USER : <?= $_SESSION['userId']; /* TODO Récupérer le nom du user */ ?></p>
+        <span class="data-cart" data-cart-id="<?= $cart->getId() ?>" data-user-id="<?= $_SESSION['userId'] ?>"></span>
+        <a href="/auth/logout">Déconnectez-vous</a>
+        <?php if ($_SERVER['REQUEST_URI'] <> '/checkout') { ?>
+          <button class="show-cart" onClick="showCart()"><img class="cart-icone" src="../../assets/img/cart/cart.png" alt="icone panier"></button>
+        <?php
+        }
+        include '../src/components/modales/cartModale.php';
+      } else if ($_SERVER['REQUEST_URI'] === '/auth/login') {
+        ?>
+        <a href="/auth/register">Créez un compte</a>
+
+      <?php
+      } else if ($_SERVER['REQUEST_URI'] === '/auth/register') {
+      ?>
+        <a href="/auth/login">Connectez-vous</a>
+
+      <?php
+      } else {
+      ?>
+        <a href="/auth/login">Connectez-vous</a>
+        <a href="/auth/register">Créez un compte</a>
       <?php
       }
-      include '../src/components/modales/cartModale.php';
-    } else if ($_SERVER['REQUEST_URI'] === '/auth/login') {
       ?>
-      <a href="/auth/register">Créez un compte</a>
+    </nav>
+  </header>
 
-    <?php
-    } else if ($_SERVER['REQUEST_URI'] === '/auth/register') {
-    ?>
-      <a href="/auth/login">Connectez-vous</a>
+  <section>
+    <div class="notification-del-contain">
+      Le produit a bien été supprimé du panier.
+    </div>
+    <div class="notification-change-contain">
+      La quantité a été changé.
+    </div>
+    <div class="blur">
+      <span></span>
+    </div>
+  </section>
 
-    <?php
-    } else {
-    ?>
-      <a href="/auth/login">Connectez-vous</a>
-      <a href="/auth/register">Créez un compte</a>
-    <?php
-    }
-    ?>
-  </nav>
-
-</header>
-<section>
-  <div class="notification-del-contain">
-    Le produit a bien été supprimé du panier.
-  </div>
-  <div class="notification-change-contain">
-    La quantité a été changé.
-  </div>
-  <div class="blur">
-    <span></span>
-  </div>
-</section>
-
-
-</html>
-<script>
-  let modalCart = document.querySelector('.modal-cart')
-  let modalBody = document.querySelector('.modal-cart .modal-body')
+  <script type="text/javascript">
+    // SELECTEURS
+  let modalCart = document.querySelector('.modal-cart');
+  let modalBody = document.querySelector('.modal-cart .modal-body');
   let cartState = false;
-  let cartId = document.querySelector(".data-cart").getAttribute("data-cart-id")
+  let cartId = document.querySelector(".data-cart").getAttribute("data-cart-id");
   let notifDel = document.querySelector('.notification-del-contain');
   let notifQuantityChanged = document.querySelector('.notification-change-contain');
   let btnClose = document.querySelector(".close");
   let blurBg = document.querySelector(".blur");
 
+  // FONCTIONS MODALE
+  // Fermer la modale
   btnClose.onclick = function() {
-    cartState = !cartState
+    cartState = !cartState;
     blurBg.classList.remove("displayVisible");
     blurBg.classList.add("hidden");
-    modalCart.classList.remove("displayFlex")
-    modalCart.classList.add("hidden")
-    clearBox(modalBody)
-  }
+    modalCart.classList.remove("displayFlex");
+    modalCart.classList.add("hidden");
+    // clearBox(modalBody);
+  };
 
   blurBg.onclick = function() {
     if (blurBg.classList.contains("hidden")) {
-
+      return;
     } else {
       blurBg.classList.remove("displayVisible");
       blurBg.classList.add("hidden");
-      cartState = !cartState
-      modalCart.classList.remove("displayFlex")
-      modalCart.classList.add("hidden")
-      clearBox(modalBody)
-    }
-  }
+      cartState = !cartState;
+      modalCart.classList.remove("displayFlex");
+      modalCart.classList.add("hidden");
+      // clearBox(modalBody);
+    };
+  };
 
-
+  // Ouverture et Récupération des items du cart
   function showCart() {
     cartState = !cartState;
     if (cartState == false) {
-      modalCart.classList.add("hidden")
-      modalCart.classList.remove("displayFlex")
+      modalCart.classList.add("hidden");
+      modalCart.classList.remove("displayFlex");
       blurBg.classList.remove("displayVisible");
       blurBg.classList.add("hidden");
-      clearBox(modalBody)
-
+      // clearBox(modalBody);
     } else {
-      modalCart.classList.remove("hidden")
-      modalCart.classList.add("displayFlex")
+      modalCart.classList.remove("hidden");
+      modalCart.classList.add("displayFlex");
       blurBg.classList.remove("hidden");
       blurBg.classList.add("displayVisible");
 
-      let div = document.createElement("div")
-      div.classList.add("body-contain")
-      let p2 = document.createElement("p")
-      let btnCheckout = document.createElement("button");
+      let itemList = document.createElement("div");
+      itemList.classList.add("body-contain");
+
+      let p2 = document.createElement("p");
       let totalPrice = 0;
       let post = {
         cart_id: cartId,
+      };
 
-      }
       fetch(baseUrl + "getContainsForCart", {
         method: 'post',
         body: JSON.stringify(post),
@@ -122,32 +122,25 @@
           'Content-Type': 'application/json',
         }
       }).then((response) => {
-        return response.json()
+        return response.json();
       }).then((res) => {
         if (res.list) {
           res.list.map(function(contain) {
-            let h3 = document.createElement("h3")
+            // Création d'item
+            // Wrapper par item
+            let itemContainer = document.createElement("div");
+            itemContainer.classList.add("item-container");
+
             let btn = document.createElement("button");
-            let p = document.createElement("p");
-            let br = document.createElement("br");
             btn.classList.add("delete-contain");
-            btn.setAttribute("data-id", contain.id)
-            h3.innerHTML = contain.product.name
+            btn.setAttribute("data-id", contain.id);
             btn.innerHTML = "Supprimer";
-            let priceVerif = "" + contain.product.price + "";
-            let price = priceVerif.replace(/,/g, ".");
-            price = (price * contain.quantity);
-            totalPrice = totalPrice + price;
-            p.innerHTML = "Prix: " + price + " €";
-            let label = document.createElement("label")
-            label.innerHTML = "Quantité: "
-            div.appendChild(h3)
-            div.appendChild(btn)
-            btn.onclick = function() {
+            btn.onClick = function() {
               let post = {
                 contain_id: btn.getAttribute("data-id")
-              }
+              };
               console.log(post);
+
               fetch(baseUrl + "deleteContain", {
                 method: 'post',
                 body: JSON.stringify(post),
@@ -156,40 +149,47 @@
                   'Content-Type': 'application/json',
                 }
               }).then((response) => {
-                return response.json()
+                return response.json();
               }).then((res) => {
                 notifDel.classList.add("show");
                 setTimeout(() => {
                   notifDel.classList.remove("show");
                 }, 3000);
-                console.log(post)
-                showCart()
+                console.log(post);
+                showCart();
               }).catch((error) => {
-                console.log(error)
-              })
-            }
-            let btnQuantity = document.createElement("button");
-            let input = document.createElement("input");
-            input.classList.add("contain-quantity")
-            btnQuantity.classList.add("change-quantity");
-            btnQuantity.innerHTML = "Changer";
-            input.value = contain.quantity;
-            div.appendChild(label)
-            div.appendChild(p);
-            div.appendChild(input)
-            div.appendChild(btnQuantity)
-            div.appendChild(br);
-            input.onchange = function() {
-              let quantityChanged = input.value
+                console.log(error);
+              });
+            };
 
-              console.log(contain.quantity + ' | ' + quantityChanged)
+            let h3 = document.createElement("h3");
+            h3.innerHTML = contain.product.name;
+
+            let p = document.createElement("p");
+
+            let price = parseFloat(contain.product.price).toFixed(2);
+            itemTotalPrice = parseFloat(price * contain.quantity).toFixed(2);
+            p.innerHTML = `Prix : ${itemTotalPrice}€ (${price}€/u)`;
+            // Ajout au total du prix
+            totalPrice = totalPrice + itemTotalPrice;
+
+            let label = document.createElement("label");
+            label.innerHTML = "Quantité: ";
+            
+            let input = document.createElement("input");
+            input.classList.add("contain-quantity");
+            input.value = contain.quantity;
+            input.onchange = function() {
+              let quantityChanged = input.value;
+
+              console.log(contain.quantity + ' | ' + quantityChanged);
 
               if (quantityChanged !== contain.quantity) {
                 btnQuantity.onclick = function() {
                   let post = {
                     contain_id: contain.id,
                     quantity: quantityChanged
-                  }
+                  };
                   console.log(post);
                   fetch(baseUrl + "changeQuantityOfContain", {
                     method: 'post',
@@ -199,44 +199,72 @@
                       'Content-Type': 'application/json',
                     }
                   }).then((response) => {
-                    return response.json()
+                    return response.json();
                   }).then((res) => {
                     notifQuantityChanged.classList.add("show");
                     setTimeout(() => {
                       notifQuantityChanged.classList.remove("show");
                     }, 3000);
                     btnQuantity.removeAttribute("onclick");
-                    showCart()
+                    showCart();
                   }).catch((error) => {
-                    console.log(error)
-                  })
-                }
-              }
+                    console.log(error);
+                  });
+                };
+              };
+            };
 
-            }
-            modalBody.appendChild(div)
+            let btnQuantity = document.createElement("button");
+            btnQuantity.classList.add("change-quantity");
+            btnQuantity.innerHTML = "Changer";
+            
+            // Ajout au wrapper
+            let itemContainerHead = document.createElement("div");
+            itemContainerHead.classList.add("item-container-head");
+            itemContainerHead.appendChild(h3);
+            itemContainerHead.appendChild(btn);
+            itemContainer.appendChild(itemContainerHead);
 
-          })
-          p2.innerHTML = "Total: " + totalPrice + " €";
+            let itemContainerDetail = document.createElement("div");
+            itemContainerDetail.classList.add("item-container-detail");
+            let quantitySector = document.createElement("div");
+            quantitySector.classList.add("quantity-sector");
+            quantitySector.appendChild(label);
+            quantitySector.appendChild(input);
+            quantitySector.appendChild(btnQuantity);
+            itemContainerDetail.appendChild(quantitySector);
+            p.classList.add("item-price");
+            itemContainerDetail.appendChild(p);
+            itemContainer.appendChild(itemContainerDetail);
+
+            itemList.appendChild(itemContainer);
+            modalBody.appendChild(itemList);
+          });
+
+          p2.innerHTML = `Total : ${totalPrice}€`;
+
+          let btnCheckout = document.createElement("button");
           btnCheckout.innerHTML = "Checkout";
-          modalBody.appendChild(p2)
-          modalBody.appendChild(btnCheckout)
           btnCheckout.onclick = function() {
             window.location.replace("/checkout");
-          }
+          };
+
+          modalBody.appendChild(p2);
+          modalBody.appendChild(btnCheckout);
         } else if (res.message) {
-          let div = document.createElement("div")
-          let p = document.createElement("p")
-          p.innerHTML = "Panier vide"
-          div.appendChild(p)
-          modalBody.appendChild(div)
-
-        }
-
+          if (!document.querySelector(".empty")) {
+            let div = document.createElement("div");
+            div.classList.add("empty");
+            let p = document.createElement("p");
+            p.innerHTML = "Panier vide";
+            div.appendChild(p);
+            modalBody.appendChild(div);
+          };
+        };
       }).catch((error) => {
-        console.log(error)
-      })
-
-    }
-  }
-</script>
+        console.log(error);
+      });
+    };
+  };
+  </script>
+</html>

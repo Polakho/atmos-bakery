@@ -12,6 +12,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/product/list.css">
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <script type="text/javascript" src="../../src/js/productList.js"></script>
     <title>Atmos Bakery</title>
 </head>
 
@@ -33,7 +35,7 @@
                   <img src="' . $product->getImage() . '" 
                   alt="Image Produit" style="width:200px; height:auto">
                   <h1>' . $product->getName() . '</h1>
-                  <p class="price">' . $product->getPrice() . ' $</p>
+                  <p class="price">' . $product->getPrice() . ' €</p>
                   <p>' . $product->getDescription() . '</p>
                   <button class="add-product" data-product-id="' . $product->getId() . '">+</button>
                   </div>';
@@ -232,5 +234,4 @@
         })
     })
 </script>
-
 </html>
