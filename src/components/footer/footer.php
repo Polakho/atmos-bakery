@@ -1,7 +1,4 @@
 <html>
-  <head>
-    <link rel="stylesheet" href="../../css/footer/footer.css">
-  </head>
   <footer>
     <ul class="content-link">
       <li><a href="/about">À propos</a></li>

@@ -1,23 +1,20 @@
 <html>
-  <head>
-    <link rel="stylesheet" href="../../css/header/header.css">
-
-  </head>
-
   <header>
     <a href="/">
-      <img src="../../assets/img/Logos/logoAC2.png" alt="top">
+      <img class="header-logo" src="../../assets/img/Logos/logoAC2.png" alt="top">
     </a>
     <a href="/product">Les produits</a>
     <a href="/about">À propos</a>
     <nav>
       <?php
       if (isset($_SESSION['userId'])) {
+        require_once '../src/classes/User.php';
+        $user = new App\Classes\User();
         // var_dump($cart);
       ?>
-        <p>ID USER : <?= $_SESSION['userId']; /* TODO Récupérer le nom du user */ ?></p>
+        <p class="user">ID USER : <?= $user->getName() /* TODO Récupérer le nom du user */ ?></p>
         <span class="data-cart" data-cart-id="<?= $cart->getId() ?>" data-user-id="<?= $_SESSION['userId'] ?>"></span>
-        <a href="/auth/logout">Déconnectez-vous</a>
+        <a href="/auth/logout">Déconnection</a>
         <?php if ($_SERVER['REQUEST_URI'] <> '/checkout') { ?>
           <button class="show-cart" onClick="showCart()"><img class="cart-icone" src="../../assets/img/cart/cart.png" alt="icone panier"></button>
         <?php
@@ -43,7 +40,7 @@
     </nav>
   </header>
 
-  <section>
+  <div class='notification blur-modal'>
     <div class="notification-del-contain">
       Le produit a bien été supprimé du panier.
     </div>
@@ -53,7 +50,7 @@
     <div class="blur">
       <span></span>
     </div>
-  </section>
+  </div>
 
   <script type="text/javascript">
     // SELECTEURS

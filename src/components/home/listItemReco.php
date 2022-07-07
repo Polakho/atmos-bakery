@@ -1,7 +1,4 @@
 <html>
-  <head>
-    <link rel="stylesheet" href="../../css/home/listItemReco.css">
-  </head>
   <div class="item-card">
     <mask>
       <img src="" alt="" class="item-dessert">
