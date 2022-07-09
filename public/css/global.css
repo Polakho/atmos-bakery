@@ -65,11 +65,18 @@ header {
   justify-content: space-around;
   width: 50vw;
 }
+.nav-une {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 50vw;
+}
 nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 15vw;
+  justify-content: space-evenly;
+  width: 50vw;
 }
 .profile-name {
   color: var(--color-primary-blue);
@@ -92,8 +99,17 @@ nav {
   height: 202px;
   margin: 0 50px;
 }
+.bjr-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .user {
-  color: white;
+  color: var(--color-primary-blue);
+}
+.user-user {
+  font-size: 2.5em;
+  font-weight: bold;
 }
 .cart-icone {
   height: 30px;
@@ -212,6 +228,34 @@ footer {
 }
 
 /* ABOUT */
+.about-item {
+  display: flex;
+  flex-direction: row;
+}
+.about-item-wrapper {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  padding: 3em; 
+}
+.picture-wrapper {
+  align-items: center;
+}
+.isp {
+  margin-bottom: 1em;
+}
+.isp span {
+  font-weight: bold;
+}
+.info-store-title {
+  font-size: 3em;
+}
+.info-store-description {
+  width: 400px;
+}
+.footer-footer {
+  position: relative;
+}
 
 
 /* MODAL */
