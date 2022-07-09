@@ -175,7 +175,11 @@ footer {
   width: 100%;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-around;
+}
+.content-link li, .socials li {
+  margin: 10px;
 }
 .socials li img {
   width: 20px;
