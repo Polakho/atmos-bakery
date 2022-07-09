@@ -183,18 +183,20 @@ footer {
 
 /* HOMEPAGE */
 .mask {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  position: absolute;
+  top: 0;
   height: 80vh;
   width: 100%;
-  border-radius: 0 0 3em 3em;
-  overflow: hidden;
+  background-image: url('./assets/img/homepagepres/mainvisual01.jpg');
+  background-origin: border-box;
+  background-size: cover;
 }
-.mask img {
+.hp-ad {
   position: absolute;
-  width: 100%;
+  height: 20vh;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
 }
 .arrow-down {
   position: absolute;
