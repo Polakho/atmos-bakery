@@ -9,13 +9,17 @@
 </head>
 
 <body>
-  <?php
-  $this->frontController->header();
-  ?>
-  LE A PROPOS LA
-  <?php
-  $this->frontController->footer();
-  ?>
+  <section>
+    <?php
+    $this->frontController->header();
+    ?>
+
+    <!-- CONTENT ABOUT -->
+
+    <?php
+    $this->frontController->footer();
+    ?>
+  </section>
 </body>
 
 </html>

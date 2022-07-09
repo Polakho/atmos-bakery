@@ -211,6 +211,9 @@ footer {
   filter: invert(81%) sepia(30%) saturate(216%) hue-rotate(318deg) brightness(100%) contrast(95%);
 }
 
+/* ABOUT */
+
+
 /* MODAL */
 .modal {
   z-index: 5;

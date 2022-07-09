@@ -10,9 +10,4 @@ define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
 require_once '../src/classes/Autoloader.php';
 \App\Classes\Autoloader::register();
 
-?>
-<link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-<style><?php include './css/global.css'; ?></style>
-<?php
-
 include_once "../src/controllers/router/router.php";
