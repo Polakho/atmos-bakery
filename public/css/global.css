@@ -393,6 +393,7 @@ footer {
   top: 2rem;
 }
 
+/* ADMIN */
 /* INDEX ADMIN */
 .admin-list-wrapper {
   width: 250px;
@@ -401,4 +402,76 @@ footer {
   padding: 1em;
   display: flex;
   justify-content: center;
+}
+
+/* ANTOINE STORE MANAGMENT */
+.store-logo {
+  height: 202px;
+}
+.store-page {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.store-title {
+  font-size: 2em;
+  margin-top: 0;
+}
+.store-head-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  height: 20vh;
+  margin-bottom: 5vh;
+}
+.store-edit-wrapper {
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.store-edit {
+  width: 35vw;
+  height: 65vh;
+  background-color: var(--color-primary-pink);
+  border-radius: 2em;
+  padding: 1em;
+  margin: 0 2em;
+}
+@media only screen and (max-width: 600px) {
+  .store-page {
+    height: auto;
+  }
+  .store-edit-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .store-edit {
+    width: 90vw;
+    height: auto;
+    margin-top: 2em;
+  }
+}
+.store-add-wrapper {
+  width: 90vw;
+  background-color: var(--color-primary-pink);
+  border-radius: 2em;
+  padding: 1em;
+}
+@media only screen and (max-width: 600px) {
+  .store-add-wrapper {
+    width: 90vw;
+  }
+}
+.text-crud {
+  color: white;
+  text-decoration: none;
+}
+.crud-btn {
+  margin-bottom: .5em;
+}
+.overflowauto {
+  overflow-x: auto;
 }
