@@ -392,3 +392,13 @@ footer {
 .show {
   top: 2rem;
 }
+
+/* INDEX ADMIN */
+.admin-list-wrapper {
+  width: 250px;
+  background-color: var(--color-primary-pink);
+  border-radius: 2em;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+}

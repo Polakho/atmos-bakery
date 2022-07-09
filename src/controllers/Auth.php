@@ -24,13 +24,15 @@ class Auth extends Controller
     {
         $UserModel = new UserModel();
         if (isset($_POST['mail']) && isset($_POST['password'])) {
-            $userId = $UserModel->GetUserIdFromMailAndPassword($_POST['mail'], $_POST['password']);
-            if ($userId > 0) {
-                $_SESSION['userId'] = $userId['id'];
+            $user = $UserModel->getUserFromMailAndPassword($_POST['mail'], $_POST['password']);
+            if (isset($user['id']) && isset($user['name']) && isset($user['f_name']) && isset($user['mail']) && isset($user['roles'])) {
+                $_SESSION['user'] = $user;
                 header('Location: /');
+                // $this->frontController->redirect('/');
             } else {
                 $errorMsg = "Wrong login and/or password.";
                 include '../src/views/login/login.php';
+                // $this->frontController->redirect('/login');
             }
         } else {
             include '../src/views/login/login.php';
@@ -42,7 +44,7 @@ class Auth extends Controller
      */
     public function logout()
     {
-        unset($_SESSION['userId']);
+        unset($_SESSION['user']);
         header('Location: /');
     }
 
@@ -64,8 +66,8 @@ class Auth extends Controller
             if ($errorMsg) {
                 include '../src/views/register/register.php';
             } else {
-                $userId = $userModel->CreateNewUser($_POST['name'], $_POST['f_name'], $_POST['mail'], $_POST['password'], "CLIENT");
-                $_SESSION['userId'] = $userId;
+                $user = $userModel->CreateNewUser($_POST['name'], $_POST['f_name'], $_POST['mail'], $_POST['password'], "CLIENT");
+                $_SESSION['user'] = $user;
                 header('Location: /');
             }
         } else {
