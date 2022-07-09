@@ -20,11 +20,11 @@ class FrontController extends Controller
 
     public function header()
     {
-        if (isset($_SESSION['userId'])) {
-            $cart = $this->cartModel->getActiveCartForUser($_SESSION['userId']);
+        if (isset($_SESSION['user']['id'])) {
+            $cart = $this->cartModel->getActiveCartForUser($_SESSION['user']['id']);
             // var_dump($cart);
             if ($cart == false){
-                $cart = $this->cartModel->createActiveCart($_SESSION['userId']);
+                $cart = $this->cartModel->createActiveCart($_SESSION['user']['id']);
             }
         }
         include __DIR__ . '/../components/header/header.php';
