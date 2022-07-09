@@ -14,7 +14,7 @@ class About extends Controller {
    * @return void
    */
   public function index() {
-    echo "la page about";
+    // echo "la page about";
     include '../src/views/about/about.php';
   }
 }
