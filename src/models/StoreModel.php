@@ -39,9 +39,9 @@ class StoreModel
       "id" => $id
     ]);
     $store = $stmt->fetch();
-    $rs = $this->getImage($id);
+    $rs = $this->getImageBase64($id);
     if ($rs) {
-      $store['image'] = $rs[0]['image'];
+      $store['image'] = $rs;
     }
     // $store['image'] = $this->getImage($store['id']);
     return $store;
@@ -141,6 +141,21 @@ class StoreModel
     ]);
     $images = $stmt->fetchAll();
     return $images;
+  }
+
+  // fetch a base 64 image from the database
+  public function getImageBase64($id)
+  {
+    $pdo = $this->db->getPDO();
+    $sql = "SELECT image FROM store_picture WHERE store_id = :store_id AND actif = 1";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+      "store_id" => $id,
+    ]);
+    $images = $stmt->fetchAll();
+    $image = $images[0]['image'];
+    $image = base64_encode($image);
+    return $image;
   }
 
   public function updateImage($id, $image)

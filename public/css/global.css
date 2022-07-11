@@ -353,23 +353,22 @@ footer {
 /* LOGIN & REGISTER */
 .form-container {
   display: flex;
-  position: relative;
-
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  border-radius: 2em;
 
-  width: 35vw;
-  height: 35vh;
+  width: 600px;
+  height: 450px;
 
-  background-color: #f0f;
+  padding: 1em;
+
+  background-color: var(--color-primary-pink);
 }
-.login-form {
-  display: flex;
-  flex-direction: column;
-}
-.register-form {
-  display: flex;
-  flex-direction: column;
+@media only screen and (max-width: 600px) {
+  .form-container {
+    width: 300px;
+    height: auto;
+  }
 }
 
 /* PRODUCTS LIST */
