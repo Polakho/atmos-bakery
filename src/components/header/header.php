@@ -1,10 +1,12 @@
 <html>
   <header>
-    <a href="/">
-      <img class="header-logo" src="../../assets/img/Logos/logoAC2.png" alt="top">
-    </a>
-    <a href="/product">Les produits</a>
-    <a href="/about">À propos</a>
+    <div class="nav-une">
+      <a href="/">
+        <img class="header-logo" src="../../assets/img/Logos/logoAC2.png" alt="top">
+      </a>
+      <a href="/product">Les produits</a>
+      <a href="/about">À propos</a>
+    </div>
     <nav>
       <?php
       if (isset($_SESSION['user']['id'])) {
@@ -12,7 +14,10 @@
         $user = new App\Classes\User();
         // var_dump($cart);
       ?>
-        <p class="user">ID USER : <?php echo $_SESSION['user']['name']; $user->getName() /* TODO Récupérer le nom du user */ ?></p>
+        <div class="bjr-user">
+          <p class="user">Bonjour,</p>
+          <span class="user user-user"><?php echo $_SESSION['user']['name']?></span>
+        </div>
         <span class="data-cart" data-cart-id="<?= $cart->getId() ?>" data-user-id="<?= $_SESSION['user']['id'] ?>"></span>
         <?php if (isset($_SESSION['user']['roles']) && $_SESSION['user']['roles'] === 'ADMIN') { ?>
           <a href="/admin" target="_blank">Admin panel</a>

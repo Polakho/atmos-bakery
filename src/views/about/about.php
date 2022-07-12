@@ -9,17 +9,35 @@
 </head>
 
 <body>
-  <section>
+  <div class="footer-footer">
     <?php
     $this->frontController->header();
+
+    foreach ($stores as $store)
+    {
+      ?>
+
+        <section class="about-item">
+          <div class="picture-wrapper about-item-wrapper">
+            IMAGE
+          </div>
+
+          <div class="info-wrapper about-item-wrapper">
+            <h1 class="info-store-title"><?= $store['name'] ?></h1>
+            <p class="info-store-description isp"><?= $store['description'] ?></p>
+            <p class="info-store-contact isp"><span>Contact</span> : <?= $this->formatPhone($store['phone']) ?></p>
+            <p class="info-store-adresse isp"><span>Adresse</span> : <?= $store['address'] ?></p>
+          </div>
+        </section>
+
+      <?php
+    }
     ?>
-
-    <!-- CONTENT ABOUT -->
-
+    
     <?php
     $this->frontController->footer();
     ?>
-  </section>
+  </div> 
 </body>
 
 </html>
