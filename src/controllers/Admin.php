@@ -22,7 +22,7 @@ class Admin extends Controller
   {
     $storeModel = new StoreModel();
     $stores = $storeModel->getAllStores();
-    $_SESSION['stores'] = $stores;
+    // return $stores;
     include '../src/views/CRUDs/ant_crud_store/store.php';
   }
 

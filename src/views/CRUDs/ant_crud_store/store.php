@@ -31,7 +31,8 @@
           <button class="btn btn-primary crud-btn"><a href="/admin/addStore" class="text-crud">Ajouter une boutique</a></button>
           <div class="overflowauto">
             <?php
-              if (isset($_SESSION['stores'])) {
+            // var_dump($stores);
+              if (isset($stores)) {
                 ?>
                 <form method="POST" enctype="multipart/form-data">
                   <table class="table store-crud-table">
@@ -48,7 +49,7 @@
                     </thead>
                     <tbody>
                   <?php
-                  foreach ($_SESSION['stores'] as $store) {
+                  foreach ($stores as $store) {
                     ?>
                       <tr>
                         <th scope="row"><?= $store['id'] ?></td>
@@ -64,7 +65,7 @@
                           } else {
                             // var_dump($store['image'][0]['image']);
                             ?>
-                            <td><img src="data:image/jpg;base64,<?= base64_encode($store['image'][0]['image']) ?>" alt="<?= $store['name'] ?>" class="store-img" style="width: 50px;"></td>
+                            <td><img src="data:image/jpg;base64,<?= base64_encode($store['image']) ?>" alt="<?= $store['name'] ?>" class="store-img" style="width: 50px;"></td>
                             <?php
                           }
                         ?>

@@ -25,8 +25,12 @@ class StoreModel
     $stmt->execute();
     $stores = $stmt->fetchAll();
     foreach ($stores as $key => $store) {
-      $stores[$key]['image'] = $this->getImage($store['id']);
+      $image = $this->getImage($store['id']);
+      if (isset($image) && isset($image[0]) && isset($image[0][0])) {
+        $stores[$key]['image'] = $image[0][0];
+      }
     }
+    // var_dump($stores);
     return $stores;
   }
 
