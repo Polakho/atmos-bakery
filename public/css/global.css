@@ -180,6 +180,79 @@ nav {
 .show-cart:active {
   background-color: var(--btn-color-hover-active-pink);
 }
+.small-header {
+  visibility: hidden;
+}
+@media only screen and (max-width: 1100px) {
+  .large-header {
+    visibility: hidden;
+  }
+  .small-header {
+    visibility: visible;
+  }
+}
+.menu-container {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  background-color: #4e4e4e4d;
+  top: 0;
+  display: flex;
+  justify-content: end;
+  padding: 1em;
+  transition: ease all 0.4s;
+}
+.menu-box {
+  height: 200px;
+  width: 150px;
+  background-color: white;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1em;
+  filter: drop-shadow(0 0 30px #616161);
+}
+.menu-list {
+  flex-direction: column;
+}
+.account-name {
+  font-weight: bold;
+  color: var(--color-primary-blue);
+  font-size: 1.5em;
+  align-self: center;
+  margin: 0.2em 0;
+}
+.menu-list-item {
+  margin: .2em 0;
+}
+.close-menu-btn {
+  outline: none;
+  border: none;
+  color: var(--color-primary-pink);
+  cursor: pointer;
+  align-self: end;
+}
+.show-menu-btn {
+  outline: var(--color-primary-pink) 2px solid;
+  border: none;
+  color: var(--color-primary-pink);
+  cursor: pointer;
+  background-color: transparent;
+  height: 2em;
+  width: 4em;
+  border-radius: 1em;
+  transition: all 0.3s ease;
+}
+.show-menu-btn:hover {
+  color: white;
+  outline: white;
+  background-color: var(--color-primary-pink);
+}
+.show-menu-btn:active {
+  color: white;
+  outline: white;
+  background-color: var(--color-primary-pink);
+}
 
 /* FOOTER */
 footer {
