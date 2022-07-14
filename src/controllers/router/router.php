@@ -6,6 +6,7 @@ namespace App\Controllers;
 use App\Controllers\HomeController;
 
 $params = explode('/', $_GET['p']);
+// $getget = explode('?', $_GET['']);
 if ($params[0] != '') {
   // Stockage des variables controller et action (controller et methode)
   $controller = ucfirst($params[0]);
@@ -17,8 +18,12 @@ if ($params[0] != '') {
   }
 
   $action = isset($params[1]) ? $params[1] : 'index';
+  // $identifier = isset($getget[1]) ? $getget[1] : '';
+  // var_dump($getget);
+
   // Appel controller
   require_once('../src/controllers/'.$controller.'.php');
+  // require_once('../src/controllers/'.$controller.'.php'.$identifier);
   // Instancie le controller
   $className= "App\\Controllers\\$controller";
 
