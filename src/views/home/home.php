@@ -13,7 +13,7 @@
   $this->frontController->header();
 
   ?>
-  <section>
+  <section class="unclick">
     <div class="mask"></div>
     <div class="hp-ad">
       <h1 class="hp-title">Découvrez nos produits</h1>

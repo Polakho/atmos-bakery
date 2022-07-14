@@ -15,7 +15,7 @@
                 <button id="btn btn-more">+</button>
             </div>
         </div>
-        <button class="btn add-product-action">Ajouter au panier</button>
-        <button class="btn cancel">Annuler</button>
+        <button class="add-product-action">Ajouter au panier</button>
+        <button class="cancel">Annuler</button>
     </div>
 </div>
