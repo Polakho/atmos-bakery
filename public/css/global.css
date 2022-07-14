@@ -330,6 +330,11 @@ footer {
   position: relative;
 }
 
+/* PRODUCTS */
+.list-section {
+  padding: 202px 0;
+  height: 100%;
+}
 
 /* MODAL */
 .modal {

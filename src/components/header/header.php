@@ -71,6 +71,6 @@
     </div>
   </div>
 
-  <script><?php require_once('./js/cartModal.js'); ?></script>
+  <script defer><?php require_once('./js/cartModal.js'); ?></script>
   <script defer><?php require_once('./js/showMenu.js'); ?></script>
 </html>

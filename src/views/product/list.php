@@ -19,26 +19,48 @@
     <?php
     $this->frontController->header();
     ?>
-    <section class="main-section-background">
-        <h1 class="titre">Nos Produits</h1>
+    <section class="main-section-background list-section">
+        <!-- <h1 class="titre">Nos Produits</h1> -->
         <div class="listing" data-pages="<?= $pages ?>">
             <?php
             require("../vendor/autoload.php");
 
             foreach ($list as $key => $array) {
-                echo '<div class="page" data-page="page-' . ($key + 1) . '">';
-                /** @var \App\Classes\Product $product */
-                foreach ($array as $product) {
-                    echo '<div class="card">
-                  <img src="' . $product->getImage() . '" 
-                  alt="Image Produit" style="width:200px; height:auto">
-                  <h3>' . $product->getName() . '</h3>
-                  <p class="price">' . $product->getPrice() . ' €</p>
-                  <p>' . $product->getDescription() . '</p>
-                  <button class="add-product" data-product-id="' . $product->getId() . '">+</button>
-                  </div>';
-                }
-                echo '</div>';
+                ?>
+                <div class="page" data-page="page-<?=($key + 1)?>">
+                    <?php
+                    /** @var \App\Classes\Product $product */
+                    foreach ($array as $product) {
+                        ?>
+                        <div class="card">
+                            <div class="product-image">
+                                <img src="<?= $product->getImage() ?>" alt="Image Produit" style="width:200px; height:auto">
+                            </div>
+                            <div class="product-info">
+                                <h3><?= $product->getName() ?></h3>
+                                <p class="price"><?= $product->getPrice() ?>€</p>
+                                <p><?= $product->getDescription() ?></p>
+                            </div>
+                            <button class="add-product" data-product-id="<?= $product->getId() ?>">+</button>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <?php
+                // echo '<div class="page" data-page="page-' . ($key + 1) . '">';
+                // /** @var \App\Classes\Product $product */
+                // foreach ($array as $product) {
+                //     echo '<div class="card">
+                //   <img src="' . $product->getImage() . '" 
+                //   alt="Image Produit" style="width:200px; height:auto">
+                //   <h3>' . $product->getName() . '</h3>
+                //   <p class="price">' . $product->getPrice() . ' €</p>
+                //   <p>' . $product->getDescription() . '</p>
+                //   <button class="add-product" data-product-id="' . $product->getId() . '">+</button>
+                //   </div>';
+                // }
+                // echo '</div>';
             }
             ?>
             <div id="navigation">
@@ -48,18 +70,17 @@
             </div>
 
         </div>
+        <?php $this->frontController->footer(); ?>
     </section>
-    <section>
+    <div>
         <!-- Reprendre -->
         <div class="notification-add-product">
             Le produit a bien été ajouté
         </div>
         <?php
         include "../src/components/modales/addProductModal.php";
-
-        $this->frontController->footer();
         ?>
-    </section>
+    </div>
 </body>
-<script><?php require_once('./js/productList.js'); ?></script>
+<script defer><?php require_once('./js/productList.js'); ?></script>
 </html>
