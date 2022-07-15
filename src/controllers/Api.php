@@ -81,7 +81,7 @@ class Api extends Controller
             header('Content-Type: application/json');
 
             $user = $userModel->getUserFromMailAndPassword($mail, $password);
-            if ($user['user']['id'] > 0) {
+            if ($user['id'] > 0) {
                 /*echo json_encode(
                     [
                         "message" => 'Good login',
@@ -92,7 +92,7 @@ class Api extends Controller
                 $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
 
                 // Create token payload as a JSON string
-                $payload = json_encode(['user_id' => $user['user']['id']]);
+                $payload = json_encode(['user_id' => $user['id']]);
 
                 // Encode Header to Base64Url String
                 $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
@@ -109,7 +109,7 @@ class Api extends Controller
                 // Create JWT
                 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
-                $user['user']['token'] = $jwt;
+                $user['token'] = $jwt;
                 return json_encode($user);
                 exit();
             } else {
