@@ -80,8 +80,8 @@ class Api extends Controller
             header("Access-Control-Allow-Origin: *");
             header('Content-Type: application/json');
 
-            $user = $userModel->getUserFromMailAndPassword($mail, $password);
-            if ($user['id'] > 0) {
+            $userId = $userModel->GetUserIdFromMailAndPassword($mail, $password);
+            if ($userId > 0) {
                 /*echo json_encode(
                     [
                         "message" => 'Good login',
@@ -92,7 +92,7 @@ class Api extends Controller
                 $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
 
                 // Create token payload as a JSON string
-                $payload = json_encode(['user_id' => $user['id']]);
+                $payload = json_encode(['user_id' => $userId['id']]);
 
                 // Encode Header to Base64Url String
                 $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
@@ -109,8 +109,13 @@ class Api extends Controller
                 // Create JWT
                 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
-                $user['token'] = $jwt;
-                echo json_encode($user);
+                echo json_encode(
+                    [
+                        "message" => 'Good login',
+                        "user_id" => $userId['id'],
+                        "jwtoken" => $jwt
+                    ]
+                );
                 exit();
             } else {
                 $errorMsg = "Wrong login and/or password.";
