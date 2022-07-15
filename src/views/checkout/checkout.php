@@ -15,7 +15,8 @@
         ?>
         <section class="main-section-background">
             <?php
-            if (http_response_code() === 999) {
+            if (http_response_code() === 401) { // Si verif cartId n'appartient pas à userId
+                var_dump('Unauthorized');
                 echo "<div class='alert alert-warning' role='alert'>Vous ne pouvez pas modifier le panier de quelqu'un d'autre.</div>";
             }
             ?>
@@ -38,7 +39,7 @@
 
             </div>
             <div class="checkout">
-                <button><a href="/payment">Continuer vers le paiement</a></button>
+                <a href="/payment">Continuer vers le paiement</a>
             </div>
         </section>
         <?php
@@ -47,19 +48,14 @@
 
     </section>
     <script>
-        const baseHref = "/checkout/updateContain?updateid=##&quantity="
+        const baseHref = "/checkout/updateContain?containid=##&quantity="
 
         function changeInputValue(containId) {
-            console.log(containId)
             let hrefReplaced = baseHref
             hrefReplaced.replace(/[0-9]/g, "##")
-            let inputValue = document.getElementById("quantity-" + containId).value;
-            hrefReplaced = hrefReplaced.replace("updateid=##", "updateid=" + containId)
-            console.log(hrefReplaced)
- 
-            console.log(inputValue)
-            console.log(hrefReplaced + inputValue)
-            document.getElementById("change-quantity-" + containId).href = hrefReplaced + inputValue
+            let inputValue = document.getElementById("quantity-" + containId).value; //Récup la value de l'input changé
+            hrefReplaced = hrefReplaced.replace("containid=##", "containid=" + containId) //Remplace le contain id
+            document.getElementById("change-quantity-" + containId).href = hrefReplaced + inputValue //Remplace le href du <a> Modifier
         }
     </script>
 </body>

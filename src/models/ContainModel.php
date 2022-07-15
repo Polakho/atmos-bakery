@@ -111,7 +111,7 @@ class ContainModel
         return $contains;
     }
 
-    public function verifyCartUserByContainId($containId)
+    public function verifyCartUserByContainId($containId) // Verifie que l'utilisateur connecté agit bien avec son panier
     {
         $userId = $_SESSION['user']['id'];
         $pdo = $this->db->getPDO();

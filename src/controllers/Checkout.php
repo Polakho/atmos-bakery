@@ -42,14 +42,12 @@ class Checkout extends Controller
         $containModel = new ContainModel();
         $id = explode('=', $_SERVER['REQUEST_URI'])[1];
         $id = explode('&', $id)[0];
-        var_dump($id);
         $quantity = explode('=', $_SERVER['REQUEST_URI'])[2];
-        var_dump($quantity);
         $verif = $containModel->verifyCartUserByContainId($id);
+        var_dump($verif);
         if ($verif === false) {
-            $errorMsg = 'Vous n\'etes pas autorisés à modifier le panier de quelqu\'un d\'autre.';
-            header('Location: /checkout', true, 999);
-            // A REMPLACER PAR DES HEADERS !!
+            header('Location: /checkout'); //response code 401 pour dire que l'accès n'est pas autorisé (vu que header et pas include, obligé de passer par ca) 
+            header('HTTP/1.1 410 Gone');
         }
         $containModel->changeQuantityOfContain($id, $quantity);
         header('Location: /checkout');
