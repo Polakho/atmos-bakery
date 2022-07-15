@@ -110,7 +110,7 @@ class Api extends Controller
                 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
                 $user['user']['token'] = $jwt;
-                echo $user['user'];
+                echo json_encode($user);
                 exit();
             } else {
                 $errorMsg = "Wrong login and/or password.";
