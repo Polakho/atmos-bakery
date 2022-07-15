@@ -35,7 +35,7 @@
               if (isset($stores)) {
                 ?>
                 <form method="POST" enctype="multipart/form-data">
-                  <table class="table store-crud-table">
+                <table class="table store-crud-table">
                     <thead>
                       <tr>
                         <th scope="col">ID</th>

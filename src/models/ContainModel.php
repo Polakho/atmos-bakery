@@ -110,4 +110,36 @@ class ContainModel
         }
         return $contains;
     }
+
+    public function verifyCartUserByContainId($containId)
+    {
+        $userId = $_SESSION['user']['id'];
+        $pdo = $this->db->getPDO();
+        $sql = "SELECT cart_id FROM contain  WHERE contain.id = :containId and contain.trash = 0";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            "containId" => $containId
+        ]);
+        $row = $stmt->fetch();
+        if (isset($row[0])) {
+            $cartId = $row[0];
+            $sql = "SELECT user_id FROM cart  WHERE id = :cartId ";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                "cartId" => $cartId
+            ]);
+            $row = $stmt->fetch();
+            if (isset($row[0])) {
+                $fetchedUserId = $row[0];
+            }
+            if ($fetchedUserId === $userId) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
