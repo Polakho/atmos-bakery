@@ -32,21 +32,13 @@ if ($params[0] != '') {
   if (method_exists($controller, $action)) {
     // Appel de la methode
     $controller->$action();
-    ?>
-      <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-      <style><?php include './css/global.css'; ?></style>
-    <?php
   } else {
     http_response_code(404);
     echo "La page recherchée n'existe pas";
   }
 } else {
 
-    $controller = new HomeController();
-    ?>
-      <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-      <style><?php include './css/global.css'; ?></style>
-    <?php
+  $controller = new HomeController();
   $controller->index();
 }
 

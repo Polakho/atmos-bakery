@@ -13,6 +13,10 @@ class Admin extends Controller
 
   public function index()
   {
+    ?>
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <style><?php include './css/global.css'; ?></style>
+    <?php
     include '../src/views/CRUDs/index.php';
   }
 
@@ -20,6 +24,10 @@ class Admin extends Controller
   // PAGES
   public function store()
   {
+    ?>
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <style><?php include './css/global.css'; ?></style>
+    <?php
     $storeModel = new StoreModel();
     $stores = $storeModel->getAllStores();
     // return $stores;
@@ -28,11 +36,19 @@ class Admin extends Controller
 
   public function addStore()
   {
+    ?>
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <style><?php include './css/global.css'; ?></style>
+    <?php
     include '../src/views/CRUDs/ant_crud_store/addStore.php';
   }
 
   public function updateStore()
   {
+    ?>
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <style><?php include './css/global.css'; ?></style>
+    <?php
     $id = explode('=', $_SERVER['REQUEST_URI'])[1];
     echo $id;
     $storeModel = new StoreModel();

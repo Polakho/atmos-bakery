@@ -1,4 +1,6 @@
 <html>
+  <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+  <style><?php include './css/global.css'; ?></style>
   <header class="large-header">
     <div class="nav-une">
       <a href="/">
