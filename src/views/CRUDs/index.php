@@ -27,6 +27,11 @@
             <li><a href="/admin/store">Gestion de magasin</a></li>
           </ul>
         </div>
+          <div class="admin-list-wrapper" style="margin-top: 10px">
+              <ul>
+                  <li><a href="/admin/user">Gestion des Utilisateurs</a></li>
+              </ul>
+          </div>
       </section>
   <?php
     }
