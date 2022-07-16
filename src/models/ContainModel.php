@@ -36,13 +36,14 @@ class ContainModel
     {
         $pdo = $this->db->getPDO();
         $contain = $this->getContainByProductAndCart($productId, $cartId);
+        $quantityToUse = intval($quantity);
         if ($contain == null) {
             try {
                 //Update trash  0
                 $sql = "INSERT INTO  contain (quantity, trash, product_id, cart_id) VALUES (:quantity, 0, :productId, :cartId)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([
-                    "quantity" => $quantity,
+                    "quantity" => $quantityToUse,
                     "productId" => $productId,
                     "cartId" => $cartId
                 ]);
@@ -54,7 +55,7 @@ class ContainModel
         } else {
             $containId = $contain->getId();
             $quantityBefore = intval($contain->getQuantity());
-            $someQuantity = $quantityBefore + $quantity;
+            $someQuantity = $quantityBefore + $quantityToUse;
             $changed = $this->changeQuantityOfContain($containId, intval($someQuantity));
             if ($changed == true) {
                 return 1;
