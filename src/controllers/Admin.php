@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Classes\Controller;
+use App\Models\ProductModel;
 use App\Models\StoreModel;
 use App\Models\UserModel;
 
@@ -156,7 +157,7 @@ class Admin extends Controller
     <style>
       <?php include './css/global.css'; ?>
     </style>
-<?php
+  <?php
     $userModel = new UserModel();
     // $users = $userModel->get(); //J'ai commenté cette ligne pr pvr test la partie products
     // return $users;
@@ -168,5 +169,14 @@ class Admin extends Controller
   //PARTIE LEANDRE
   public function products()
   {
+  ?>
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <style>
+      <?php include './css/global.css'; ?>
+    </style>
+<?php
+    $productModel = new ProductModel();
+    $products = $productModel->getAllProductJson();
+    include '../src/views/CRUDs/ld_crud_products/products.php';
   }
 }
