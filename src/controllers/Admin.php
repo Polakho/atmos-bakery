@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Classes\Controller;
+use App\Models\ProductModel;
 use App\Models\StoreModel;
 
 class Admin extends Controller
@@ -98,4 +100,13 @@ class Admin extends Controller
 
   // FIN PARTIE ANTOINE
 
+
+  // PARTIE LEANDRE
+  public function products()
+  {
+    $productModel = new ProductModel();
+    $products = $productModel->getAllProduct();
+    // return $stores;
+    include '../src/views/CRUDs/products/products.php';
+  }
 }

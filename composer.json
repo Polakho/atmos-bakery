@@ -8,6 +8,7 @@
   },
   "autoload": {
     "psr-4": {
+      "Stripe\\": "lib/",
       "App\\": "src",
       "App\\Controllers\\": "src/controllers/"
     }
