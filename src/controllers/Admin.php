@@ -137,7 +137,7 @@ class Admin extends Controller
     $userModel = new UserModel();
     $users = $userModel->getAllUser();
     // return $users;
-    include '../src/views/CRUDs/trist_crud_user';
+    include '../src/views/CRUDs/trist_crud_users/users.php';
   }
   public function newuser()
   {
