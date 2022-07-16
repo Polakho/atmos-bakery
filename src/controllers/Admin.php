@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Classes\Controller;
 use App\Models\StoreModel;
 use App\Models\UserModel;
+
 class Admin extends Controller
 {
   public function __construct()
@@ -13,10 +15,12 @@ class Admin extends Controller
 
   public function index()
   {
-    ?>
+?>
     <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-    <style><?php include './css/global.css'; ?></style>
-    <?php
+    <style>
+      <?php include './css/global.css'; ?>
+    </style>
+  <?php
     include '../src/views/CRUDs/index.php';
   }
 
@@ -24,10 +28,12 @@ class Admin extends Controller
   // PAGES
   public function store()
   {
-    ?>
+  ?>
     <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-    <style><?php include './css/global.css'; ?></style>
-    <?php
+    <style>
+      <?php include './css/global.css'; ?>
+    </style>
+  <?php
     $storeModel = new StoreModel();
     $stores = $storeModel->getAllStores();
     // return $stores;
@@ -36,19 +42,23 @@ class Admin extends Controller
 
   public function addStore()
   {
-    ?>
+  ?>
     <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-    <style><?php include './css/global.css'; ?></style>
-    <?php
+    <style>
+      <?php include './css/global.css'; ?>
+    </style>
+  <?php
     include '../src/views/CRUDs/ant_crud_store/addStore.php';
   }
 
   public function updateStore()
   {
-    ?>
+  ?>
     <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-    <style><?php include './css/global.css'; ?></style>
-    <?php
+    <style>
+      <?php include './css/global.css'; ?>
+    </style>
+  <?php
     $id = explode('=', $_SERVER['REQUEST_URI'])[1];
     echo $id;
     $storeModel = new StoreModel();
@@ -113,34 +123,50 @@ class Admin extends Controller
   }
 
   // FIN PARTIE ANTOINE
-    //DEBUT PARTIE TRISTAN
-    //Pages
-    public function user(){
-      ?>
-        <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-        <style><?php include './css/global.css'; ?></style>
-        <?php
-        $userModel = new UserModel();
-        $users = $userModel->getAllUser();
-        // return $users;
-        include '../src/views/CRUDs/trist_crud_user';
-    }
-    public function newuser(){
-        ?>
-        <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-        <style><?php include './css/global.css'; ?></style>
-        <?php
-        include '../src/views/CRUDs/trist_crud_newUser';
 
-    }
-    public function updateuser(){
-        ?>
-        <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-        <style><?php include './css/global.css'; ?></style>
-        <?php
-        $userModel = new UserModel();
-        $users = $userModel->get();
-        // return $users;
-        include '../src/views/CRUDs/trist_crud_users';
-    }
+  //DEBUT PARTIE TRISTAN
+  //Pages
+  public function user()
+  {
+  ?>
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <style>
+      <?php include './css/global.css'; ?>
+    </style>
+  <?php
+    $userModel = new UserModel();
+    $users = $userModel->getAllUser();
+    // return $users;
+    include '../src/views/CRUDs/trist_crud_user';
+  }
+  public function newuser()
+  {
+  ?>
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <style>
+      <?php include './css/global.css'; ?>
+    </style>
+  <?php
+    include '../src/views/CRUDs/trist_crud_newUser';
+  }
+  public function updateuser()
+  {
+  ?>
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <style>
+      <?php include './css/global.css'; ?>
+    </style>
+<?php
+    $userModel = new UserModel();
+    // $users = $userModel->get(); //J'ai commenté cette ligne pr pvr test la partie products
+    // return $users;
+    include '../src/views/CRUDs/trist_crud_users';
+  }
+
+
+
+  //PARTIE LEANDRE
+  public function products()
+  {
+  }
 }
