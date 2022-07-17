@@ -115,81 +115,83 @@ class Admin extends Controller
     // return $stores;
     include '../src/views/CRUDs/products/products.php';
   }
-}
 
-// PARTIE ALEX LE GROS BG
+    // PARTIE ALEX LE GROS BG
 
-public function schedule()
-{
-    $storeModel = new StoreModel();
-    $stores = $storeModel->getAllStores();
-    $scheduleModel = new ScheduleModel();
-    // return $stores;
-    include '../src/views/CRUDs/alex_crud_schedule/schedule.php';
-}
-
-public function updateSchedule()
-{
-    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
-
-    $storeModel = new StoreModel();
-    $store = $storeModel->getStoreById($id);
-
-    $scheduleModel = new ScheduleModel();
-    $schedules = $scheduleModel->getSchedulesByStoreId($id);
-
-    include '../src/views/CRUDs/alex_crud_schedule/updateSchedule.php';
-}
-
-public function updatingSchedules()
-{
-    $params = $this->params();
-
-    $session = $params["session"];
-    if (isset($session['user']) && $session['user']['roles'] === 'ADMIN') {
-
-        header('Content-Type: application/json');
-        header("Access-Control-Allow-Origin: *");
-
-        $semaine = $params['semaine'];
-
-        $storeId = $params['storeId'];
-
-        $scheduleModel = new scheduleModel();
-
-        $scheduleModel->updateSchedules($semaine, $storeId);
-        exit();
-    } else {
-        echo json_encode('Vous n\'avez pas les droits nécessaires pour effectuer cette action.');
-    }
-}
-
-public function addSchedule()
-{
-
-    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
-
-    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id)) {
+    public function schedule()
+    {
+        $storeModel = new StoreModel();
+        $stores = $storeModel->getAllStores();
         $scheduleModel = new ScheduleModel();
-        $scheduleModel->createScheduleForStore($id);
-        header('Location: /admin/updateSchedule?updateid='. $id);
-    } else {
-        echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
+        // return $stores;
+        include '../src/views/CRUDs/alex_crud_schedule/schedule.php';
     }
-}
 
-public function deleteSchedule()
-{
+    public function updateSchedule()
+    {
+        $id = explode('=', $_SERVER['REQUEST_URI'])[1];
 
-    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+        $storeModel = new StoreModel();
+        $store = $storeModel->getStoreById($id);
 
-    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id)) {
         $scheduleModel = new ScheduleModel();
-        $scheduleModel->deleteScheduleForStore($id);
-        header('Location: /admin/schedule');
-    } else {
-        echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
+        $schedules = $scheduleModel->getSchedulesByStoreId($id);
+
+        include '../src/views/CRUDs/alex_crud_schedule/updateSchedule.php';
     }
-}
+
+    public function updatingSchedules()
+    {
+        $params = $this->params();
+
+        $session = $params["session"];
+        if (isset($session['user']) && $session['user']['roles'] === 'ADMIN') {
+
+            header('Content-Type: application/json');
+            header("Access-Control-Allow-Origin: *");
+
+            $semaine = $params['semaine'];
+
+            $storeId = $params['storeId'];
+
+            $scheduleModel = new scheduleModel();
+
+            $scheduleModel->updateSchedules($semaine, $storeId);
+            exit();
+        } else {
+            echo json_encode('Vous n\'avez pas les droits nécessaires pour effectuer cette action.');
+        }
+    }
+
+    public function addSchedule()
+    {
+
+        $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+
+        if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id)) {
+            $scheduleModel = new ScheduleModel();
+            $scheduleModel->createScheduleForStore($id);
+            header('Location: /admin/updateSchedule?updateid='. $id);
+        } else {
+            echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
+        }
+    }
+
+    public function deleteSchedule()
+    {
+
+        $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+
+        if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id)) {
+            $scheduleModel = new ScheduleModel();
+            $scheduleModel->deleteScheduleForStore($id);
+            header('Location: /admin/schedule');
+        } else {
+            echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
+        }
+    }
 // FIN PARTIE ALEX LE GROS BG
+
+
 }
+
