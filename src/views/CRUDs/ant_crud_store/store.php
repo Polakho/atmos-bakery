@@ -23,7 +23,7 @@
   ?>
     <div class="store-page">
       <div class="store-head-wrapper">
-        <a href="/admin"><img class="store-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo"></a>
+      <a href="/admin"><img class="store-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo"></a>
         <h1 class="store-title">GESTION DE MAGASIN</h1>
       </div>
 

@@ -201,9 +201,8 @@ class Admin extends Controller
     </style>
 <?php
     $id = explode('=', $_SERVER['REQUEST_URI'])[1];
-    echo $id;
     $productModel = new ProductModel();
-    $product = $productModel->getProductById($id);
+    $product = $productModel->arrayGetProductById($id);
     include '../src/views/CRUDs/ld_crud_products/updateProduct.php';
   }
 
@@ -231,6 +230,70 @@ class Admin extends Controller
     if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
       $storeModel->updateStore($id, $_POST['name'], $_POST['address'], $_POST['phone'], $_POST['description']);
       header('Location: /admin/store');
+    } else {
+      echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
+    }
+  }
+
+  public function updatingProductImage()
+  {
+    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id) && isset($_FILES['image'])) {
+      $product = new ProductModel();
+      $target_dir =  __DIR__ . "/../components/uploads/";
+      $target_file = $target_dir . basename($_FILES["image"]["name"]);
+      var_dump($target_file);
+      $uploadOk = 1;
+      $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+      // Verifie les extensions multiples
+      if (isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["image"]["tmp_name"]);
+        if ($check !== false) {
+          echo "Le fichier est une image - " . $check["mime"] . ".";
+          $uploadOk = 1;
+        } else {
+          echo "Le fichier n'est pas une image";
+          $uploadOk = 0;
+        }
+      }
+
+      // Verifie si le fichier existe déjà
+      if (file_exists($target_file)) {
+        echo "Le fichier existe déjà sur le serveur";
+        $uploadOk = 0;
+      }
+
+      // Limite la taille de l'img
+      if ($_FILES["image"]["size"] > 500000) {
+        echo "Votre image est trop volumineuse.";
+        $uploadOk = 0;
+      }
+
+      // Limite les extensions
+      if (
+        $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif"
+      ) {
+        echo "Seuls les JPG, JPEG, PNG & GIF sont autorisés.";
+        $uploadOk = 0;
+      }
+
+      // Gestion des erreurs
+      if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+      } else {
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+          echo "L'image " . htmlspecialchars(basename($_FILES["image"]["name"])) . " a été upload.";
+        } else {
+          echo "Une erreur est survenue lors de l'upload.";
+        }
+      }
+
+      // $file = $_FILES['image']['tmp_name'];
+      // $image = file_get_contents($file);
+      $product->updateImage($id, $target_file);
+      // header('Location: /admin/products');
     } else {
       echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
     }

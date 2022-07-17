@@ -35,6 +35,7 @@
                     <?php
                     // var_dump($stores);
                     if (isset($products)) {
+                        $categories = $productModel->getCategories();
                     ?>
                         <form method="POST" enctype="multipart/form-data">
                             <table class="table store-crud-table">
@@ -45,9 +46,9 @@
                                         <th scope="col">Prix</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Composition</th>
-                                        <th scope="col">Image</th>
                                         <th scope="col">Poids</th>
                                         <th scope="col">Catégorie</th>
+                                        <th scope="col">Image</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
@@ -61,6 +62,9 @@
                                             <td><?= $product['price'] ?></td>
                                             <td><?= $product['description'] ?></td>
                                             <td><?= $product['compo'] ?></td>
+                                            <td><?= $product['weight'] ?></td>
+                                            <td><?= $categories[$product['category_id']] ?></td>
+
                                             <?php
                                             if (!isset($product['image']) || $product['image'] == null) {
                                             ?>
@@ -69,7 +73,7 @@
                                             } else {
                                                 // var_dump($store['image'][0]['image']);
                                             ?>
-                                                <td><a href="/admin/updateProduct?updateid=<?= $product['id'] ?>"><img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>" class="store-img" style="width: 50px;"></td>
+                                                <td><img src="data:image/jpg;base64,<?= base64_encode($product['image']) ?>" alt="<?= $product['name'] ?>" class="store-img" style="width: 50px;"></td>
                                             <?php
                                             }
                                             ?>

@@ -33,30 +33,30 @@
 
                 <div class="store-edit edit-info">
                     <h3>Modification des informations :</h3>
-                    <form action="/admin/updatingStore?id=<?= $product['id'] ?>" method="POST">
+                    <form action="/admin/updatingProduct?id=<?= $product['id'] ?>" method="POST">
 
                         <div class="row">
 
                             <div class="col">
                                 <label>Nom</label>
-                                <input class="form-control" type="text" name="name" value="<?= $store['name']; ?>" required>
+                                <input class="form-control" type="text" name="name" value="<?= $product['name']; ?>" required>
                             </div>
 
                             <div class="col">
-                                <label>Téléphone</label>
-                                <input class="form-control" type="tel" pattern="[0-9]{10}" name="phone" value="<?php echo $store['phone']; ?>" required>
+                                <label>Prix</label>
+                                <input class="form-control" type="text" name="price" value="<?php echo $product['price']; ?>" required>
                             </div>
 
-                        </div>
-
-                        <div class="form-group">
-                            <label>Adresse</label>
-                            <input class="form-control" type="text" name="address" value="<?php echo $store['address']; ?>" required>
                         </div>
 
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea class="form-control" name="description" rows="3" required><?php echo $store['address']; ?></textarea>
+                            <input class="form-control" type="text" name="description" value="<?php echo $product['description']; ?>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Composition</label>
+                            <textarea class="form-control" name="" rows="3"><?php echo $product['compo']; ?></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Modifier les informations</button>
@@ -66,14 +66,13 @@
                 <div class="store-edit edit-picture">
                     <h3>Modification de la photo :</h3>
                     <?php
-                    if (isset($store['image']) && $store['image'] !== '') {
-                        // var_dump(base64_encode($store['image']));
+                    if (isset($product['image']) && $product['image'] !== '') {
                     ?>
-                        <img src="data:image/jpg;base64,<?= base64_encode($store['image']) ?>" alt="<?= $store['name'] ?>">
+                        <img src="data:image/jpg;base64,<?= base64_encode($product['image']) ?>" alt="<?= $product['name'] ?>">
                     <?php
                     }
                     ?>
-                    <form action="/admin/updatingImage?id=<?= $store['id'] ?>" method="POST" enctype="multipart/form-data">
+                    <form action="/admin/updatingProductImage?id=<?= $product['id'] ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>Photo</label>
                             <input class="form-control" type="file" name="image" required>
