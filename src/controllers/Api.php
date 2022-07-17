@@ -683,8 +683,8 @@ class Api extends Controller
         $cartId = htmlspecialchars($params['cart_id']);
 
         if (isset($containId) && isset($cartId)) {
-            $containModel->deleteContain($containId, $cartId);
-            echo json_encode(["message" => "Le produit: $containId du cart: $cartId a bien été supprimé"]);
+            $containModel->deleteContain($containId);
+            echo json_encode(["message" => "Le produit: $containId a bien été supprimé du panier"]);
         }
     }
 }
