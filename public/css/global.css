@@ -526,22 +526,20 @@ footer {
 .titre {
   color: indianred;
 }
-
 .listing {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .card {
   display: block;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   width: 300px;
+  height: 400px;
   margin: 40px 40px 40px 40px;
   text-align: center;
   font-family: arial, Serif;
 }
-
 [class^="page"] {
   display: flex;
   flex-wrap: wrap;
@@ -549,23 +547,19 @@ footer {
   margin: 0 100px 100px 100px;
 
 }
-
 #navigation {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
   width: 100px;
 }
-
 .hidden {
   display: none
 }
-
 .price {
   color: grey;
   font-size: 22px;
 }
-
 .card button {
   border: none;
   outline: 0;
@@ -577,11 +571,9 @@ footer {
   width: 100%;
   font-size: 18px;
 }
-
 .card button:hover {
   opacity: 0.7;
 }
-
 .notification-add-product {
   position: fixed;
   top: -8rem;
@@ -592,12 +584,8 @@ footer {
   box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.4);
   transition: all 0.4s;
 }
-
 .show {
   top: 2rem;
-}
-.random-products{
-  margin-top: 2rem;
 }
 .presentation-3-produits{
   display: flex;
@@ -627,19 +615,16 @@ footer {
 .store-logo {
   height: 202px;
 }
-
 .store-page {
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .store-title {
   font-size: 2em;
   margin-top: 0;
 }
-
 .store-head-wrapper {
   display: flex;
   align-items: center;
@@ -648,14 +633,12 @@ footer {
   height: 20vh;
   margin-bottom: 5vh;
 }
-
 .store-edit-wrapper {
   height: auto;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-
 .store-edit {
   width: 35vw;
   height: 65vh;
@@ -664,52 +647,43 @@ footer {
   padding: 1em;
   margin: 0 2em;
 }
-
 @media only screen and (max-width: 600px) {
   .store-page {
     height: auto;
   }
-
   .store-edit-wrapper {
     flex-direction: column;
     align-items: center;
   }
-
   .store-edit {
     width: 90vw;
     height: auto;
     margin-top: 2em;
   }
 }
-
 .store-add-wrapper {
   width: 90vw;
   background-color: var(--color-primary-pink);
   border-radius: 2em;
   padding: 1em;
 }
-
 @media only screen and (max-width: 600px) {
   .store-add-wrapper {
     width: 90vw;
   }
 }
-
 .text-crud {
   color: white;
   text-decoration: none;
 }
-
 .crud-btn {
   margin-bottom: .5em;
 }
-
 .overflowauto {
   overflow-x: auto;
 }
 
 /*USER MANAGEMENT TRISTAN*/
-
 .user-logo {
   height: 202px;
 }
@@ -775,8 +749,8 @@ footer {
   text-decoration-line: line-through;
   text-decoration-color: darkred;
 }
-/* ALEX SCHEDULE MANAGMENT */
 
+/* ALEX SCHEDULE MANAGMENT */
 .schedule-edit {
   height: auto;
   display: flex;
@@ -789,13 +763,11 @@ footer {
   padding: 1em;
   margin: 2em 2em;
 }
-
 .jour{
   display: flex;
   flex-flow: column;
   margin: 1em 2em;
 }
-
 .horraires{
   display: flex;
   flex-flow: row;
