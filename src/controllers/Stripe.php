@@ -285,14 +285,14 @@ class Stripe extends Controller
                 }
                 // var_dump($prices);
                 // var_dump($quantities);
-                $line_items_array = [];
-                foreach ($prices as $key => $price) {
+                // $line_items_array = [];
+                // foreach ($prices as $key => $price) {
                     // var_dump($key . ' => ' . $price);
                     // $line_items_array = [
                     //     'price' => "{$prices['id']}",
                     //     'quantity' => "{$value}"
                     // ];
-                }
+                // }
 
                 // $stripe->checkout->sessions->create([
                 //     'success_url' => '/payment/success',
