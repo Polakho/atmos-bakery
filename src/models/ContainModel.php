@@ -63,15 +63,16 @@ class ContainModel
         }
     }
 
-    public function deleteContain($containId)
+    public function deleteContain($cartId, $containId)
     {
         try {
             $pdo = $this->db->getPDO();
             //prepare
-            $sql = "UPDATE contain SET  contain.trash = 1 WHERE contain.id = :containId";
+            $sql = "UPDATE contain SET  contain.trash = 1 WHERE contain.id = :containId AND contain.cart_id = :cartId";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
-                "containId" => $containId
+                "containId" => $containId,
+                "cartId" => $cartId
             ]);
             return true;
         } catch (PDOException $e) {
