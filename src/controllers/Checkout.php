@@ -63,7 +63,6 @@ class Checkout extends Controller
         if ($verif === false) {
             $errorMsg = 'Vous n\'etes pas autorisés à modifier le panier de quelqu\'un d\'autre.';
             header('Location: /checkout', true, 999);
-            // A REMPLACER PAR DES HEADERS !!
         }
         $containModel->deleteContain($id);
         header('Location: /checkout');

@@ -171,7 +171,7 @@ class Stripe extends Controller
                     ]
                 ]);
                 $stripe->prices->create([
-                    'unit_amount_decimal' => $product['price'],
+                    'unit_amount_decimal' => $product['price'] * 100,
                     'currency' => 'eur',
                     'product' => $product['id'],
                 ]);
@@ -273,42 +273,25 @@ class Stripe extends Controller
                 );
                 $prices = [];
                 $quantities = [];
+                $line_items_array = [];
                 foreach ($contains as $contain) {
                     $price = $stripe->prices->search([
                         'query' => "product:'" . $contain['product_id'] . "'",
                     ]);
-                    // echo json_decode($priceId);
-                    $priceJson = json_decode($price);
-                    var_dump($priceJson['data']);
-                    $prices = [$contain['product_id'] => $price];
-                    $quantities = [$contain['product_id'] => $contain['quantity']];
-                }
-                // var_dump($prices);
-                // var_dump($quantities);
-                // $line_items_array = [];
-                // foreach ($prices as $key => $price) {
-                    // var_dump($key . ' => ' . $price);
-                    // $line_items_array = [
-                    //     'price' => "{$prices['id']}",
-                    //     'quantity' => "{$value}"
-                    // ];
-                // }
+                    // var_dump($price['data'][0]['id']);
 
-                // $stripe->checkout->sessions->create([
-                //     'success_url' => '/payment/success',
-                //     'cancel_url' => '/payment/cancel',
-                //     'line_items' => [
-                //         [
-                //             'price' => $priceId,
-                //             'quantity' => 2,
-                //         ],
-                //         [
-                //             'price' => $priceId,
-                //             'quantity' => 2,
-                //         ],
-                //     ],
-                //     'mode' => 'payment',
-                // ]);
+                    $line_items_array[] = [
+                        'price' => $price['data'][0]['id'],
+                        'quantity' => $contain['quantity']
+                    ];
+                }
+                var_dump($line_items_array);
+                $stripe->checkout->sessions->create([
+                    'success_url' => 'http://atmosdev.com/stripe/payment',
+                    'cancel_url' => 'http://atmosdev.com/stripe/cancel',
+                    'line_items' => $line_items_array,
+                    'mode' => 'payment',
+                ]);
             }
         } catch (\Stripe\Exception\CardException $e) {
             // Since it's a decline, \Stripe\Exception\CardException will be caught

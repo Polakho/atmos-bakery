@@ -128,12 +128,13 @@ nav {
   font-weight: bold;
 }
 
-.vertical{
-  border-left : 2px solid black;
+.vertical {
+  border-left: 2px solid black;
   height: auto;
   display: inline-block;
   margin: 0 15px;
 }
+
 .cart-icone {
   height: 30px;
   width: 30px;
@@ -708,13 +709,112 @@ footer {
   margin: 2em 2em;
 }
 
-.jour{
+.jour {
   display: flex;
   flex-flow: column;
   margin: 1em 2em;
 }
 
-.horraires{
+.horraires {
   display: flex;
   flex-flow: row;
+}
+
+/* CHECKOUT */
+.active-cart {
+  display: flex;
+  margin-top: 2vh;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2vw;
+  width: 80vw;
+  height: 60vh;
+  object-fit: contain;
+  overflow: auto;
+}
+
+.active-cart p {
+  font-size: large;
+  padding: 1vh;
+}
+
+
+.active-cart input {
+  width: 20%;
+  text-align: center;
+  margin-bottom: 1vh;
+
+}
+
+.active-cart img {
+  width: 202px;
+  height: 202px;
+}
+
+
+.active-cart .btn-update {
+  border: none;
+  width: 50%;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #c4a29e;
+  color: #000;
+  margin-bottom: 0.5vh;
+}
+
+.active-cart .btn-delete {
+  border: none;
+  width: 50%;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #901103;
+  color: #000;
+}
+
+.active-cart .product {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  column-gap: 2vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 20%;
+  padding-bottom: 1%;
+  padding-top: 1%;
+  border: 1px solid black;
+  object-fit: contain;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.checkout {
+  display: flex;
+  justify-content: center;
+  margin-top: 2vh;
+  width: 60%;
+}
+
+
+
+.checkout a {
+  display: block;
+  color: #000;
+  padding: 2%;
+  text-align: center;
+  background-color: var(--color-primary-blue);
+  color: #000;
+  border: none;
+  width: auto;
+  border-radius: 20px;
+  object-fit: contain;
+}
+
+.checkout a:hover {
+  background-color: var(--btn-color-hover-active-pink);
+  color: white;
+  transition: 0.5s;
 }
