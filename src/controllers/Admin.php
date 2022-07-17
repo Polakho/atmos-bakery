@@ -126,7 +126,7 @@ class Admin extends Controller
 
   //DEBUT PARTIE TRISTAN
   //Pages
-  public function user()
+  public function users()
   {
   ?>
     <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
@@ -135,10 +135,12 @@ class Admin extends Controller
     </style>
   <?php
     $userModel = new UserModel();
-    $users = $userModel->getAllUser();
+    $users = $userModel->getAllUsers();
     // return $users;
     include '../src/views/CRUDs/trist_crud_users/users.php';
   }
+
+
   public function newuser()
   {
   ?>
@@ -147,8 +149,10 @@ class Admin extends Controller
       <?php include './css/global.css'; ?>
     </style>
   <?php
-    include '../src/views/CRUDs/trist_crud_newUser';
+    include '../src/views/CRUDs/trist_crud_user/newUser.php';
   }
+
+
   public function updateuser()
   {
   ?>
@@ -157,13 +161,48 @@ class Admin extends Controller
       <?php include './css/global.css'; ?>
     </style>
 <?php
-    $userModel = new UserModel();
-    // $users = $userModel->get(); //J'ai commenté cette ligne pr pvr test la partie products
-    // return $users;
-    include '../src/views/CRUDs/trist_crud_users';
+      $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+      $userModel = new UserModel();
+      $user = $userModel->getUsersById($id); //J'ai commenté cette ligne pr pvr test la partie products
+    // return $user;
+    include '../src/views/CRUDs/trist_crud_users/updateUser.php';
+  }
+//METHODE
+    public function deleteUser()
+    {
+        $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+        if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id)) {
+            $user = new UserModel();
+            $user->deleteUser($id);
+            header('Location: /admin/users');
+        } else {
+            echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
+        }
+    }
+    public function trashUser(){
+      ?>
+      <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+      <style>
+          <?php include './css/global.css'; ?>
+      </style>
+      <?php
+      $userModel = new UserModel();
+      $users = $userModel->getAllUsers();
+      // return $users;
+      include '../src/views/CRUDs/trist_crud_users/users.php';
   }
 
-
+    public function updatingUser()
+    {
+        $userModel = new UserModel();
+        $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+        if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
+            $userModel->updateUser($id, $_POST['mail'], $_POST['name'], $_POST['f_name'], $_POST['trash'], $_POST['roles']);
+            header('Location: /admin/users');
+        } else {
+            echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
+        }
+    }
 
   //PARTIE LEANDRE
   public function products()

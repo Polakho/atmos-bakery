@@ -29,7 +29,7 @@
         </div>
           <div class="admin-list-wrapper" style="margin-top: 10px">
               <ul>
-                  <li><a href="/admin/user">Gestion des Utilisateurs</a></li>
+                  <li><a href="/admin/users">Gestion des Utilisateurs</a></li>
               </ul>
           </div>
       </section>

@@ -596,3 +596,74 @@ footer {
 .overflowauto {
   overflow-x: auto;
 }
+
+
+
+/*USER MANAGEMENT TRISTAN*/
+
+
+.user-logo {
+  height: 202px;
+}
+.user-page {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.user-title {
+  font-size: 2em;
+  margin-top: 0;
+}
+.user-head-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  height: 20vh;
+  margin-bottom: 5vh;
+}
+.user-edit-wrapper {
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.user-edit {
+  width: 60vw;
+  height: 65vh;
+  background-color: var(--color-primary-pink);
+  border-radius: 2em;
+  padding: 1em;
+  margin: 0 2em;
+}
+@media only screen and (max-width: 600px) {
+  .user-page {
+    height: auto;
+  }
+  .user-edit-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .user-edit {
+    width:90vw;
+    height: auto;
+    margin-top: 2em;
+  }
+}
+.user-add-wrapper {
+  width: 90vw;
+  background-color: var(--color-primary-pink);
+  border-radius: 2em;
+  padding: 1em;
+}
+@media only screen and (max-width: 600px) {
+  .user-add-wrapper {
+    width: 90vw;
+  }
+}
+.trashed_user {
+color: gray;
+text-decoration-line: line-through;
+  text-decoration-color: darkred;
+}

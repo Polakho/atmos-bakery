@@ -31,7 +31,7 @@
           <button class="btn btn-primary crud-btn"><a href="/admin/addStore" class="text-crud">Ajouter une boutique</a></button>
           <div class="overflowauto">
             <?php
-            // var_dump($stores);
+             //var_dump($stores);
               if (isset($stores)) {
                 ?>
                 <form method="POST" enctype="multipart/form-data">
