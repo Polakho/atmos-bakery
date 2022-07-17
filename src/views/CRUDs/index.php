@@ -25,6 +25,8 @@
         <div class="admin-list-wrapper">
           <ul>
             <li><a href="/admin/store">Gestion de magasin</a></li>
+              <span class="vertical"></span>
+            <li><a href="/admin/schedule">Gestion des horraires</a></li>
           </ul>
         </div>
       </section>
