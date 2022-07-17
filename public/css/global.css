@@ -616,6 +616,12 @@ footer {
   display: flex;
   justify-content: center;
 }
+.list-admin {
+  flex-direction: column;
+}
+.list-admin-item {
+  margin: 5px 0;
+}
 
 /* ANTOINE STORE MANAGMENT */
 .store-logo {

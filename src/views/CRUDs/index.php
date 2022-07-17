@@ -25,11 +25,11 @@
       <img class="header-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo">
       <h1>PANEL ADMIN</h1>
       <div class="admin-list-wrapper">
-        <ul>
-          <li><a href="/admin/store">Gestion de magasin</a></li>
-          <li><a href="/admin/products">Gestion des produits</a></li>
-          <li><a href="/admin/schedule">Gestion des horaires</a></li>
-          <li><a href="/admin/users">Gestion des Utilisateurs</a></li>
+        <ul class="list-admin">
+          <li class="list-admin-item"><a href="/admin/store">Gestion de magasin</a></li>
+          <li class="list-admin-item"><a href="/admin/products">Gestion des produits</a></li>
+          <li class="list-admin-item"><a href="/admin/schedule">Gestion des horaires</a></li>
+          <li class="list-admin-item"><a href="/admin/users">Gestion des Utilisateurs</a></li>
         </ul>
       </div>
     </section>
