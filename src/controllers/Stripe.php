@@ -140,69 +140,57 @@ class Stripe extends Controller
             $productModel = new ProductModel;
             $products = $productModel->getAllProductJson();
             $stripe = new \Stripe\StripeClient("sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU");
-            try {
-                // foreach ($products as $product) {
-                //     var_dump($product);
-                //     $stripe->products->create([
-                //         'id' => $product['id'],
-                //         'name' => $product['name'],
-                //         'description' => $product['description'],
-                //         'images' => [$product['image']],
-                //         'active' => $product['trash'],
-                //         'metadata' => [
-                //             'price' => $product['price'],
-                //             'compo' => $product['compo'],
-                //             'weight' => $product['weight'],
-                //             'category_id' => $product['category_id']
-                //         ]
-                //     ]);
-                $product = $products[0];
-                // var_dump($product);
-                $stripe->products->create([
-                    'id' => $product['id'],
-                    'name' => $product['name'],
-                    'description' => $product['description'],
-                    'images' => [$product['image']],
-                    'metadata' => [
-                        'price' => $product['price'],
-                        'compo' => $product['compo'],
-                        'weight' => $product['weight'],
-                        'category_id' => $product['category_id']
-                    ]
-                ]);
-                $stripe->prices->create([
-                    'unit_amount_decimal' => $product['price'] * 100,
-                    'currency' => 'eur',
-                    'product' => $product['id'],
-                ]);
-            } catch (\Stripe\Exception\CardException $e) {
-                // Since it's a decline, \Stripe\Exception\CardException will be caught
-                echo 'Status is:' . $e->getHttpStatus() . '\n';
-                echo 'Type is:' . $e->getError()->type . '\n';
-                echo 'Code is:' . $e->getError()->code . '\n';
-                // param is '' in this case
-                echo 'Param is:' . $e->getError()->param . '\n';
-                echo 'Message is:' . $e->getError()->message . '\n';
-            } catch (\Stripe\Exception\RateLimitException $e) {
-                echo 'RateLimitException';
-                // Too many requests made to the API too quickly
-            } catch (\Stripe\Exception\InvalidRequestException $e) {
-                echo 'InvalidRequestException:';
-                echo 'Type is:' . $e->getError()->type . '\n';
-                echo 'Param is:' . $e->getError()->param . '\n';
-                echo 'Message is:' . $e->getError()->message . '\n';
-                // Invalid parameters were supplied to Stripe's API
-            } catch (\Stripe\Exception\AuthenticationException $e) {
-                echo 'AuthenticationException';
-                // Authentication with Stripe's API failed
-                // (maybe you changed API keys recently)
-            } catch (\Stripe\Exception\ApiConnectionException $e) {
-                echo 'ApiConnectionException';
-                // Network communication with Stripe failed
-            } catch (\Stripe\Exception\ApiErrorException $e) {
-                echo 'ApiErrorException';
-                // Display a very generic error to the user, and maybe send
-                // yourself an email
+
+            foreach ($products as $product) {
+                try {
+                    $stripe->products->create([
+                        'id' => $product['id'],
+                        'name' => $product['name'],
+                        'description' => $product['description'],
+                        'images' => [$product['image']],
+                        'metadata' => [
+                            'price' => $product['price'],
+                            'compo' => $product['compo'],
+                            'weight' => $product['weight'],
+                            'category_id' => $product['category_id']
+                        ]
+                    ]);
+
+                    $stripe->prices->create([
+                        'unit_amount_decimal' => $product['price'] * 100,
+                        'currency' => 'eur',
+                        'product' => $product['id'],
+                    ]);
+                } catch (\Stripe\Exception\CardException $e) {
+                    // Since it's a decline, \Stripe\Exception\CardException will be caught
+                    echo 'Status is:' . $e->getHttpStatus() . '\n';
+                    echo 'Type is:' . $e->getError()->type . '\n';
+                    echo 'Code is:' . $e->getError()->code . '\n';
+                    // param is '' in this case
+                    echo 'Param is:' . $e->getError()->param . '\n';
+                    echo 'Message is:' . $e->getError()->message . '\n';
+                } catch (\Stripe\Exception\RateLimitException $e) {
+                    echo 'RateLimitException';
+                    // Too many requests made to the API too quickly
+                } catch (\Stripe\Exception\InvalidRequestException $e) {
+                    echo 'InvalidRequestException:';
+                    echo 'Type is:' . $e->getError()->type . '\n';
+                    echo 'Param is:' . $e->getError()->param . '\n';
+                    echo 'Message is:' . $e->getError()->message . '\n';
+                    // continue;
+                    // Invalid parameters were supplied to Stripe's API
+                } catch (\Stripe\Exception\AuthenticationException $e) {
+                    echo 'AuthenticationException';
+                    // Authentication with Stripe's API failed
+                    // (maybe you changed API keys recently)
+                } catch (\Stripe\Exception\ApiConnectionException $e) {
+                    echo 'ApiConnectionException';
+                    // Network communication with Stripe failed
+                } catch (\Stripe\Exception\ApiErrorException $e) {
+                    echo 'ApiErrorException';
+                    // Display a very generic error to the user, and maybe send
+                    // yourself an email
+                }
             }
         }
     }
@@ -271,6 +259,8 @@ class Stripe extends Controller
                 $stripe = new \Stripe\StripeClient(
                     'sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU'
                 );
+
+
                 $prices = [];
                 $quantities = [];
                 $line_items_array = [];
@@ -278,21 +268,21 @@ class Stripe extends Controller
                     $price = $stripe->prices->search([
                         'query' => "product:'" . $contain['product_id'] . "'",
                     ]);
-                    // var_dump($price['data'][0]['id']);
 
                     $line_items_array[] = [
                         'price' => $price['data'][0]['id'],
                         'quantity' => $contain['quantity']
                     ];
                 }
-                var_dump($line_items_array);
-                $stripe->checkout->sessions->create([
-                    'success_url' => 'http://atmosdev.com/stripe/payment',
+                // var_dump($line_items_array);
+                $session = $stripe->checkout->sessions->create([
+                    'success_url' => 'http://atmosdev.com/stripe/success',
                     'cancel_url' => 'http://atmosdev.com/stripe/cancel',
                     'line_items' => $line_items_array,
                     'mode' => 'payment',
                 ]);
             }
+            header('Location: ' . $session['url'] . '');
         } catch (\Stripe\Exception\CardException $e) {
             // Since it's a decline, \Stripe\Exception\CardException will be caught
             echo 'Status is:' . $e->getHttpStatus() . '\n';
@@ -323,5 +313,15 @@ class Stripe extends Controller
             // Display a very generic error to the user, and maybe send
             // yourself an email
         }
+    }
+
+    public function success()
+    {
+        # code...
+    }
+
+    public function cancel()
+    {
+        # code...
     }
 }
