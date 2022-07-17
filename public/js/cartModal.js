@@ -10,7 +10,7 @@ let blurBg = document.querySelector(".blur");
 
 // FONCTIONS MODALE
 // Fermer la modale
-btnClose.onclick = function() {
+btnClose.onclick = function () {
   cartState = !cartState;
   blurBg.classList.remove("displayVisible");
   blurBg.classList.add("hidden");
@@ -19,7 +19,7 @@ btnClose.onclick = function() {
   // clearBox(modalBody);
 };
 
-blurBg.onclick = function() {
+blurBg.onclick = function () {
   if (blurBg.classList.contains("hidden")) {
     return;
   } else {
@@ -67,7 +67,7 @@ function showCart() {
       return response.json();
     }).then((res) => {
       if (res.list) {
-        res.list.map(function(contain) {
+        res.list.map(function (contain) {
           // Création d'item
           // Wrapper par item
           let itemContainer = document.createElement("div");
@@ -77,7 +77,7 @@ function showCart() {
           btn.classList.add("delete-contain");
           btn.setAttribute("data-id", contain.id);
           btn.innerHTML = "Supprimer";
-          btn.onClick = function() {
+          btn.onClick = function () {
             let post = {
               contain_id: btn.getAttribute("data-id")
             };
@@ -113,21 +113,21 @@ function showCart() {
           itemTotalPrice = parseFloat(price * contain.quantity).toFixed(2);
           p.innerHTML = `Prix : ${itemTotalPrice}€ (${price}€/u)`;
           // Ajout au total du prix
-          totalPrice = totalPrice + itemTotalPrice;
+          totalPrice = parseFloat(totalPrice) + parseFloat(itemTotalPrice);
 
           let label = document.createElement("label");
           label.innerHTML = "Quantité: ";
-          
+
           let input = document.createElement("input");
           input.classList.add("contain-quantity");
           input.value = contain.quantity;
-          input.onchange = function() {
+          input.onchange = function () {
             let quantityChanged = input.value;
 
             console.log(contain.quantity + ' | ' + quantityChanged);
 
             if (quantityChanged !== contain.quantity) {
-              btnQuantity.onclick = function() {
+              btnQuantity.onclick = function () {
                 let post = {
                   contain_id: contain.id,
                   quantity: quantityChanged
@@ -159,7 +159,7 @@ function showCart() {
           let btnQuantity = document.createElement("button");
           btnQuantity.classList.add("change-quantity");
           btnQuantity.innerHTML = "Changer";
-          
+
           // Ajout au wrapper
           let itemContainerHead = document.createElement("div");
           itemContainerHead.classList.add("item-container-head");
@@ -187,7 +187,7 @@ function showCart() {
 
         let btnCheckout = document.createElement("button");
         btnCheckout.innerHTML = "Checkout";
-        btnCheckout.onclick = function() {
+        btnCheckout.onclick = function () {
           window.location.replace("/checkout");
         };
 

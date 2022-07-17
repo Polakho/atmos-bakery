@@ -7,9 +7,9 @@ class Schedule
 
     private $id;
     private $day;
-    private  $op_am;
+    private $op_am;
     private $cl_am;
-    private  $op_pm;
+    private $op_pm;
     private $cl_pm;
     private $trash;
     private $store_id;

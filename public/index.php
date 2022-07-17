@@ -1,8 +1,8 @@
 <?php
 require_once('../vendor/autoload.php');
+
 session_start();
 ini_set('display_errors', '1');
-
 define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
 // define('ROOT', 'src/');
 // echo ROOT;

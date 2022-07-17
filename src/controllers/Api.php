@@ -32,6 +32,7 @@ class Api extends Controller
     public function doc()
     {
         require_once "../public/swagger/index.html";
+        exit();
     }
 
     /**
@@ -578,6 +579,7 @@ class Api extends Controller
                 ];
             }
             echo json_encode(["list" => $containWithProduct]);
+            exit();
         }
     }
 
@@ -678,9 +680,11 @@ class Api extends Controller
 
         $containId = htmlspecialchars($params['contain_id']);
 
-        if (isset($containId)) {
+        $cartId = htmlspecialchars($params['cart_id']);
+
+        if (isset($containId) && isset($cartId)) {
             $containModel->deleteContain($containId);
-            echo json_encode(["message" => "Le produit a été supprimé du panier"]);
+            echo json_encode(["message" => "Le produit: $containId a bien été supprimé du panier"]);
         }
     }
 }

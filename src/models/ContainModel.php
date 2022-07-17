@@ -36,13 +36,14 @@ class ContainModel
     {
         $pdo = $this->db->getPDO();
         $contain = $this->getContainByProductAndCart($productId, $cartId);
+        $quantityToUse = intval($quantity);
         if ($contain == null) {
             try {
                 //Update trash  0
                 $sql = "INSERT INTO  contain (quantity, trash, product_id, cart_id) VALUES (:quantity, 0, :productId, :cartId)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([
-                    "quantity" => $quantity,
+                    "quantity" => $quantityToUse,
                     "productId" => $productId,
                     "cartId" => $cartId
                 ]);
@@ -54,7 +55,7 @@ class ContainModel
         } else {
             $containId = $contain->getId();
             $quantityBefore = intval($contain->getQuantity());
-            $someQuantity = $quantityBefore + $quantity;
+            $someQuantity = $quantityBefore + $quantityToUse;
             $changed = $this->changeQuantityOfContain($containId, intval($someQuantity));
             if ($changed == true) {
                 return 1;
@@ -70,7 +71,7 @@ class ContainModel
             $sql = "UPDATE contain SET  contain.trash = 1 WHERE contain.id = :containId";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
-                "containId" => $containId
+                "containId" => intval($containId),
             ]);
             return true;
         } catch (PDOException $e) {
@@ -109,5 +110,37 @@ class ContainModel
             $contains[] = $contain->jsonify();
         }
         return $contains;
+    }
+
+    public function verifyCartUserByContainId($containId) // Verifie que l'utilisateur connecté agit bien avec son panier
+    {
+        $userId = $_SESSION['user']['id'];
+        $pdo = $this->db->getPDO();
+        $sql = "SELECT cart_id FROM contain  WHERE contain.id = :containId and contain.trash = 0";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            "containId" => $containId
+        ]);
+        $row = $stmt->fetch();
+        if (isset($row[0])) {
+            $cartId = $row[0];
+            $sql = "SELECT user_id FROM cart  WHERE id = :cartId ";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                "cartId" => $cartId
+            ]);
+            $row = $stmt->fetch();
+            if (isset($row[0])) {
+                $fetchedUserId = $row[0];
+            }
+            if ($fetchedUserId === $userId) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }
