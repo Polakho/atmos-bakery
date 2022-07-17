@@ -68,7 +68,7 @@ class ContainModel
         try {
             $pdo = $this->db->getPDO();
             //prepare
-            $sql = "UPDATE contain SET  contain.trash = 1 WHERE contain.id = :containId AND contain.cart_id = :cartId";
+            $sql = "UPDATE contain SET  contain.trash = 1 WHERE contain.product_id = :containId AND contain.cart_id = :cartId";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 "containId" => $containId,
