@@ -30,7 +30,6 @@
       <div class="store-add-wrapper">
         <h3>Liste des boutiques :</h3>
 
-<<<<<<< HEAD
           <button class="btn btn-primary crud-btn"><a href="/admin/addStore" class="text-crud">Ajouter une boutique</a></button>
           <div class="overflowauto">
             <?php
@@ -51,28 +50,6 @@
                       </tr>
                     </thead>
                     <tbody>
-=======
-        <button class="btn btn-primary crud-btn"><a href="/admin/addStore" class="text-crud">Ajouter une boutique</a></button>
-        <div class="overflowauto">
-          <?php
-          // var_dump($stores);
-          if (isset($stores)) {
-          ?>
-            <form method="POST" enctype="multipart/form-data">
-              <table class="table store-crud-table">
-                <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Téléphone</th>
-                    <th scope="col">Adresse</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
->>>>>>> 6844c03c997ec8dffc516aa53ea17197719f3622
                   <?php
                   foreach ($stores as $store) {
                   ?>

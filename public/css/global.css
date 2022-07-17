@@ -702,11 +702,7 @@ footer {
   overflow-x: auto;
 }
 
-<<<<<<< HEAD
-
-
 /*USER MANAGEMENT TRISTAN*/
-
 
 .user-logo {
   height: 202px;
@@ -769,10 +765,10 @@ footer {
   }
 }
 .trashed_user {
-color: gray;
-text-decoration-line: line-through;
+  color: gray;
+  text-decoration-line: line-through;
   text-decoration-color: darkred;
-=======
+}
 /* ALEX SCHEDULE MANAGMENT */
 
 .schedule-edit {
@@ -797,5 +793,4 @@ text-decoration-line: line-through;
 .horraires{
   display: flex;
   flex-flow: row;
->>>>>>> 6844c03c997ec8dffc516aa53ea17197719f3622
 }

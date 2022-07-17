@@ -167,7 +167,6 @@ class Admin extends Controller
     <style>
       <?php include './css/global.css'; ?>
     </style>
-<<<<<<< HEAD
 <?php
       $id = explode('=', $_SERVER['REQUEST_URI'])[1];
       $userModel = new UserModel();
@@ -213,18 +212,6 @@ class Admin extends Controller
     }
 
   //PARTIE LEANDRE
-=======
-  <?php
-    $userModel = new UserModel();
-    // $users = $userModel->get(); //J'ai commenté cette ligne pr pvr test la partie products
-    // return $users;
-    include '../src/views/CRUDs/trist_crud_users';
-  }
-
-  // FIN PARTIE TRISTAN
-
-  // PARTIE LEANDRE
->>>>>>> 6844c03c997ec8dffc516aa53ea17197719f3622
   public function products()
   {
   ?>

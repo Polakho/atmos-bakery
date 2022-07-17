@@ -31,29 +31,12 @@
       </div>
       <div class="admin-list-wrapper" style="margin-top: 10px">
         <ul>
-          <li><a href="/admin/user">Gestion des utilisateurs</a></li>
-        </ul>
-      </div>
-      <div class="admin-list-wrapper" style="margin-top: 10px">
-        <ul>
           <li><a href="/admin/products">Gestion des produits</a></li>
+          <li><a href="/admin/schedule">Gestion des horaires</a></li>
+          <li><a href="/admin/users">Gestion des Utilisateurs</a></li>
         </ul>
       </div>
-        <div class="admin-list-wrapper" style="margin-top: 10px">
-            <ul>
-                <li><a href="/admin/schedule">Gestion des horaires</a></li>
-            </ul>
-        </div>
-<<<<<<< HEAD
-          <div class="admin-list-wrapper" style="margin-top: 10px">
-              <ul>
-                  <li><a href="/admin/users">Gestion des Utilisateurs</a></li>
-              </ul>
-          </div>
-      </section>
-=======
     </section>
->>>>>>> 6844c03c997ec8dffc516aa53ea17197719f3622
   <?php
   }
   ?>
