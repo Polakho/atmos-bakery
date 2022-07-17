@@ -164,9 +164,9 @@ class Admin extends Controller
     include '../src/views/CRUDs/trist_crud_users';
   }
 
+  // FIN PARTIE TRISTAN
 
-
-  //PARTIE LEANDRE
+  // PARTIE LEANDRE
   public function products()
   {
   ?>
@@ -174,9 +174,65 @@ class Admin extends Controller
     <style>
       <?php include './css/global.css'; ?>
     </style>
-<?php
+  <?php
     $productModel = new ProductModel();
     $products = $productModel->getAllProductJson();
     include '../src/views/CRUDs/ld_crud_products/products.php';
+  }
+
+  public function addProduct()
+  {
+  ?>
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <style>
+      <?php include './css/global.css'; ?>
+    </style>
+  <?php
+    include '../src/views/CRUDs/ld_crud_products/addProduct.php';
+  }
+
+
+  public function updateProduct()
+  {
+  ?>
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <style>
+      <?php include './css/global.css'; ?>
+    </style>
+<?php
+    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+    echo $id;
+    $productModel = new ProductModel();
+    $product = $productModel->getProductById($id);
+    include '../src/views/CRUDs/ld_crud_products/updateProduct.php';
+  }
+
+  // METHODS
+  public function addingProduct()
+  {
+    $productModel = new ProductModel();
+    if (isset($_POST['name']) && isset($_POST['price']) && isset($_POST['category_id'])) {
+      $newProductId = $productModel->saveProduct($_POST['name'], $_POST['price'], $_POST['categoryId'], $_POST['description'], $_POST['compo'], $_POST['image'], $_POST['weight']);
+      if (isset($_FILES['image'])) {
+        $file = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+        //$productModel->addImage($newProductId, $file); // A FAIRE DEM
+      }
+      header('Location: /admin/products');
+    } else {
+      $errorMsg = "Veuillez remplir tous les champs.";
+      header('Location: /admin/addProduct');
+    }
+  }
+
+  public function updatingProduct()
+  {
+    $storeModel = new StoreModel();
+    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
+      $storeModel->updateStore($id, $_POST['name'], $_POST['address'], $_POST['phone'], $_POST['description']);
+      header('Location: /admin/store');
+    } else {
+      echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
+    }
   }
 }

@@ -23,7 +23,7 @@
     ?>
         <div class="store-page">
             <div class="store-head-wrapper">
-                <img class="store-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo">
+                <a href="/admin"><img class="store-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo"></a>
                 <h1 class="store-title">GESTION DE PRODUITS</h1>
             </div>
 
@@ -69,12 +69,7 @@
                                             } else {
                                                 // var_dump($store['image'][0]['image']);
                                             ?>
-                                                <form class="" action="#" method="post">
-                                                    <td>
-                                                        <input type="file" name="fileToUpload" id="fileToUpload" style="display: none;" />
-                                                        <input type="image" id="image" alt="Product image" title="Cliquez pour changer d'image" class="store-img" style="width: 50px" src="<?= $product['image'] ?>" onclick="document.getElementById('fileToUpload').click();">
-                                                    </td>
-                                                </form>
+                                                <td><a href="/admin/updateProduct?updateid=<?= $product['id'] ?>"><img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>" class="store-img" style="width: 50px;"></td>
                                             <?php
                                             }
                                             ?>
