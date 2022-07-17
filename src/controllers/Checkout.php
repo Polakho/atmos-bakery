@@ -46,7 +46,7 @@ class Checkout extends Controller
         $verif = $containModel->verifyCartUserByContainId($id);
         var_dump($verif);
         if ($verif === false) {
-            header('Location: /checkout'); //response code 401 pour dire que l'accès n'est pas autorisé (vu que header et pas include, obligé de passer par ca) 
+            header('Location: /checkout'); //response code 401 pour dire que l'accès n'est pas autorisé (vu que header et pas de include, obligé de passer par ca) 
             header('HTTP/1.1 410 Gone');
         }
         $containModel->changeQuantityOfContain($id, $quantity);

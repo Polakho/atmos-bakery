@@ -5,12 +5,15 @@ namespace App\Controllers;
 use App\Classes\Controller;
 use App\Models\ProductModel;
 use App\Models\StoreModel;
+use Dotenv\Dotenv;
+
 
 class Admin extends Controller
 {
   public function __construct()
   {
     $this->frontController = new FrontController();
+    $this->dotenv  = Dotenv::createImmutable(__DIR__ . "/../../");
   }
 
   public function index()
