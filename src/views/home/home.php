@@ -23,6 +23,29 @@
       </a>
     </div>
   </section>
+  <div class="random-products">
+      <div class="presentation-3-produits">
+          <?php
+                  /** @var \App\Classes\Product $product */
+                  foreach ($products as $product) {
+                      ?>
+                      <div class="card">
+                          <div class="product-image">
+                              <img src="<?= $product->getImage() ?>" alt="Image Produit" style="width:200px; height:auto">
+                          </div>
+                          <div class="product-info">
+                              <h3><?= $product->getName() ?></h3>
+                              <p class="price"><?= $product->getPrice() ?>€</p>
+                              <p><?= $product->getDescription() ?></p>
+                          </div>
+                          <button class="add-product" data-product-id="<?= $product->getId() ?>">+</button>
+                      </div>
+                      <?php
+                  }
+                  ?>
+              </div>
+      </div>
+  </div>
   <section id="pageDown">
     <?php
     $this->frontController->footer();
