@@ -27,10 +27,6 @@
       <div class="admin-list-wrapper">
         <ul>
           <li><a href="/admin/store">Gestion de magasin</a></li>
-        </ul>
-      </div>
-      <div class="admin-list-wrapper" style="margin-top: 10px">
-        <ul>
           <li><a href="/admin/products">Gestion des produits</a></li>
           <li><a href="/admin/schedule">Gestion des horaires</a></li>
           <li><a href="/admin/users">Gestion des Utilisateurs</a></li>
