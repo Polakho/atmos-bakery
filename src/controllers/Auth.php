@@ -48,6 +48,8 @@ class Auth extends Controller
         header('Location: /');
     }
 
+
+
     /**
      * Register un nouveau user (et le connecte)
      */

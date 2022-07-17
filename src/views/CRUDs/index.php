@@ -39,6 +39,11 @@
           <li><a href="/admin/products">Gestion des produits</a></li>
         </ul>
       </div>
+        <div class="admin-list-wrapper" style="margin-top: 10px">
+            <ul>
+                <li><a href="/admin/schedule">Gestion des horaires</a></li>
+            </ul>
+        </div>
     </section>
   <?php
   }

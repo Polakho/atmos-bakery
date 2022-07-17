@@ -58,13 +58,12 @@ class Cart
     }
 
 
-    public function jsonify(){
+    public function jsonify()
+    {
         return  [
             "id" => $this->getId(),
             "user_id" => $this->getUserId(),
             "status" => $this->getStatus()
         ];
     }
-
-
 }

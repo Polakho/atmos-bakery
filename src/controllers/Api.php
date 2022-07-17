@@ -32,6 +32,7 @@ class Api extends Controller
     public function doc()
     {
         require_once "../public/swagger/index.html";
+        exit();
     }
 
     /**
@@ -578,6 +579,7 @@ class Api extends Controller
                 ];
             }
             echo json_encode(["list" => $containWithProduct]);
+            exit();
         }
     }
 
