@@ -29,6 +29,7 @@ class Checkout extends Controller
         if (isset($_SESSION['user'])) {
             $cart = $this->cartModel->getActiveCartForUser($_SESSION['user']['id']);
             $contains = $this->containModel->getContainsForCart($cart->getId());
+            $total = $this->cartModel->getTotalForCart($contains);
             if (isset(explode('=', $_SERVER['REQUEST_URI'])[1])) {
                 $status = explode('=', $_SERVER['REQUEST_URI'])[1];
             }
