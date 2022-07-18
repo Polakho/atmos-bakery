@@ -68,15 +68,16 @@
           <?php
           if (isset($store['image']) && $store['image'] !== '') {
             // var_dump(base64_encode($store['image']));
+            // var_dump($store['image'][0]['image']);
           ?>
-            <img src="data:image/jpg;base64,<?= base64_encode($store['image']) ?>" alt="<?= $store['name'] ?>">
+            <img src="<?= $store['image'] ?>" style="width: 100%" alt="<?= $store['name'] ?>">
           <?php
           }
           ?>
           <form action="/admin/updatingImage?id=<?= $store['id'] ?>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
               <label>Photo</label>
-              <input class="form-control" type="file" name="image" required>
+              <input class="form-control" type="text" name="image" placeholder="url de l'image..." required>
             </div>
             <button type="submit" class="btn btn-primary">Modifier la photo</button>
           </form>

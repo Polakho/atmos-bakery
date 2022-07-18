@@ -65,9 +65,9 @@
                         <td><img src="../../assets/img/Logos/logoAC2.png" alt="<?= $store['name'] ?>" class="store-img" style="width: 50px;"></td>
                       <?php
                       } else {
-                        // var_dump($store['image'][0]['image']);
+                        var_dump($store['image']);
                       ?>
-                        <td><img src="data:image/jpg;base64,<?= base64_encode($store['image']) ?>" alt="<?= $store['name'] ?>" class="store-img" style="width: 50px;"></td>
+                        <td><img src="<?= $store['image'] ?>" alt="<?= $store['name'] ?>" class="store-img" style="width: 50px;"></td>
                       <?php
                       }
                       ?>
