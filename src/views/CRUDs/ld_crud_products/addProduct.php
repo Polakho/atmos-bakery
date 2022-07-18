@@ -14,20 +14,23 @@
     if ($_SESSION['user']['roles'] !== 'ADMIN') {
     ?>
         <section>
-            <img class="store-logo" s3c="../../assets/img/Logos/logoAC2.png" alt="logo">
+            <img class="product-logo" s3c="../../assets/img/Logos/logoAC2.png" alt="logo">
             <h3>Il semblerait que vous vous soyez perdu...</h3>
             <a href="/">Retourner au site</a>
         </section>
     <?php
     } else {
+        $categories = $productModel->getCategories();
     ?>
-        <div class="store-page">
-            <div class="store-head-wrapper">
-                <a href="/admin"><img class="store-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo"></a>
-                <h1 class="store-title">GESTION DES PRODUITS</h1>
+        <div class="product-page">
+            <div class="product-head-wrapper">
+                <a href="/admin"><img class="product-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo"></a>
+                <a href="/admin/products">
+                    <h1 class="product-title">GESTION DE PRODUITS</h1>
+                </a>
             </div>
 
-            <div class="store-add-wrapper">
+            <div class="product-add-wrapper">
 
                 <form action="/admin/addingProduct" method="POST" enctype="multipart/form-data">
                     <div class="row">
@@ -41,22 +44,45 @@
                             <label>Prix</label>
                             <input class="form-control" type="text" name="price" required>
                         </div>
+
+                        <div class="col">
+                            <label>Poids</label>
+                            <input class="form-control" type="text" name="weight" required>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Categorie</label>
-                        <input class="form-control" type="text" name="category" required>
-                    </div>
 
+                    <div class="row">
+                        <div class="col">
+                            <label>URL Image</label>
+                            <input class="form-control" type="text" name="image" value="" required>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea class="form-control" type="text" rows="3" name="description" required></textarea>
+                        <input class="form-control" type="text" name="description" value="" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Photo du produit</label>
-                        <input type="file" class="form-control-file" name="image" id="image">
+                        <label>Composition</label>
+                        <textarea class="form-control" name="compo" rows="3"></textarea>
                     </div>
+
+                    <div class="form-group">
+                        <label>Catégorie</label>
+                        <select class="form-control" name="category">
+                            <?php
+                            foreach ($categories as $key => $category) {
+                            ?>
+                                <option value="<?= $key ?>"><?= $category ?></option>
+                            <?php
+                            }
+                            ?>
+
+                        </select>
+
+                    </div>
+
 
                     <button type="submit" class="btn btn-primary" value="Upload Image/Data">Ajouter la boutique</button>
                 </form>

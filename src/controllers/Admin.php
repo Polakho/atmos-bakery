@@ -29,10 +29,10 @@ class Admin extends Controller
     include '../src/views/CRUDs/index.php';
   }
 
-    private function params()
-    {
-        return (json_decode(file_get_contents('php://input'), true));
-    }
+  private function params()
+  {
+    return (json_decode(file_get_contents('php://input'), true));
+  }
 
   // PARTIE ANTOINE
   // PAGES
@@ -170,49 +170,50 @@ class Admin extends Controller
     <style>
       <?php include './css/global.css'; ?>
     </style>
-<?php
-      $id = explode('=', $_SERVER['REQUEST_URI'])[1];
-      $userModel = new UserModel();
-      $user = $userModel->getUsersById($id); //J'ai commenté cette ligne pr pvr test la partie products
+  <?php
+    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+    $userModel = new UserModel();
+    $user = $userModel->getUsersById($id); //J'ai commenté cette ligne pr pvr test la partie products
     // return $user;
     include '../src/views/CRUDs/trist_crud_users/updateUser.php';
   }
-//METHODE
-    public function deleteUser()
-    {
-        $id = explode('=', $_SERVER['REQUEST_URI'])[1];
-        if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id)) {
-            $user = new UserModel();
-            $user->deleteUser($id);
-            header('Location: /admin/users');
-        } else {
-            echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
-        }
+  //METHODE
+  public function deleteUser()
+  {
+    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id)) {
+      $user = new UserModel();
+      $user->deleteUser($id);
+      header('Location: /admin/users');
+    } else {
+      echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
     }
-    public function trashUser(){
-      ?>
-      <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-      <style>
-          <?php include './css/global.css'; ?>
-      </style>
-      <?php
-      $userModel = new UserModel();
-      $users = $userModel->getAllUsers();
-      // return $users;
-      include '../src/views/CRUDs/trist_crud_users/users.php';
+  }
+  public function trashUser()
+  {
+  ?>
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <style>
+      <?php include './css/global.css'; ?>
+    </style>
+  <?php
+    $userModel = new UserModel();
+    $users = $userModel->getAllUsers();
+    // return $users;
+    include '../src/views/CRUDs/trist_crud_users/users.php';
   }
 
-    public function updatingUser()
-    {
-        $userModel = new UserModel();
-        $id = explode('=', $_SERVER['REQUEST_URI'])[1];
-        if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
-            $userModel->updateUser($id, $_POST['mail'], $_POST['name'], $_POST['f_name'], $_POST['trash'], $_POST['roles']);
-            header('Location: /admin/users');
-        } else {
-            echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
-        }
+  public function updatingUser()
+  {
+    $userModel = new UserModel();
+    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
+      $userModel->updateUser($id, $_POST['mail'], $_POST['name'], $_POST['f_name'], $_POST['trash'], $_POST['roles']);
+      header('Location: /admin/users');
+    } else {
+      echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
     }
+  }
 
   //PARTIE LEANDRE
   public function products()
@@ -233,7 +234,9 @@ class Admin extends Controller
   ?>
     <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
     <style>
-      <?php include './css/global.css'; ?>
+      <?php
+      $productModel = new ProductModel();
+      include './css/global.css'; ?>
     </style>
   <?php
     include '../src/views/CRUDs/ld_crud_products/addProduct.php';
@@ -258,169 +261,105 @@ class Admin extends Controller
   public function addingProduct()
   {
     $productModel = new ProductModel();
-    if (isset($_POST['name']) && isset($_POST['price']) && isset($_POST['category_id'])) {
-      $newProductId = $productModel->saveProduct($_POST['name'], $_POST['price'], $_POST['categoryId'], $_POST['description'], $_POST['compo'], $_POST['image'], $_POST['weight']);
-      if (isset($_FILES['image'])) {
-        $file = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-        //$productModel->addImage($newProductId, $file); // A FAIRE DEM
-      }
-      header('Location: /admin/products');
+    if (isset($_POST['name']) && isset($_POST['price']) && isset($_POST['category'])) {
+      //$name, $price, $categoryId, $description = '', $compo = '', $image = '', $weight = ''
+      $newProductId = $productModel->addProduct($_POST['name'], $_POST['price'], $_POST['category'], $_POST['description'], $_POST['compo'], $_POST['image'], $_POST['weight']);
+      var_dump($newProductId);
+      // header('Location: /admin/products');
     } else {
       $errorMsg = "Veuillez remplir tous les champs.";
-      header('Location: /admin/addProduct');
+      // header('Location: /admin/addProduct');
     }
   }
 
   public function updatingProduct()
   {
-    $storeModel = new StoreModel();
+    $productModel = new ProductModel();
     $id = explode('=', $_SERVER['REQUEST_URI'])[1];
     if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
-      $storeModel->updateStore($id, $_POST['name'], $_POST['address'], $_POST['phone'], $_POST['description']);
+      //$id, $name, $price, $categoryId, $image, $description, $compo = '', $weight = 0
+      $productModel->updateProduct($id, $_POST['name'], $_POST['price'], $_POST['category'], $_POST['description'], $_POST['compo'], $_POST['weight']);
       header('Location: /admin/store');
     } else {
       echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
     }
   }
 
-  public function updatingProductImage()
+
+  // PARTIE ALEX LE GROS BG
+
+  public function schedule()
+  {
+    $storeModel = new StoreModel();
+    $stores = $storeModel->getAllStores();
+    $scheduleModel = new ScheduleModel();
+    // return $stores;
+    include '../src/views/CRUDs/alex_crud_schedule/schedule.php';
+  }
+
+  public function updateSchedule()
   {
     $id = explode('=', $_SERVER['REQUEST_URI'])[1];
-    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id) && isset($_FILES['image'])) {
-      $product = new ProductModel();
-      $target_dir =  __DIR__ . "/../components/uploads/";
-      $target_file = $target_dir . basename($_FILES["image"]["name"]);
-      var_dump($target_file);
-      $uploadOk = 1;
-      $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-      // Verifie les extensions multiples
-      if (isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["image"]["tmp_name"]);
-        if ($check !== false) {
-          echo "Le fichier est une image - " . $check["mime"] . ".";
-          $uploadOk = 1;
-        } else {
-          echo "Le fichier n'est pas une image";
-          $uploadOk = 0;
-        }
-      }
+    $storeModel = new StoreModel();
+    $store = $storeModel->getStoreById($id);
 
-      // Verifie si le fichier existe déjà
-      if (file_exists($target_file)) {
-        echo "Le fichier existe déjà sur le serveur";
-        $uploadOk = 0;
-      }
+    $scheduleModel = new ScheduleModel();
+    $schedules = $scheduleModel->getSchedulesByStoreId($id);
 
-      // Limite la taille de l'img
-      if ($_FILES["image"]["size"] > 500000) {
-        echo "Votre image est trop volumineuse.";
-        $uploadOk = 0;
-      }
+    include '../src/views/CRUDs/alex_crud_schedule/updateSchedule.php';
+  }
 
-      // Limite les extensions
-      if (
-        $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif"
-      ) {
-        echo "Seuls les JPG, JPEG, PNG & GIF sont autorisés.";
-        $uploadOk = 0;
-      }
+  public function updatingSchedules()
+  {
+    $params = $this->params();
 
-      // Gestion des erreurs
-      if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-      } else {
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-          echo "L'image " . htmlspecialchars(basename($_FILES["image"]["name"])) . " a été upload.";
-        } else {
-          echo "Une erreur est survenue lors de l'upload.";
-        }
-      }
+    $session = $params["session"];
+    if (isset($session['user']) && $session['user']['roles'] === 'ADMIN') {
 
-      // $file = $_FILES['image']['tmp_name'];
-      // $image = file_get_contents($file);
-      $product->updateImage($id, $target_file);
-      // header('Location: /admin/products');
+      header('Content-Type: application/json');
+      header("Access-Control-Allow-Origin: *");
+
+      $semaine = $params['semaine'];
+
+      $storeId = $params['storeId'];
+
+      $scheduleModel = new scheduleModel();
+
+      $scheduleModel->updateSchedules($semaine, $storeId);
+      exit();
+    } else {
+      echo json_encode('Vous n\'avez pas les droits nécessaires pour effectuer cette action.');
+    }
+  }
+
+  public function addSchedule()
+  {
+
+    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+
+    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id)) {
+      $scheduleModel = new ScheduleModel();
+      $scheduleModel->createScheduleForStore($id);
+      header('Location: /admin/updateSchedule?updateid=' . $id);
     } else {
       echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
     }
   }
 
-    // PARTIE ALEX LE GROS BG
+  public function deleteSchedule()
+  {
 
-    public function schedule()
-    {
-        $storeModel = new StoreModel();
-        $stores = $storeModel->getAllStores();
-        $scheduleModel = new ScheduleModel();
-        // return $stores;
-        include '../src/views/CRUDs/alex_crud_schedule/schedule.php';
+    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+
+    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id)) {
+      $scheduleModel = new ScheduleModel();
+      $scheduleModel->deleteScheduleForStore($id);
+      header('Location: /admin/schedule');
+    } else {
+      echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
     }
-
-    public function updateSchedule()
-    {
-        $id = explode('=', $_SERVER['REQUEST_URI'])[1];
-
-        $storeModel = new StoreModel();
-        $store = $storeModel->getStoreById($id);
-
-        $scheduleModel = new ScheduleModel();
-        $schedules = $scheduleModel->getSchedulesByStoreId($id);
-
-        include '../src/views/CRUDs/alex_crud_schedule/updateSchedule.php';
-    }
-
-    public function updatingSchedules()
-    {
-        $params = $this->params();
-
-        $session = $params["session"];
-        if (isset($session['user']) && $session['user']['roles'] === 'ADMIN') {
-
-            header('Content-Type: application/json');
-            header("Access-Control-Allow-Origin: *");
-
-            $semaine = $params['semaine'];
-
-            $storeId = $params['storeId'];
-
-            $scheduleModel = new scheduleModel();
-
-            $scheduleModel->updateSchedules($semaine, $storeId);
-            exit();
-        } else {
-            echo json_encode('Vous n\'avez pas les droits nécessaires pour effectuer cette action.');
-        }
-    }
-
-    public function addSchedule()
-    {
-
-        $id = explode('=', $_SERVER['REQUEST_URI'])[1];
-
-        if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id)) {
-            $scheduleModel = new ScheduleModel();
-            $scheduleModel->createScheduleForStore($id);
-            header('Location: /admin/updateSchedule?updateid='. $id);
-        } else {
-            echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
-        }
-    }
-
-    public function deleteSchedule()
-    {
-
-        $id = explode('=', $_SERVER['REQUEST_URI'])[1];
-
-        if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id)) {
-            $scheduleModel = new ScheduleModel();
-            $scheduleModel->deleteScheduleForStore($id);
-            header('Location: /admin/schedule');
-        } else {
-            echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
-        }
-    }
-// FIN PARTIE ALEX LE GROS BG
+  }
+  // FIN PARTIE ALEX LE GROS BG
 
 }

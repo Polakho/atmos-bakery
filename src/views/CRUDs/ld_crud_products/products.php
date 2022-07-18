@@ -14,31 +14,31 @@
     if ($_SESSION['user']['roles'] !== 'ADMIN') {
     ?>
         <section>
-            <img class="store-logo" s3c="../../assets/img/Logos/logoAC2.png" alt="logo">
+            <img class="product-logo" s3c="../../assets/img/Logos/logoAC2.png" alt="logo">
             <h3>Il semblerait que vous vous soyez perdu...</h3>
             <a href="/">Retourner au site</a>
         </section>
     <?php
     } else {
     ?>
-        <div class="store-page">
-            <div class="store-head-wrapper">
-                <a href="/admin"><img class="store-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo"></a>
-                <h1 class="store-title">GESTION DE PRODUITS</h1>
+        <div class="product-page">
+            <div class="product-head-wrapper">
+                <a href="/admin"><img class="product-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo"></a>
+                <h1 class="product-title">GESTION DES PRODUITS</h1>
             </div>
 
-            <div class="store-add-wrapper">
+            <div class="product-add-wrapper">
                 <h3>Liste des produits :</h3>
 
                 <button class="btn btn-primary crud-btn"><a href="/admin/addProduct" class="text-crud">Ajouter un produit</a></button>
                 <div class="overflowauto">
                     <?php
-                    // var_dump($stores);
+                    // var_dump($products);
                     if (isset($products)) {
                         $categories = $productModel->getCategories();
                     ?>
                         <form method="POST" enctype="multipart/form-data">
-                            <table class="table store-crud-table">
+                            <table class="table product-crud-table">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
@@ -68,12 +68,12 @@
                                             <?php
                                             if (!isset($product['image']) || $product['image'] == null) {
                                             ?>
-                                                <td><img src="../../assets/img/Logos/logoAC2.png" alt="<?= $product['name'] ?>" class="store-img" style="width: 50px;"></td>
+                                                <td><img src="../../assets/img/Logos/logoAC2.png" alt="<?= $product['name'] ?>" class="product-img" style="width: 50px;"></td>
                                             <?php
                                             } else {
-                                                // var_dump($store['image'][0]['image']);
+                                                // var_dump($product['image'][0]['image']);
                                             ?>
-                                                <td><img src="data:image/jpg;base64,<?= base64_encode($product['image']) ?>" alt="<?= $product['name'] ?>" class="store-img" style="width: 50px;"></td>
+                                                <td><img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>" class="product-img" style="width: 50px;"></td>
                                             <?php
                                             }
                                             ?>
