@@ -36,11 +36,13 @@
                                 <img src="<?= $product->getImage() ?>" alt="Image Produit" style="width:200px; height:auto">
                             </div>
                             <div class="product-info">
-                                <h3><?= $product->getName() ?></h3>
-                                <p class="price"><?= $product->getPrice() ?>€</p>
-                                <p><?= $product->getDescription() ?></p>
+                                <div class="head-product-text">
+                                <h3 class="product-title"><?= $product->getName() ?></h3>
+                                <p class="product-card-price"><?= $product->getPrice() ?>€</p>
+                                </div>
+                                <p class="product-descrition"><?= $product->getDescription() ?></p>
                             </div>
-                            <button class="add-product" data-product-id="<?= $product->getId() ?>">+</button>
+                            <button class="add-product" data-product-id="<?= $product->getId() ?>">Ajouter au panier</button>
                         </div>
                         <?php
                     }

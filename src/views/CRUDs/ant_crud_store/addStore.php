@@ -55,10 +55,10 @@
 
           <div class="form-group">
             <label>Photo de la boutique</label>
-            <input type="file" class="form-control-file" name="image" id="image">
+            <input type="text" placeholder="url de l'image..." class="form-control-file" name="image" id="image">
           </div>
 
-          <button type="submit" class="btn btn-primary" value="Upload Image/Data">Ajouter la boutique</button>
+          <button type="submit" class="btn btn-primary">Ajouter la boutique</button>
         </form>
 
       </div>
