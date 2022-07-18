@@ -83,8 +83,8 @@ class Admin extends Controller
     $storeModel = new StoreModel();
     if (isset($_POST['name']) && isset($_POST['phone']) && isset($_POST['address']) && isset($_POST['description'])) {
       $newStoreId = $storeModel->addStore($_POST['name'], $_POST['phone'], $_POST['address'], $_POST['description']);
-      if (isset($_FILES['image'])) {
-        $file = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+      if (isset($_POST['image'])) {
+        $file = $_POST['image'];
         $storeModel->addImage($newStoreId, $file);
       }
       header('Location: /admin/store');
@@ -99,7 +99,7 @@ class Admin extends Controller
     $storeModel = new StoreModel();
     $id = explode('=', $_SERVER['REQUEST_URI'])[1];
     if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
-      $storeModel->updateStore($id, $_POST['name'], $_POST['address'], $_POST['phone'], $_POST['description']);
+      $storeModel->updateStore($id, $_POST['name'], $_POST['phone'], $_POST['address'], $_POST['description']);
       header('Location: /admin/store');
     } else {
       echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';

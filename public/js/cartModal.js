@@ -79,9 +79,11 @@ function showCart() {
           // Wrapper par item
           let itemContainer = document.createElement("div");
           itemContainer.classList.add("item-container");
+          let horizentalSpan = document.createElement("span");
+          horizentalSpan.classList.add("horizental");
+          itemContainer.appendChild(horizentalSpan);
 
           let btn = document.createElement("button");
-          console.log(btn)
           btn.classList.add("delete-contain");
           btn.setAttribute("data-id", contain.id);
           btn.innerHTML = "Supprimer";
@@ -133,8 +135,6 @@ function showCart() {
           input.onchange = function () {
             let quantityChanged = input.value;
 
-            console.log(contain.quantity + ' | ' + quantityChanged);
-
             if (quantityChanged !== contain.quantity) {
               btnQuantity.onclick = function () {
                 let post = {
@@ -156,6 +156,8 @@ function showCart() {
                     notifQuantityChanged.classList.remove("show");
                   }, 3000);
                   btnQuantity.removeAttribute("onclick");
+                  let itemContainer = document.createElement("div");
+                  itemContainer.removeChild(itemContainer[0])
                   showCart();
                 }).catch((error) => {
                   console.log(error);
@@ -167,6 +169,7 @@ function showCart() {
           let btnQuantity = document.createElement("button");
           btnQuantity.classList.add("change-quantity");
           btnQuantity.innerHTML = "Changer";
+          btnQuantity.classList.add("btn-warning")
 
           // Ajout au wrapper
           let itemContainerHead = document.createElement("div");
@@ -190,6 +193,7 @@ function showCart() {
           itemList.appendChild(itemContainer);
           modalBody.appendChild(itemList);
         });
+
 
         p2.innerHTML = `Total : ${totalPrice}€`;
 

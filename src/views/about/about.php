@@ -19,7 +19,17 @@
 
         <section class="about-item">
           <div class="picture-wrapper about-item-wrapper">
-            IMAGE
+            <?php
+            if (isset($store['image'])) {
+              ?>
+              <img src="<?= $store['image'] ?>" alt="<?= $store['name'] ?>">
+              <?php
+            } else {
+            ?>
+              <img src="" alt="<?= $store['name'] ?>" class="store-image acLogo">
+            <?php
+            }
+            ?>
           </div>
 
           <div class="info-wrapper about-item-wrapper">

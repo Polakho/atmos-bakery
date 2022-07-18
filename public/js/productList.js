@@ -102,6 +102,12 @@ function clearBox(div) {
   visibleBtnQuantity();
 };
 
+let btnCancel = document.querySelector(".cancel");
+
+btnCancel.addEventListener("click", function(){
+  showModal();
+  clearBox(modalHeader);
+})
 
 let AllBtnAdd = document.querySelectorAll(".add-product");
 

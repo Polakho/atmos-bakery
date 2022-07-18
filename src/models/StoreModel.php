@@ -81,11 +81,11 @@ class StoreModel
     $sql = "UPDATE store SET name = :name, phone = :phone, address = :address, description = :description WHERE id = :id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
-      "id" => $id,
       "name" => $name,
       "phone" => $phone,
       "address" => $address,
       "description" => $description,
+      "id" => $id,
     ]);
   }
 
