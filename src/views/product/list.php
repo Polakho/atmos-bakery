@@ -2,8 +2,6 @@
 <html lang="en">
 
 <script>
-    //Penser à changer l'url de l'api selon le vhost
-    //Bien mettre un / après le api
     let baseUrl = "http://93.4.7.36:8455/api/"
 </script>
 
@@ -84,4 +82,5 @@
     </div>
 </body>
 <script defer><?php require_once('./js/productList.js'); ?></script>
+
 </html>
