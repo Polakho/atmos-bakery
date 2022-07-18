@@ -58,12 +58,8 @@ function showCart() {
     };
 
     fetch(baseUrl + "getContainsForCart", {
-      method: 'post',
+      method: 'POST',
       body: JSON.stringify(post),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      }
     }).then((response) => {
       return response.json();
     }).then((res) => {
@@ -75,22 +71,23 @@ function showCart() {
           itemContainer.classList.add("item-container");
 
           let btn = document.createElement("button");
+          console.log(btn)
           btn.classList.add("delete-contain");
           btn.setAttribute("data-id", contain.id);
           btn.innerHTML = "Supprimer";
-          btn.onClick = function () {
+          btn.addEventListener("click", function () {
             let post = {
               contain_id: btn.getAttribute("data-id")
             };
             console.log(post);
 
             fetch(baseUrl + "deleteContain", {
-              method: 'post',
+              method: 'POST',
               body: JSON.stringify(post),
-              headers: {
+              /*headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-              }
+              }*/
             }).then((response) => {
               return response.json();
             }).then((res) => {
@@ -103,7 +100,7 @@ function showCart() {
             }).catch((error) => {
               console.log(error);
             });
-          };
+          });
 
           let h3 = document.createElement("h3");
           h3.innerHTML = contain.product.name;

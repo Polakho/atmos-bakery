@@ -4,14 +4,13 @@
 <script>
     //Penser à changer l'url de l'api selon le vhost
     //Bien mettre un / après le api
-    let baseUrl = "http://atmosdev.com/api/"
+    let baseUrl = "http://93.4.7.36:8455/api/"
 </script>
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="../../src/js/productList.js"></script>
     <title>Atmos Bakery</title>
 </head>
 

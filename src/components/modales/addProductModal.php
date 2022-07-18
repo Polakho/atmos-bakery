@@ -10,9 +10,9 @@
         <div class="quantity">
             Quantité :
             <div>
-                <button id="btn btn-less">-</button>
+                <button class="btn" id="btn-less">-</button>
                 <p id="product-quantity">1</p>
-                <button id="btn btn-more">+</button>
+                <button class="btn" id="btn-more">+</button>
             </div>
         </div>
         <button class="add-product-action">Ajouter au panier</button>

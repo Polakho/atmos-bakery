@@ -559,9 +559,9 @@ class Api extends Controller
 
         $containModel = new containModel();
         $productModel = new productModel();
-
-        $cartId = htmlspecialchars($params['cart_id']);
-
+        if (isset($params['cart_id'])) {
+            $cartId = htmlspecialchars($params['cart_id']);
+        }
         if (isset($cartId)) {
             $contains = $containModel->getContainsForCart($cartId);
 
@@ -681,9 +681,15 @@ class Api extends Controller
 
         $containModel = new containModel();
 
-        $containId = htmlspecialchars($params['contain_id']);
+        if (isset($params['contain_id'])){
+            $containId = htmlspecialchars($params['contain_id']);
+        }
 
-        $cartId = htmlspecialchars($params['cart_id']);
+        if (isset($params['cart_id'])){
+            $cartId = htmlspecialchars($params['cart_id']);
+        }
+
+
 
         if (isset($containId) && isset($cartId)) {
             $containModel->deleteContain($containId);
