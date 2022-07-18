@@ -23,8 +23,7 @@
             <div class="active-cart">
                 <?php
                 foreach ($contains as $contain) {
-                    $product = $this->productModel->getProductById($contain['id']);
-
+                    $product = $this->productModel->getProductById($contain['product_id']);
                 ?> <div class="product <?= $product->getId() ?>">
                         <img src="<?= $product->getImage() ?>" alt="image product <?= $product->getId() ?>">
                         <p><?= $product->getName() ?></p>

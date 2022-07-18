@@ -691,4 +691,25 @@ class Api extends Controller
             echo json_encode(["message" => "Le produit a été supprimé du panier"]);
         }
     }
+
+    public function getUserById()
+    {
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+
+        $params = $this->params();
+
+        $userModel = new UserModel;
+
+        $userId = htmlspecialchars($params['user_id']);
+
+        if (isset($userId)) {
+            $user = $userModel->getUserById($userId);
+
+            echo json_encode(["user" => $user->jsonify()]);
+            exit();
+        } else {
+            echo json_encode(["message" => "user_id non spécifié"]);
+        }
+    }
 }

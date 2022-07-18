@@ -178,8 +178,8 @@ nav {
   top: 2rem;
 }
 
-.blur {
-  z-index: 0;
+/* .blur {
+  z-index: 100;
   position: fixed;
   visibility: hidden;
   top: 0;
@@ -192,7 +192,7 @@ nav {
   transition: all 2s;
 
   opacity: 1;
-}
+} */
 
 .displayVisible {
   visibility: visible;

@@ -62,7 +62,8 @@ class Checkout extends Controller
         $verif = $containModel->verifyCartUserByContainId($id);
         if ($verif === false) {
             $errorMsg = 'Vous n\'etes pas autorisés à modifier le panier de quelqu\'un d\'autre.';
-            header('Location: /checkout', true, 999);
+            header('Location: /checkout'); //response code 401 pour dire que l'accès n'est pas autorisé (vu que header et pas de include, obligé de passer par ca) 
+            header('HTTP/1.1 410 Gone');
         }
         $containModel->deleteContain($id);
         header('Location: /checkout');
