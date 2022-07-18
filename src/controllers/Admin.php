@@ -159,7 +159,7 @@ class Admin extends Controller
       <?php include './css/global.css'; ?>
     </style>
   <?php
-    include '../src/views/CRUDs/trist_crud_user/newUser.php';
+    include '../src/views/CRUDs/trist_crud_users/newUser.php';
   }
 
 
@@ -214,6 +214,15 @@ class Admin extends Controller
         }
     }
 
+    public function createUser(){
+        $userModel = new UserModel();
+        if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
+            $userModel->createUser($_POST['name'], $_POST['f_name'],$_POST['mail'], $_POST['password'], $_POST['roles']);
+            header('Location: /admin/users');
+        } else {
+            echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
+        }
+    }
   //PARTIE LEANDRE
   public function products()
   {

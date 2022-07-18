@@ -45,17 +45,20 @@ if ($_SESSION['user']['roles'] !== 'ADMIN') {
                             <input class="form-control" type="email" name="mail" value="<?= $user['mail']; ?>" required>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col,form-control">
                         <label>Actif ?</label>
-                        <select class="form-control" name="trash">
+                        <select class="form-control" style="text-align: center;margin-bottom: 10px" name="trash">
                             <option value="0">Activer</option>
                             <option value="1">Desactiver</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col,form-control">
                         <label>Role</label>
-                            <input class="form-control" type="text" name="roles" value="<?= $user['roles']; ?>" required>
+                        <select class="form-control" style="text-align: center;margin-bottom: 10px" name="roles">
+                            <option value="CLIENT">Client</option>
+                            <option value="ADMIN">Admin</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Modifier les informations</button>
                 </form>

@@ -23,13 +23,13 @@ if ($_SESSION['user']['roles'] !== 'ADMIN') {
 <div class="user-page">
     <div class="user-head-wrapper">
         <img class="user-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo">
-        <h1 class="user-title">GESTION DES UTILISATEURS</h1>
+        <a href="/admin"><h1 class="user-title">GESTION DES UTILISATEURS</h1></a>
     </div>
 
     <div class="user-add-wrapper">
         <h3>Liste des Utilisateurs :</h3>
 
-        <button class="btn btn-primary crud-btn"><a href="/admin/addUser" class="text-crud">Ajouter un Utilisateur</a>
+        <button class="btn btn-primary crud-btn"><a href="/admin/newuser" class="text-crud">Ajouter un Utilisateur</a>
         </button>
         <div class="overflowauto">
             <?php

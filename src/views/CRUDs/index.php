@@ -23,7 +23,7 @@
   ?>
     <section>
       <img class="header-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo">
-      <h1>PANEL ADMIN</h1>
+        <a href="/"><h1>PANEL ADMIN</h1></a>
       <div class="admin-list-wrapper">
         <ul class="list-admin">
           <li class="list-admin-item"><a href="/admin/store">Gestion de magasin</a></li>
