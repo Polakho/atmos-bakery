@@ -378,7 +378,7 @@ class Api extends Controller
         $userId = htmlspecialchars($params['user_id']);
         if (isset($userId)) {
             $cart = $cartModel->getActiveCartForUser($userId);
-            if ($cart == false){
+            if ($cart == false) {
                 $cart = $cartModel->createActiveCart($userId);
             }
             echo json_encode(["cart" => $cart->jsonify()]);
@@ -721,7 +721,7 @@ class Api extends Controller
                 $contains = $this->containModel->getContainsForCart($cart->getId());
 
                 $stripe = new \Stripe\StripeClient(
-                    'sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU'
+                    'sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul'
                 );
 
 
@@ -747,7 +747,6 @@ class Api extends Controller
                 ]);
                 echo json_encode(["url" => $session['url']]);
             }
-
         } catch (\Stripe\Exception\CardException $e) {
             // Since it's a decline, \Stripe\Exception\CardException will be caught
             echo 'Status is:' . $e->getHttpStatus() . '\n';
@@ -780,4 +779,3 @@ class Api extends Controller
         }
     }
 }
-
