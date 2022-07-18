@@ -77,7 +77,7 @@ btnLess.addEventListener("click", function() {
   }
 });
 
-// GESTION DE LA MODALE PANIER
+// GESTION DE LA Ajout produit
 let modalState = false;
 let modal = document.querySelector('.modal-add-product');
 let modalHeader = document.querySelector('.modal-add-product .modal-header');
@@ -115,10 +115,10 @@ AllBtnAdd.forEach(function(btn, index) {
     fetch(baseUrl + "getProductById", {
       method: 'post',
       body: JSON.stringify(post),
-      headers: {
+     /* headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-      }
+      }*/
     }).then((response) => {
       return response.json();
     }).then((res) => {
@@ -146,10 +146,10 @@ btnAddProduct.addEventListener("click", function() {
   fetch(baseUrl + "addToCart", {
     method: 'post',
     body: JSON.stringify(post),
-    headers: {
+    /*headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-    }
+    }*/
   }).then((response) => {
     return response.json();
   }).then((res) => {

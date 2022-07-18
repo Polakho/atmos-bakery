@@ -70,7 +70,7 @@ class Admin extends Controller
     </style>
   <?php
     $id = explode('=', $_SERVER['REQUEST_URI'])[1];
-    echo $id;
+    // echo $id;
     $storeModel = new StoreModel();
     $store = $storeModel->getStoreById($id);
     // var_dump($store);
@@ -122,9 +122,9 @@ class Admin extends Controller
   public function updatingImage()
   {
     $id = explode('=', $_SERVER['REQUEST_URI'])[1];
-    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id) && isset($_FILES['image'])) {
+    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id) && isset($_POST['image'])) {
       $store = new StoreModel();
-      $img = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+      $img = $_POST['image'];
       $store->updateImage($id, $img);
       header('Location: /admin/store');
     } else {
@@ -159,7 +159,7 @@ class Admin extends Controller
       <?php include './css/global.css'; ?>
     </style>
   <?php
-    include '../src/views/CRUDs/trist_crud_user/newUser.php';
+    include '../src/views/CRUDs/trist_crud_users/newUser.php';
   }
 
 
@@ -215,6 +215,15 @@ class Admin extends Controller
     }
   }
 
+    public function createUser(){
+        $userModel = new UserModel();
+        if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
+            $userModel->createUser($_POST['name'], $_POST['f_name'],$_POST['mail'], $_POST['password'], $_POST['roles']);
+            header('Location: /admin/users');
+        } else {
+            echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
+        }
+    }
   //PARTIE LEANDRE
   public function products()
   {

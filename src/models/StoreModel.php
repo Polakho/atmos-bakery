@@ -43,11 +43,10 @@ class StoreModel
       "id" => $id
     ]);
     $store = $stmt->fetch();
-    $rs = $this->getImageBase64($id);
+    $rs = $this->getImage($id);
     if ($rs) {
       $store['image'] = $rs;
     }
-    // $store['image'] = $this->getImage($store['id']);
     return $store;
   }
 
@@ -144,7 +143,13 @@ class StoreModel
       "store_id" => $id,
     ]);
     $images = $stmt->fetchAll();
-    return $images;
+    // var_dump($images[0][0]);
+    if (isset($images[0][0])) {
+      return $images;
+    } else {
+      return false;
+    }
+    // return strval($images[0][0]);
   }
 
   // fetch a base 64 image from the database
