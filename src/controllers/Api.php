@@ -745,7 +745,7 @@ class Api extends Controller
                     'line_items' => $line_items_array,
                     'mode' => 'payment',
                 ]);
-                echo $session['url'];
+                echo json_encode(["url" => $session['url']]);
             }
 
         } catch (\Stripe\Exception\CardException $e) {
