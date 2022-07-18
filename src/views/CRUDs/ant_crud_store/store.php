@@ -65,7 +65,7 @@
                         <td><img src="../../assets/img/Logos/logoAC2.png" alt="<?= $store['name'] ?>" class="store-img" style="width: 50px;"></td>
                       <?php
                       } else {
-                        var_dump($store['image']);
+                        // var_dump($store['image']);
                       ?>
                         <td><img src="<?= $store['image'] ?>" alt="<?= $store['name'] ?>" class="store-img" style="width: 50px;"></td>
                       <?php
