@@ -24,7 +24,7 @@
         <?php if (isset($_SESSION['user']['roles']) && $_SESSION['user']['roles'] === 'ADMIN') { ?>
           <a href="/admin" target="_blank">Admin panel</a>
         <?php } ?>
-        <a href="/auth/logout">Déconnection</a>
+        <a href="/auth/logout">Déconnexion</a>
         <?php if ($_SERVER['REQUEST_URI'] <> '/checkout') { ?>
           <button class="show-cart" onClick="showCart()"><img class="cart-icone" src="../../assets/img/cart/cart.png" alt="icone panier"></button>
         <?php
