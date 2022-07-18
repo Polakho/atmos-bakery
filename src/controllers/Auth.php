@@ -44,6 +44,9 @@ class Auth extends Controller
      */
     public function logout()
     {
+        if (isset($_SESSION['checkout_session'])) {
+            unset($_SESSION['checkout_session']);
+        }
         unset($_SESSION['user']);
         header('Location: /');
     }

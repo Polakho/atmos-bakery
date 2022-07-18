@@ -173,7 +173,7 @@ class Admin extends Controller
   <?php
     $id = explode('=', $_SERVER['REQUEST_URI'])[1];
     $userModel = new UserModel();
-    $user = $userModel->getUsersById($id); //J'ai commenté cette ligne pr pvr test la partie products
+    $user = $userModel->getUsersById($id);
     // return $user;
     include '../src/views/CRUDs/trist_crud_users/updateUser.php';
   }
@@ -274,9 +274,9 @@ class Admin extends Controller
       $product = new ProductModel();
       $verif = $product->deleteProductById($id);
       if ($verif === true) {
-        // header('Location: /admin/products?status=success');
+        header('Location: /admin/products?status=success');
       } else {
-        // header('Location: /admin/products?status=failed');
+        header('Location: /admin/products?status=failed');
       }
     } else {
       echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';

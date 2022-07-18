@@ -365,7 +365,7 @@ class Stripe extends Controller
                 $checkout_session,
                 []
             );
-            header("Refresh:5; Url=/");
+            header("Refresh:4; Url=/checkout");
             include('../src/views/payment/failed.php');
         } else {
             header('Location: /');

@@ -16,10 +16,11 @@
         ?>
         <section>
             <div class="payment-success">
-                <h3>Atmos Corporation vous remercie pour votre commande.</h3>
-                <h4>Transaction numéro <?= $checkout_session; ?></h4>
+                <img src="../../assets/img/payment/valid-transaction.png" alt="Icon valide">
+                <h3 class="valid-transaction">Merci pour votre commande.</h3>
+                <p class="valid-transaction">Vous recevrez un mail d'ici peu avec le récapitulatif de la commade.</p>
+                <p class="valid-transaction">Transaction numéro <?= $checkout_session; ?></h4>
             </div>
-
         </section>
 
 
