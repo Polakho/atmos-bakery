@@ -9,44 +9,55 @@
 </head>
 
 <body>
-    <section class="main">
         <?php
         $this->frontController->header();
         ?>
-        <section class="main-section-background">
-            <?php
-            if (isset($status)) {
-                if ($status === 'unauthorized') { // Si verif cartId n'appartient pas à userId
-                    echo "<div class='alert'>Vous ne pouvez pas modifier le panier de quelqu'un d'autre.</div>";
-                }
-            }
-            ?>
-            <div class="active-cart">
+        <section class="checkout-section">
+            <div class="checkout-div">
                 <?php
-                foreach ($contains as $contain) {
-                    $product = $this->productModel->getProductById($contain['product_id']);
-                ?> <div class="product <?= $product->getId() ?>">
-                        <img src="<?= $product->getImage() ?>" alt="image product <?= $product->getId() ?>">
-                        <p><?= $product->getName() ?></p>
-                        <label for="quantity">Quantité:</label>
-                        <input type="text" value="<?= $contain['quantity'] ?>" name="quantity" id="quantity-<?= $contain['id'] ?>" onchange="changeInputValue(<?= $contain['id'] ?>)" />
-                        <button class="btn-update"><a href="" id="change-quantity-<?= $contain['id'] ?>" class="text-crud">Modifier</a></button>
-                        <button class="btn-delete"><a href="/checkout/deleteContain?deleteid=<?= $contain['id'] ?>" class="text-crud">Supprimer</a></button>
-                    </div>
-                <?php
+                if (isset($status)) {
+                    if ($status === 'unauthorized') { // Si verif cartId n'appartient pas à userId
+                        echo "<div class='alert'>Vous ne pouvez pas modifier le panier de quelqu'un d'autre.</div>";
+                    }
                 }
                 ?>
-
+                <div class="active-cart">
+                    <?php
+                    foreach ($contains as $contain) {
+                        $product = $this->productModel->getProductById($contain['product_id']);
+                        ?> <div class="product <?= $product->getId() ?>">
+                            <p><?= $product->getName() ?></p>
+                            <div class="product-actions">
+                                <div class="product-quantity">
+                                    <div>
+                                        <label for="quantity">Quantité:</label>
+                                        <input type="text" value="<?= $contain['quantity'] ?>" name="quantity" id="quantity-<?= $contain['id'] ?>" onchange="changeInputValue(<?= $contain['id'] ?>)" />
+                                    </div>
+                                    <button class="btn-update"><a href="" id="change-quantity-<?= $contain['id'] ?>" class="text-crud">Modifier</a></button>
+                                </div>
+                                <div class="product-delete">
+                                    <button class="btn-delete"><a href="/checkout/deleteContain?deleteid=<?= $contain['id'] ?>" class="text-crud">Supprimer</a></button>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <span class="horizental"></span>
+                    <div class="checkout-total">
+                        Total : <?= $total ?> €
+                    </div>
+                </div>
+                <div class="checkout">
+                    <a href="/stripe/payment">Continuer vers le paiement</a>
+                </div>
             </div>
-            <div class="checkout">
-                <a href="/stripe/payment">Continuer vers le paiement</a>
-            </div>
+            <?php
+            $this->frontController->footer();
+            ?>
         </section>
-        <?php
-        $this->frontController->footer();
-        ?>
 
-    </section>
+
     <script>
         const baseHref = "/checkout/updateContain?containid=##&quantity="
 
