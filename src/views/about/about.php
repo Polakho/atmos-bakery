@@ -20,13 +20,13 @@
         <section class="about-item">
           <div class="picture-wrapper about-item-wrapper">
             <?php
-            if (isset($store['image'])) {
+            if (isset($store['image']) && $store['image'] != '') {
               ?>
               <img src="<?= $store['image'] ?>" class="about-store-image" alt="<?= $store['name'] ?>">
               <?php
             } else {
             ?>
-              <img src="assets/img/Logos/logoAC2.png" alt="<?= $store['name'] ?>"  class="about-store-image">
+              <img src="../../../assets/img/Logos/logoAC2.png" alt="<?= $store['name'] ?>"  class="about-store-image le-logo">
             <?php
             }
             ?>
