@@ -378,6 +378,9 @@ class Api extends Controller
         $userId = htmlspecialchars($params['user_id']);
         if (isset($userId)) {
             $cart = $cartModel->getActiveCartForUser($userId);
+            if ($cart == false){
+                $cart = $cartModel->createActiveCart($userId);
+            }
             echo json_encode(["cart" => $cart->jsonify()]);
             exit();
         }
