@@ -317,11 +317,25 @@ class Stripe extends Controller
 
     public function success()
     {
-        # code...
+        $stripe = new \Stripe\StripeClient(
+            'sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU'
+        );
+        $stripe->checkout->sessions->retrieve( // Trouver le moyen de recup la session terminee par lutilisateur
+            '',
+            []
+        );
+        include('');
     }
+
 
     public function cancel()
     {
-        # code...
+        $stripe = new \Stripe\StripeClient(
+            'sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU'
+        );
+        $stripe->checkout->sessions->retrieve(
+            '',
+            []
+        );
     }
 }

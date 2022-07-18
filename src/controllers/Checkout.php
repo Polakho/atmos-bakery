@@ -29,6 +29,9 @@ class Checkout extends Controller
         if (isset($_SESSION['user'])) {
             $cart = $this->cartModel->getActiveCartForUser($_SESSION['user']['id']);
             $contains = $this->containModel->getContainsForCart($cart->getId());
+            if (isset(explode('=', $_SERVER['REQUEST_URI'])[1])) {
+                $status = explode('=', $_SERVER['REQUEST_URI'])[1];
+            }
             include '../src/views/checkout/checkout.php';
         } else {
             $errorMsg = "Log in first, checkout later... ;)";
@@ -44,13 +47,12 @@ class Checkout extends Controller
         $id = explode('&', $id)[0];
         $quantity = explode('=', $_SERVER['REQUEST_URI'])[2];
         $verif = $containModel->verifyCartUserByContainId($id);
-        var_dump($verif);
         if ($verif === false) {
-            header('Location: /checkout'); //response code 401 pour dire que l'accès n'est pas autorisé (vu que header et pas de include, obligé de passer par ca) 
-            header('HTTP/1.1 410 Gone');
+            header('Location: /checkout?status=unauthorized'); //response code 401 pour dire que l'accès n'est pas autorisé (vu que header et pas de include, obligé de passer par ca) 
+        } else {
+            $containModel->changeQuantityOfContain($id, $quantity);
+            header('Location: /checkout');
         }
-        $containModel->changeQuantityOfContain($id, $quantity);
-        header('Location: /checkout');
     }
 
     public function deleteContain()
@@ -58,13 +60,12 @@ class Checkout extends Controller
         $containModel = new ContainModel();
         $id = explode('=', $_SERVER['REQUEST_URI'])[1];
         $id = explode('&', $id)[0];
-        var_dump($id);
         $verif = $containModel->verifyCartUserByContainId($id);
         if ($verif === false) {
-            $errorMsg = 'Vous n\'etes pas autorisés à modifier le panier de quelqu\'un d\'autre.';
-            header('Location: /checkout', true, 999);
+            header('Location: /checkout?status=unauthorized'); //response code 401 pour dire que l'accès n'est pas autorisé (vu que header et pas de include, obligé de passer par ca) 
+        } else {
+            $containModel->deleteContain($id);
+            header('Location: /checkout');
         }
-        $containModel->deleteContain($id);
-        header('Location: /checkout');
     }
 }

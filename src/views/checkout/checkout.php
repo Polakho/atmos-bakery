@@ -15,16 +15,16 @@
         ?>
         <section class="main-section-background">
             <?php
-            if (http_response_code() === 401) { // Si verif cartId n'appartient pas à userId
-                var_dump('Unauthorized');
-                echo "<div class='alert alert-warning' role='alert'>Vous ne pouvez pas modifier le panier de quelqu'un d'autre.</div>";
+            if (isset($status)) {
+                if ($status === 'unauthorized') { // Si verif cartId n'appartient pas à userId
+                    echo "<div class='alert'>Vous ne pouvez pas modifier le panier de quelqu'un d'autre.</div>";
+                }
             }
             ?>
             <div class="active-cart">
                 <?php
                 foreach ($contains as $contain) {
-                    $product = $this->productModel->getProductById($contain['id']);
-
+                    $product = $this->productModel->getProductById($contain['product_id']);
                 ?> <div class="product <?= $product->getId() ?>">
                         <img src="<?= $product->getImage() ?>" alt="image product <?= $product->getId() ?>">
                         <p><?= $product->getName() ?></p>

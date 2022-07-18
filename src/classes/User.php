@@ -13,7 +13,8 @@ class User
     private $client_id;
     private $roles;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->setRoles("Client");
         $this->trash = 0;
     }
@@ -69,14 +70,16 @@ class User
     /**
      * @param mixed
      */
-    public function getFname() {
+    public function getFname()
+    {
         return $this->f_name;
     }
 
     /**
      * @param mixed $f_name
      */
-    public function setFname($f_name) : void {
+    public function setFname($f_name): void
+    {
         $this->f_name = $f_name;
     }
 
@@ -144,5 +147,15 @@ class User
         $this->roles = $roles;
     }
 
-
+    public function jsonify()
+    {
+        return  [
+            "id" => $this->getId(),
+            "name" => $this->getName(),
+            "mail" => $this->getMail(),
+            "f_name" => $this->getFname(),
+            "roles" => $this->getRoles(),
+            "trash" => $this->isTrash(),
+        ];
+    }
 }

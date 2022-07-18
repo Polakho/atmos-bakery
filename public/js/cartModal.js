@@ -7,6 +7,7 @@ let notifDel = document.querySelector('.notification-del-contain');
 let notifQuantityChanged = document.querySelector('.notification-change-contain');
 let btnClose = document.querySelector(".close");
 let blurBg = document.querySelector(".blur");
+let header = document.querySelector("header");
 
 // FONCTIONS MODALE
 // Fermer la modale
