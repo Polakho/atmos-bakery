@@ -16,6 +16,7 @@ class Stripe extends Controller
 
     public function __construct()
     {
+        $this->frontController = new FrontController();
         $this->cartModel = new CartModel();
         $this->containModel = new ContainModel();
         $this->productModel = new ProductModel();
@@ -26,7 +27,7 @@ class Stripe extends Controller
     public function list()
     {
         header('Content-Type: application/json');
-        $stripe = new \Stripe\StripeClient("sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU");
+        $stripe = new \Stripe\StripeClient("sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul");
         try {
             echo json_decode($stripe->products->all(['limit' => 3]));
         } catch (\Stripe\Exception\CardException $e) {
@@ -61,7 +62,7 @@ class Stripe extends Controller
     public function create($name)
     {
         if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
-            $stripe = new \Stripe\StripeClient("sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU");
+            $stripe = new \Stripe\StripeClient("sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul");
             try {
                 $stripe->products->create([
                     'name' => $name,
@@ -99,7 +100,7 @@ class Stripe extends Controller
 
     public function retrieve($id)
     {
-        $stripe = new \Stripe\StripeClient("sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU");
+        $stripe = new \Stripe\StripeClient("sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul");
         try {
             $stripe->products->retrieve(
                 $id
@@ -139,7 +140,7 @@ class Stripe extends Controller
         if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
             $productModel = new ProductModel;
             $products = $productModel->getAllProductJson();
-            $stripe = new \Stripe\StripeClient("sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU");
+            $stripe = new \Stripe\StripeClient("sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul");
 
             foreach ($products as $product) {
                 try {
@@ -149,7 +150,6 @@ class Stripe extends Controller
                         'description' => $product['description'],
                         'images' => [$product['image']],
                         'metadata' => [
-                            'price' => $product['price'],
                             'compo' => $product['compo'],
                             'weight' => $product['weight'],
                             'category_id' => $product['category_id']
@@ -208,7 +208,7 @@ class Stripe extends Controller
             }
             $productModel = new ProductModel;
             $products = $productModel->getAllProductJson();
-            $stripe = new \Stripe\StripeClient("sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU");
+            $stripe = new \Stripe\StripeClient("sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul");
             try {
                 foreach ($products as $product) {
                     $stripe->products->delete(
@@ -276,7 +276,7 @@ class Stripe extends Controller
                 $contains = $this->containModel->getContainsForCart($cart->getId());
 
                 $stripe = new \Stripe\StripeClient(
-                    'sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU'
+                    'sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul'
                 );
 
 
@@ -295,13 +295,13 @@ class Stripe extends Controller
                 }
                 // var_dump($line_items_array);
                 $session = $stripe->checkout->sessions->create([
-                    'success_url' => 'http://atmosdev.com/stripe/success?checkoutsess=' . $_SESSION['checkout_session'], //TODO: REMPLACER L'URL
-                    'cancel_url' => 'http://atmosdev.com/stripe/cancel?checkoutsess=' . $_SESSION['checkout_session'],
+                    'success_url' => 'http://atmosdev.com/stripe/success', //TODO: REMPLACER L'URL
+                    'cancel_url' => 'http://atmosdev.com/stripe/cancel',
                     'line_items' => $line_items_array,
                     'mode' => 'payment',
                 ]);
-                var_dump($session);
-                // header('Location: ' . $session['url'] . '');
+                $_SESSION['checkout_session'] = $session['id'];
+                header('Location: ' . $session['url'] . '');
             }
         } catch (\Stripe\Exception\CardException $e) {
             // Since it's a decline, \Stripe\Exception\CardException will be caught
@@ -337,27 +337,38 @@ class Stripe extends Controller
 
     public function success()
     {
-        $checkout_session = explode('=', $_SERVER['REQUEST_URI'])[1];
-
-        $stripe = new \Stripe\StripeClient(
-            'sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU'
-        );
-        $stripe->checkout->sessions->retrieve( // Trouver le moyen de recup la session terminee par lutilisateur
-            '',
-            []
-        );
-        include('');
+        if (isset($_SESSION['checkout_session'])) {
+            $checkout_session = $_SESSION['checkout_session'];
+            $stripe = new \Stripe\StripeClient(
+                'sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul'
+            );
+            $stripe->checkout->sessions->retrieve(
+                $checkout_session,
+                []
+            );
+            include('../src/views/payment/success.php');
+        } else {
+            header('Location: /');
+        }
     }
 
 
     public function cancel()
     {
-        $stripe = new \Stripe\StripeClient(
-            'sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU'
-        );
-        $stripe->checkout->sessions->retrieve(
-            '',
-            []
-        );
+        if (isset($_SESSION['checkout_session'])) {
+            $checkout_session = $_SESSION['checkout_session'];
+
+            $stripe = new \Stripe\StripeClient(
+                'sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul'
+            );
+            $stripe->checkout->sessions->retrieve(
+                $checkout_session,
+                []
+            );
+            header("Refresh:5; Url=/");
+            include('../src/views/payment/failed.php');
+        } else {
+            header('Location: /');
+        }
     }
 }
