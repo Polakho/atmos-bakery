@@ -468,6 +468,19 @@ footer {
   display: none;
 }
 
+.modal-cart-container {
+  height: 100vh;
+  width: 150vw;
+  z-index: 5;
+  position: absolute;
+  background-color: #4e4e4e4d;
+  top: 0;
+  display: flex;
+  justify-content: end;
+  padding: 1em;
+  transition: ease all 0.4s;
+}
+
 .modal-header {
   display: flex;
   flex-direction: row;
@@ -563,6 +576,24 @@ footer {
 
 .delete-contain:active {
   background-color: var(--btn-danger-hover-active);
+}
+
+.modal-body .checkout {
+  border: none;
+  background-color: white;
+  height: 2%;
+  border-radius: 2em;
+  color: black;
+  transition: all .3s linear;
+  padding: 5px 5px;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.modal-body .checkout:hover {
+  cursor: pointer;
+  color: var(--color-primary-blue);
 }
 
 /* LOGIN & REGISTER */
@@ -1042,6 +1073,7 @@ footer {
   background-color: var(--color-primary-pink);
   border-radius: 25px;
   box-shadow: 0 4px 5px rgb(0 0 0 / 40%);
+  overflow: auto;
 }
 
 .active-cart p {

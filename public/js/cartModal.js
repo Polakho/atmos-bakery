@@ -8,6 +8,7 @@ let notifQuantityChanged = document.querySelector('.notification-change-contain'
 let btnClose = document.querySelector(".close");
 let blurBg = document.querySelector(".blur");
 let header = document.querySelector("header");
+let modalCartContainer = document.querySelector(".modal-cart-container");
 
 // FONCTIONS MODALE
 // clearBox
@@ -24,9 +25,12 @@ function clearBox(div) {
 btnClose.onclick = function () {
   cartState = !cartState;
   blurBg.classList.remove("displayVisible");
+  body.style.overflow = "auto";
   blurBg.classList.add("hidden");
   modalCart.classList.remove("displayFlex");
   modalCart.classList.add("hidden");
+  modalCartContainer.style.visibility = "hidden";
+  modalCartContainer.style.opacity = "0";
   clearBox(modalBody);
 };
 
@@ -38,6 +42,7 @@ blurBg.onclick = function () {
     blurBg.classList.add("hidden");
     cartState = !cartState;
     modalCart.classList.remove("displayFlex");
+    body.style.overflow = "auto";
     modalCart.classList.add("hidden");
     clearBox(modalBody);
   };
@@ -47,12 +52,19 @@ blurBg.onclick = function () {
 function showCart() {
   cartState = !cartState;
   if (cartState == false) {
+    modalCartContainer.style.visibility = "hidden";
+    modalCartContainer.style.opacity = "0";
     modalCart.classList.add("hidden");
     modalCart.classList.remove("displayFlex");
     blurBg.classList.remove("displayVisible");
     blurBg.classList.add("hidden");
     clearBox(modalBody);
+    body.style.overflow = "auto";
+
   } else {
+    modalCartContainer.style.visibility = "visible";
+    modalCartContainer.style.opacity = "1";
+    body.style.overflow = "hidden";
     modalCart.classList.remove("hidden");
     modalCart.classList.add("displayFlex");
     blurBg.classList.remove("hidden");
@@ -198,7 +210,8 @@ function showCart() {
         p2.innerHTML = `Total : ${totalPrice}€`;
 
         let btnCheckout = document.createElement("button");
-        btnCheckout.innerHTML = "Checkout";
+        btnCheckout.classList.add('checkout')
+        btnCheckout.innerHTML = "📦 Checkout 🍰";
         btnCheckout.onclick = function () {
           window.location.replace("/checkout");
         };
