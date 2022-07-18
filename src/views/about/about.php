@@ -22,11 +22,11 @@
             <?php
             if (isset($store['image'])) {
               ?>
-              <img src="<?= $store['image'] ?>" alt="<?= $store['name'] ?>">
+              <img src="<?= $store['image'] ?>" class="about-store-image" alt="<?= $store['name'] ?>">
               <?php
             } else {
             ?>
-              <img src="" alt="<?= $store['name'] ?>" class="store-image acLogo">
+              <img src="assets/img/Logos/logoAC2.png" alt="<?= $store['name'] ?>"  class="about-store-image">
             <?php
             }
             ?>
