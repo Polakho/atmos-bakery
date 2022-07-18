@@ -39,7 +39,7 @@
 
             </div>
             <div class="checkout">
-                <a href="/payment">Continuer vers le paiement</a>
+                <a href="/stripe/payment">Continuer vers le paiement</a>
             </div>
         </section>
         <?php

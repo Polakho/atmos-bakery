@@ -7,12 +7,15 @@ use App\Models\ProductModel;
 use App\Models\ScheduleModel;
 use App\Models\StoreModel;
 use App\Models\UserModel;
+use Dotenv\Dotenv;
+
 
 class Admin extends Controller
 {
   public function __construct()
   {
     $this->frontController = new FrontController();
+    $this->dotenv  = Dotenv::createImmutable(__DIR__ . "/../../");
   }
 
   public function index()
