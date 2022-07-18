@@ -47,23 +47,7 @@
       <?php
       }
       include '../src/components/modales/cartModale.php';
-    } else if ($_SERVER['REQUEST_URI'] === '/auth/login') {
       ?>
-      <a href="/auth/register">Créez un compte</a>
-
-    <?php
-    } else if ($_SERVER['REQUEST_URI'] === '/auth/register') {
-    ?>
-      <a href="/auth/login">Connectez-vous</a>
-
-    <?php
-    } else {
-    ?>
-      <a href="/auth/login">Connectez-vous</a>
-      <a href="/auth/register">Créez un compte</a>
-    <?php
-    }
-    ?>
   </nav>
 </header>
 
