@@ -215,15 +215,16 @@ class Admin extends Controller
     }
   }
 
-    public function createUser(){
-        $userModel = new UserModel();
-        if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
-            $userModel->createUser($_POST['name'], $_POST['f_name'],$_POST['mail'], $_POST['password'], $_POST['roles']);
-            header('Location: /admin/users');
-        } else {
-            echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
-        }
+  public function createUser()
+  {
+    $userModel = new UserModel();
+    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
+      $userModel->createUser($_POST['name'], $_POST['f_name'], $_POST['mail'], $_POST['password'], $_POST['roles']);
+      header('Location: /admin/users');
+    } else {
+      echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
     }
+  }
   //PARTIE LEANDRE
   public function products()
   {
@@ -266,6 +267,22 @@ class Admin extends Controller
     include '../src/views/CRUDs/ld_crud_products/updateProduct.php';
   }
 
+  public function deleteProduct()
+  {
+    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id)) {
+      $product = new ProductModel();
+      $verif = $product->deleteProductById($id);
+      if ($verif === true) {
+        // header('Location: /admin/products?status=success');
+      } else {
+        // header('Location: /admin/products?status=failed');
+      }
+    } else {
+      echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
+    }
+  }
+
   // METHODS
   public function addingProduct()
   {
@@ -273,11 +290,14 @@ class Admin extends Controller
     if (isset($_POST['name']) && isset($_POST['price']) && isset($_POST['category'])) {
       //$name, $price, $categoryId, $description = '', $compo = '', $image = '', $weight = ''
       $newProductId = $productModel->addProduct($_POST['name'], $_POST['price'], $_POST['category'], $_POST['description'], $_POST['compo'], $_POST['image'], $_POST['weight']);
-      var_dump($newProductId);
-      // header('Location: /admin/products');
+      if ($newProductId !== 0) {
+        header('Location: /admin/products?status=success');
+      } else {
+        header('Location: /admin/products?status=failed');
+      }
     } else {
       $errorMsg = "Veuillez remplir tous les champs.";
-      // header('Location: /admin/addProduct');
+      header('Location: /admin/addProduct');
     }
   }
 
@@ -287,8 +307,12 @@ class Admin extends Controller
     $id = explode('=', $_SERVER['REQUEST_URI'])[1];
     if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
       //$id, $name, $price, $categoryId, $image, $description, $compo = '', $weight = 0
-      $productModel->updateProduct($id, $_POST['name'], $_POST['price'], $_POST['category'], $_POST['description'], $_POST['compo'], $_POST['weight']);
-      header('Location: /admin/store');
+      $check = $productModel->updateProduct($id, $_POST['name'], $_POST['price'], $_POST['category'], $_POST['image'], $_POST['description'], $_POST['compo'], $_POST['weight']);
+      if ($check === true) {
+        header('Location: /admin/products?status=success');
+      } else {
+        header('Location: /admin/products?status=failed');
+      }
     } else {
       echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
     }

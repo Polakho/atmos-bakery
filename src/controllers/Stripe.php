@@ -160,6 +160,8 @@ class Stripe extends Controller
                         'unit_amount_decimal' => $product['price'] * 100,
                         'currency' => 'eur',
                         'product' => $product['id'],
+                        'metadata' => ['price_value' =>  $product['price']]
+
                     ]);
                 } catch (\Stripe\Exception\CardException $e) {
                     // Since it's a decline, \Stripe\Exception\CardException will be caught
@@ -250,9 +252,26 @@ class Stripe extends Controller
 
     public function payment()
     {
+        function random_str(
+            int $length = 64,
+            string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        ): string {
+            if ($length < 1) {
+                throw new \RangeException("Length must be a positive integer");
+            }
+            $pieces = [];
+            $max = mb_strlen($keyspace, '8bit') - 1;
+            for ($i = 0; $i < $length; ++$i) {
+                $pieces[] = $keyspace[random_int(0, $max)];
+            }
+            return implode('', $pieces);
+        }
         try {
             //go fetch le contain cart pr userid
             if (isset($_SESSION['user'])) {
+
+                $_SESSION['checkout_session'] = random_str();
+
                 $cart = $this->cartModel->getActiveCartForUser($_SESSION['user']['id']);
                 $contains = $this->containModel->getContainsForCart($cart->getId());
 
@@ -276,13 +295,14 @@ class Stripe extends Controller
                 }
                 // var_dump($line_items_array);
                 $session = $stripe->checkout->sessions->create([
-                    'success_url' => 'http://atmosdev.com/stripe/success',
-                    'cancel_url' => 'http://atmosdev.com/stripe/cancel',
+                    'success_url' => 'http://atmosdev.com/stripe/success?checkoutsess=' . $_SESSION['checkout_session'], //TODO: REMPLACER L'URL
+                    'cancel_url' => 'http://atmosdev.com/stripe/cancel?checkoutsess=' . $_SESSION['checkout_session'],
                     'line_items' => $line_items_array,
                     'mode' => 'payment',
                 ]);
+                var_dump($session);
+                // header('Location: ' . $session['url'] . '');
             }
-            header('Location: ' . $session['url'] . '');
         } catch (\Stripe\Exception\CardException $e) {
             // Since it's a decline, \Stripe\Exception\CardException will be caught
             echo 'Status is:' . $e->getHttpStatus() . '\n';
@@ -317,6 +337,8 @@ class Stripe extends Controller
 
     public function success()
     {
+        $checkout_session = explode('=', $_SERVER['REQUEST_URI'])[1];
+
         $stripe = new \Stripe\StripeClient(
             'sk_test_51LLlADJy770A5I8J7lDo3OQyX49eRgOyJCcdUSNsih2r9acDam3gfCEjiEEwadM3h3dJazEfwPUZRY9tOevhgPeK00pSa2a2aU'
         );

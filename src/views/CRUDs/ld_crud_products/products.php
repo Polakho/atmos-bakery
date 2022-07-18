@@ -79,7 +79,7 @@
                                             ?>
                                             <td>
                                                 <button class="btn btn-primary crud-btn"><a href="/admin/updateProduct?updateid=<?= $product['id'] ?>" class="text-crud">Modifier</a></button>
-                                                <button class="btn btn-danger crud-btn"><a href="/admin/updateProduct?deleteid=<?= $product['id'] ?>" class="text-crud">Supprimer</a></button>
+                                                <button class="btn btn-danger crud-btn"><a href="/admin/deleteProduct?deleteid=<?= $product['id'] ?>" class="text-crud">Supprimer</a></button>
                                             </td>
                                         </tr>
                                     <?php
