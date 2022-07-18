@@ -10,6 +10,16 @@ let blurBg = document.querySelector(".blur");
 let header = document.querySelector("header");
 
 // FONCTIONS MODALE
+// clearBox
+function clearBox(div) {
+  while (div.firstChild) {
+    div.removeChild(div.firstChild);
+  }
+  div.removeAttribute("data-product-id");
+  document.querySelector("#product-quantity").innerHTML = "1";
+  currentQuantity = 1;
+  visibleBtnQuantity();
+};
 // Fermer la modale
 btnClose.onclick = function () {
   cartState = !cartState;
@@ -17,7 +27,7 @@ btnClose.onclick = function () {
   blurBg.classList.add("hidden");
   modalCart.classList.remove("displayFlex");
   modalCart.classList.add("hidden");
-  // clearBox(modalBody);
+  clearBox(modalBody);
 };
 
 blurBg.onclick = function () {
@@ -29,7 +39,7 @@ blurBg.onclick = function () {
     cartState = !cartState;
     modalCart.classList.remove("displayFlex");
     modalCart.classList.add("hidden");
-    // clearBox(modalBody);
+    clearBox(modalBody);
   };
 };
 
@@ -41,7 +51,7 @@ function showCart() {
     modalCart.classList.remove("displayFlex");
     blurBg.classList.remove("displayVisible");
     blurBg.classList.add("hidden");
-    // clearBox(modalBody);
+    clearBox(modalBody);
   } else {
     modalCart.classList.remove("hidden");
     modalCart.classList.add("displayFlex");
@@ -75,11 +85,12 @@ function showCart() {
           btn.classList.add("delete-contain");
           btn.setAttribute("data-id", contain.id);
           btn.innerHTML = "Supprimer";
-          btn.addEventListener("click", function () {
+          console.log(btn.getAttribute("data-id"))
+          btn.onclick = function () {
             let post = {
               contain_id: btn.getAttribute("data-id")
+
             };
-            console.log(post);
 
             fetch(baseUrl + "deleteContain", {
               method: 'POST',
@@ -91,16 +102,16 @@ function showCart() {
             }).then((response) => {
               return response.json();
             }).then((res) => {
+              console.log(res)
               notifDel.classList.add("show");
               setTimeout(() => {
                 notifDel.classList.remove("show");
               }, 3000);
-              console.log(post);
               showCart();
             }).catch((error) => {
               console.log(error);
             });
-          });
+          };
 
           let h3 = document.createElement("h3");
           h3.innerHTML = contain.product.name;
@@ -130,14 +141,13 @@ function showCart() {
                   contain_id: contain.id,
                   quantity: quantityChanged
                 };
-                console.log(post);
                 fetch(baseUrl + "changeQuantityOfContain", {
                   method: 'post',
                   body: JSON.stringify(post),
-                  headers: {
+                  /*headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                  }
+                  }*/
                 }).then((response) => {
                   return response.json();
                 }).then((res) => {

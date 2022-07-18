@@ -680,18 +680,9 @@ class Api extends Controller
         $params = $this->params();
 
         $containModel = new containModel();
+        $containId = htmlspecialchars($params['contain_id']);
 
-        if (isset($params['contain_id'])){
-            $containId = htmlspecialchars($params['contain_id']);
-        }
-
-        if (isset($params['cart_id'])){
-            $cartId = htmlspecialchars($params['cart_id']);
-        }
-
-
-
-        if (isset($containId) && isset($cartId)) {
+        if (isset($containId)) {
             $containModel->deleteContain($containId);
             echo json_encode(["message" => "Le produit: $containId a bien été supprimé du panier"]);
         }
