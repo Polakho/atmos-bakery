@@ -7,8 +7,8 @@
     </ul>
 
     <ul class="socials">
-      <li><a href=""><img src="../../assets/img/socials/facebook-brands.svg" alt="facebook"></a></li>
-      <li><a href=""><img src="../../assets/img/socials/twitter-brands.svg" alt="twitter"></a></li>
+      <li><a href="https://www.facebook.com/profile.php?id=100083696856191"><img src="../../assets/img/socials/facebook-brands.svg" alt="facebook"></a></li>
+      <li><a href="https://twitter.com/CorpAtmos"><img src="../../assets/img/socials/twitter-brands.svg" alt="twitter"></a></li>
       <li><a href=""><img src="../../assets/img/socials/instagram-brands.svg" alt="instagram"></a></li>
     </ul>
   </footer>
