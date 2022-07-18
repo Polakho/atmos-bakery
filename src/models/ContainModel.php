@@ -124,7 +124,6 @@ class ContainModel
         $row = $stmt->fetch();
         if (isset($row[0])) {
             $cartId = $row[0];
-            var_dump($cartId);
             $sql = "SELECT user_id FROM cart  WHERE id = :cartId ";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
