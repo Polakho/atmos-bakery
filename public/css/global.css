@@ -692,6 +692,7 @@ button.add-product-action {
   border: none;
   width: auto;
   cursor: pointer;
+  color: white;
   margin-bottom: 0.5em;
   padding: 0.5em 1em;
   border-radius: 20px;
@@ -714,7 +715,8 @@ button.cancel {
   padding: 0.5em 1em;
   border-radius: 20px;
   text-align: center;
-  background-color: #d2280e;
+  color: white;
+  background-color: var(--btn-danger);
   margin-bottom: 1vh;
 }
 
@@ -727,13 +729,16 @@ button.cancel:hover {
 
 #btn-more,
 #btn-less {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 2em;
   width: auto;
   background-color: var(--color-primary-blue);
   color: white;
   border: none;
   cursor: pointer;
-  padding: 0.1em;
+  padding:  0.1em 0.3em;
   font-weight: bold;
   font-size: 20px;
   margin-left: 2px;
