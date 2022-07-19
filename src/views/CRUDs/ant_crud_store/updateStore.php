@@ -76,7 +76,7 @@
           ?>
           <form action="/admin/updatingImage?id=<?= $store['id'] ?>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
-              <label>Photo</label>
+              <label>Photo (lien web/imgur vers une image au format jpg, jpeg ou png)</label>
               <input class="form-control" type="text" name="image" placeholder="url de l'image..." required>
             </div>
             <button type="submit" class="btn btn-primary">Modifier la photo</button>

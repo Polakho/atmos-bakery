@@ -119,14 +119,30 @@ class Admin extends Controller
     }
   }
 
+  private function isImage(string $image)
+  {
+    $regex = '/(\.(jpe?g|png))$/m';
+    preg_match($regex, $image, $match);
+    if (isset($match[0])) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public function updatingImage()
   {
     $id = explode('=', $_SERVER['REQUEST_URI'])[1];
     if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN' && isset($id) && isset($_POST['image'])) {
-      $store = new StoreModel();
       $img = $_POST['image'];
-      $store->updateImage($id, $img);
-      header('Location: /admin/store');
+      $verif = $this->isImage($img);
+      if ($verif === true) {
+        $store = new StoreModel();
+        $store->updateImage($id, $img);
+        header('Location: /admin/store');
+      } else {
+        echo 'Veuillez choisir une image dans un format valide (jpg, jpeg, png).';
+      }
     } else {
       echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
     }
