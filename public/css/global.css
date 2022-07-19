@@ -62,7 +62,7 @@ h2 {
 header {
   position: absolute;
   top: 0;
-  z-index: 150;
+  z-index: 4;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -247,8 +247,10 @@ nav {
   height: 100vh;
   width: 100%;
   position: absolute;
+  z-index: 10;
   background-color: #4e4e4e4d;
   top: 0;
+  left: 0;
   display: flex;
   justify-content: end;
   padding: 1em;
@@ -470,11 +472,12 @@ footer {
 
 .modal-cart-container {
   height: 100vh;
-  width: 150vw;
-  z-index: 5;
+  width: 100vw;
+  z-index: 10;
   position: absolute;
   background-color: #4e4e4e4d;
   top: 0;
+  left: 0;
   display: flex;
   justify-content: end;
   padding: 1em;
@@ -594,6 +597,11 @@ footer {
 .modal-body .checkout:hover {
   cursor: pointer;
   color: var(--color-primary-blue);
+}
+
+/* MODAL AJOUT PRODUIT AU PANIER */
+.modal-add-product{
+  
 }
 
 /* LOGIN & REGISTER */
@@ -1063,7 +1071,10 @@ footer {
 /* CHECKOUT */
 
 .checkout-section {
-  padding-top: 20vh;
+  padding-top: 10vh;
+  height: 80vh;
+  width: 100vw;
+  position: relative;
 }
 
 .active-cart {
@@ -1139,6 +1150,7 @@ footer {
 .checkout {
   margin-top: 2vh;
   width: auto;
+  object-fit: contain;
   display: flex;
   justify-content: center;
   align-items: center;

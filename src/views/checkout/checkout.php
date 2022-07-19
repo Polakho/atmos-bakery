@@ -52,10 +52,11 @@
                 <a href="/stripe/payment">Continuer vers le paiement</a>
             </div>
         </div>
-        <?php
-        $this->frontController->footer();
-        ?>
     </section>
+
+    <?php
+    $this->frontController->footer();
+    ?>
 
 
     <script>

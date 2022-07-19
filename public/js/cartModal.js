@@ -6,7 +6,6 @@ let cartId = document.querySelector(".data-cart").getAttribute("data-cart-id");
 let notifDel = document.querySelector('.notification-del-contain');
 let notifQuantityChanged = document.querySelector('.notification-change-contain');
 let btnClose = document.querySelector(".close");
-let blurBg = document.querySelector(".blur");
 let header = document.querySelector("header");
 let modalCartContainer = document.querySelector(".modal-cart-container");
 
@@ -24,9 +23,7 @@ function clearBox(div) {
 // Fermer la modale
 btnClose.onclick = function () {
   cartState = !cartState;
-  blurBg.classList.remove("displayVisible");
   body.style.overflow = "auto";
-  blurBg.classList.add("hidden");
   modalCart.classList.remove("displayFlex");
   modalCart.classList.add("hidden");
   modalCartContainer.style.visibility = "hidden";
@@ -34,19 +31,7 @@ btnClose.onclick = function () {
   clearBox(modalBody);
 };
 
-blurBg.onclick = function () {
-  if (blurBg.classList.contains("hidden")) {
-    return;
-  } else {
-    blurBg.classList.remove("displayVisible");
-    blurBg.classList.add("hidden");
-    cartState = !cartState;
-    modalCart.classList.remove("displayFlex");
-    body.style.overflow = "auto";
-    modalCart.classList.add("hidden");
-    clearBox(modalBody);
-  };
-};
+
 
 // Ouverture et Récupération des items du cart
 function showCart() {
@@ -56,8 +41,6 @@ function showCart() {
     modalCartContainer.style.opacity = "0";
     modalCart.classList.add("hidden");
     modalCart.classList.remove("displayFlex");
-    blurBg.classList.remove("displayVisible");
-    blurBg.classList.add("hidden");
     clearBox(modalBody);
     body.style.overflow = "auto";
 
@@ -67,8 +50,6 @@ function showCart() {
     body.style.overflow = "hidden";
     modalCart.classList.remove("hidden");
     modalCart.classList.add("displayFlex");
-    blurBg.classList.remove("hidden");
-    blurBg.classList.add("displayVisible");
 
     let itemList = document.createElement("div");
     itemList.classList.add("body-contain");

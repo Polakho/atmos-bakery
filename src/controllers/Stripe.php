@@ -346,7 +346,10 @@ class Stripe extends Controller
                 $checkout_session,
                 []
             );
+            $cart = $this->cartModel->getActiveCartForUser($_SESSION['user']['id']);
+            // var_dump($cart->getId());
             include('../src/views/payment/success.php');
+            $this->cartModel->disableCart($cart->getId());
         } else {
             header('Location: /');
         }
