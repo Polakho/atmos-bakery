@@ -73,7 +73,8 @@ class Auth extends Controller
             } else {
                 $user = $userModel->CreateNewUser($_POST['name'], $_POST['f_name'], $_POST['mail'], $_POST['password'], "CLIENT");
                 $_SESSION['user'] = $user;
-                header('Location: /');
+                header("Refresh:0; Url=/");
+                include('../src/views/home/home.php');
             }
         } else {
             include '../src/views/register/register.php';

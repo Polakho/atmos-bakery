@@ -517,10 +517,16 @@ footer {
   position: absolute;
   color: black;
   top: -.7em;
+  border-radius: 25px;
   right: .5em;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.close:hover {
+  color: rgb(36, 36, 36);
+  transition: all 0.4s;
 }
 
 .modal-body {
@@ -584,6 +590,7 @@ footer {
   border: none;
   border-radius: 2em;
   color: white;
+  cursor: pointer;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
@@ -755,7 +762,7 @@ button.cancel:hover {
   border-radius: 2em;
 
   width: 600px;
-  height: 500px;
+  height: 450px;
 
   padding: 1em;
 
@@ -767,6 +774,14 @@ button.cancel:hover {
     width: 300px;
     height: auto;
   }
+}
+
+.form-register-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
 }
 
 /* PRODUCTS LIST */
@@ -1418,4 +1433,8 @@ p.valid-transaction {
 
 #btn-prev:active {
   background-color: #75959d;
+}
+
+.alert {
+  width: 300px;
 }
