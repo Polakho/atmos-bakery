@@ -3,8 +3,8 @@ let modalCart = document.querySelector('.modal-cart');
 let modalBody = document.querySelector('.modal-cart .modal-body');
 let cartState = false;
 let cartId = document.querySelector(".data-cart").getAttribute("data-cart-id");
-let notifDel = document.querySelector('.notification-del-contain');
-let notifQuantityChanged = document.querySelector('.notification-change-contain');
+let notifDel = document.querySelector('.notification-delete-product');
+let notifQuantityChanged = document.querySelector('.notification-change-quantity');
 let btnClose = document.querySelector(".close");
 let header = document.querySelector("header");
 let modalCartContainer = document.querySelector(".modal-cart-container");
@@ -97,7 +97,6 @@ function showCart() {
             }).then((response) => {
               return response.json();
             }).then((res) => {
-              console.log(res)
               notifDel.classList.add("show");
               setTimeout(() => {
                 notifDel.classList.remove("show");

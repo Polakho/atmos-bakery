@@ -65,13 +65,13 @@
 </header>
 
 <div class='notification blur-modal'>
-  <div class="notification-del-contain">
-    Le produit a bien été supprimé du panier.
-  </div>
-  <div class="notification-change-contain">
-    La quantité a été changé.
-  </div>
 
+</div>
+<div class="notification-delete-product">
+    Le produit a bien été supprimé
+</div>
+<div class="notification-change-quantity">
+    La quantité a bien été changé
 </div>
 
 <script defer>
