@@ -63,9 +63,9 @@
             }
             ?>
             <div id="navigation">
-                <button id="btn-prev">Prev</button>
+                <button id="btn-prev">Prèc</button>
                 <p id="page-nbr">1</p>
-                <button id="btn-next">Next</button>
+                <button id="btn-next">Suiv</button>
             </div>
 
         </div>

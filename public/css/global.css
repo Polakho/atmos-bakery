@@ -738,6 +738,7 @@ footer {
 
 #navigation {
   display: flex;
+  align-items: center;
   flex-flow: row;
   justify-content: space-between;
   width: 100px;
@@ -1240,4 +1241,39 @@ h3.valid-transaction {
 p.valid-transaction {
   padding: 0.3vh;
 
+}
+
+#btn-next {
+  outline: none;
+  border: none;
+  background-color: var(--color-primary-blue);
+  color: white;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all linear 0.2s;
+}
+#btn-next:hover {
+  background-color: #75959d;
+}
+#btn-next:active {
+  background-color: #75959d;
+}
+#btn-prev {
+  outline: none;
+  border: none;
+  background-color: var(--color-primary-blue);
+  color: white;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all linear 0.2s;
+}
+#btn-prev:hover {
+  background-color: #75959d;
+}
+#btn-prev:active {
+  background-color: #75959d;
 }
