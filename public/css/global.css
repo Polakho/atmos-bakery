@@ -211,6 +211,7 @@ nav {
 .show-cart:active {
   background-color: var(--btn-color-hover-active-pink);
 }
+
 .show-cart-menu {
   border: none;
   border-radius: 2em;
@@ -600,7 +601,7 @@ footer {
   color: var(--color-primary-blue);
 }
 
-/* MODAL AJOUT PRODUIT AU PANIER */
+/* MODAL AJOUT ADD PRODUIT AU PANIER */
 .modal-addproduct-container {
   height: 100%;
   width: 100vw;
@@ -613,6 +614,100 @@ footer {
   justify-content: end;
   padding: 1em;
   transition: ease all 0.4s;
+}
+
+.modal-add-product {
+  height: 22vh;
+}
+
+.modal-add-product .modal-header {
+  font-weight: bold;
+
+}
+
+.modal-add-product .modal-footer {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 50px;
+}
+
+.modal-add-product div.quantity {
+  padding-bottom: 0.5em;
+  width: 30%;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+button.add-product-action {
+  border: none;
+  width: auto;
+  cursor: pointer;
+  margin-bottom: 0.5em;
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  text-align: center;
+  background-color: var(--color-primary-blue);
+  /* color: #000; */
+}
+
+button.add-product-action:hover {
+  background-color: #75959d;
+  color: #000;
+  cursor: pointer;
+  transition: ease all 0.4s;
+
+}
+
+button.cancel {
+  border: none;
+  width: auto;
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  text-align: center;
+  background-color: var(--color-primary-blue);
+  /* color: #000; */
+}
+
+button.cancel:hover {
+  cursor: pointer;
+  background-color: #901103;
+  color: #000;
+  transition: ease all 0.4s;
+
+}
+
+#btn-more,
+#btn-less {
+  border-radius: 2em;
+  width: auto;
+  background-color: var(--color-primary-blue);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0.1em;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 2px;
+}
+
+#btn-more:hover,
+#btn-less:hover {
+  background-color: white;
+  color: var(--color-primary-blue);
+  transition: ease all 0.4s;
+
+}
+
+@media only screen and (max-width: 400px) {
+  .modal-add-product {
+    width: 300px;
+    height: auto;
+  }
 }
 
 /* LOGIN & REGISTER */
@@ -1112,7 +1207,7 @@ footer {
   padding-top: 30vh;
 }
 
-.checkout-section footer{
+.checkout-section footer {
   position: relative;
 }
 
