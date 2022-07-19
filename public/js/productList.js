@@ -49,6 +49,7 @@ btnPrev.addEventListener("click", function () {
   };
 });
 
+
 // GESTION AJOUT PRODUIT PANIER
 let currentQuantity = document.querySelector("#product-quantity").textContent;
 let btnMore = document.querySelector("#btn-more");

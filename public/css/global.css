@@ -545,6 +545,7 @@ footer {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 1vh;
 }
 
 .quantity {
@@ -554,9 +555,18 @@ footer {
   margin-top: 2em;
 }
 
-/* .quantity-sector {
-  
-} */
+.contain-quantity{
+  width: 20%;
+  text-align: center;
+  margin-bottom: 1vh;
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+ .quantity-sector {
+display: flex;
+   align-items: baseline;
+   margin-bottom: 2vh;
+}
 .item-price {
   text-align: end;
 }
@@ -567,12 +577,32 @@ footer {
   border: none;
   border-radius: 2em;
   color: white;
-  padding: 10px 24px;
+  padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   transition: all .3s linear;
+}
+
+.change-quantity{
+  background-color: cadetblue;
+  cursor: pointer;
+  /* Green */
+  border: none;
+  border-radius: 2em;
+  color: white;
+  padding: 5px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition: all .3s linear;
+  float: right;
+}
+.change-quantity:hover{
+  background-color: #476b6c;
+
 }
 
 .delete-contain:hover {
@@ -1230,7 +1260,6 @@ button.cancel:hover {
   width: 20%;
   text-align: center;
   margin-bottom: 1vh;
-
 }
 
 .active-cart img {

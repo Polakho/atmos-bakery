@@ -72,6 +72,7 @@
     let currentQuantity = document.querySelector("#product-quantity").textContent;
     let btnMore = document.querySelector("#btn-more");
     let btnLess = document.querySelector("#btn-less");
+    let modalAddProductContainer = document.querySelector(".modal-addproduct-container");
 
     function visibleBtnQuantity() {
         if (currentQuantity == 1) {
@@ -105,9 +106,15 @@
         modalState = !modalState;
         if (modalState == false) {
             modal.classList.add("hidden");
+            modalAddProductContainer.style.visibility = "hidden";
+            modalAddProductContainer.style.opacity = "0";
+            body.style.overflow = "auto";
             clearBox(modalHeader);
         } else {
             modal.classList.remove("hidden");
+            modalAddProductContainer.style.visibility = "visible";
+            modalAddProductContainer.style.opacity = "1";
+            body.style.overflow = "hidden";
         }
     };
 

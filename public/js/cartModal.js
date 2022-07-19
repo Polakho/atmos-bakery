@@ -79,7 +79,7 @@ function showCart() {
           let btn = document.createElement("button");
           btn.classList.add("delete-contain");
           btn.setAttribute("data-id", contain.id);
-          btn.innerHTML = "Supprimer";
+          btn.innerHTML = "X";
           console.log(btn.getAttribute("data-id"))
           btn.onclick = function () {
             let post = {
