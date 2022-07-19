@@ -733,6 +733,7 @@ footer {
 }
 
 .notification-add-product {
+  z-index: 9999;
   position: fixed;
   top: -8rem;
   color: var(--color-notif-text);
