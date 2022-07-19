@@ -738,7 +738,7 @@ class Api extends Controller
                 }
                 // var_dump($line_items_array);
                 $session = $stripe->checkout->sessions->create([
-                    'success_url' => 'http://atmoscorp.xyz:8455/stripe/success',
+                    'success_url' => 'http://atmoscorp.xyz:8455/api/success',
                     'cancel_url' => 'http://atmoscorp.xyz:8455/stripe/cancel',
                     'line_items' => $line_items_array,
                     'mode' => 'payment',
