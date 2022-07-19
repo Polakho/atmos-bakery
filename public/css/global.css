@@ -1062,8 +1062,9 @@ footer {
 
 /* CHECKOUT */
 
-.checkout-section {
-  padding-top: 20vh;
+.checkout-section{
+  height: auto;
+ padding-top: 30vh;
 }
 
 .active-cart {
