@@ -66,11 +66,11 @@
         <div class="store-edit edit-picture">
           <h3>Modification de la photo :</h3>
           <?php
-          if (isset($store['image']) && $store['image'] !== '') {
+          if (isset($store['image'][0]['image']) && $store['image'][0]['image'] !== '') {
             // var_dump(base64_encode($store['image']));
             // var_dump($store['image'][0]['image']);
           ?>
-            <img src="<?= $store['image'] ?>" style="width: 100%" alt="<?= $store['name'] ?>">
+            <img src="<?= $store['image'][0]['image'] ?>" style="height: 50%" alt="<?= $store['name'] ?>">
           <?php
           }
           ?>
