@@ -600,9 +600,7 @@ footer {
 }
 
 /* MODAL AJOUT PRODUIT AU PANIER */
-.modal-add-product{
-  
-}
+.modal-add-product {}
 
 /* LOGIN & REGISTER */
 .form-container {
@@ -741,6 +739,7 @@ footer {
 }
 
 .notification-add-product {
+  z-index: 9999;
   position: fixed;
   top: -8rem;
   color: var(--color-notif-text);
@@ -1071,10 +1070,8 @@ footer {
 /* CHECKOUT */
 
 .checkout-section {
-  padding-top: 10vh;
-  height: 80vh;
-  width: 100vw;
-  position: relative;
+  height: auto;
+  padding-top: 30vh;
 }
 
 .active-cart {
