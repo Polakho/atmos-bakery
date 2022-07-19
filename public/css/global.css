@@ -560,18 +560,20 @@ footer {
   margin-top: 2em;
 }
 
-.contain-quantity{
+.contain-quantity {
   width: 20%;
   text-align: center;
   margin-bottom: 1vh;
   margin-left: 2vw;
   margin-right: 2vw;
 }
- .quantity-sector {
-display: flex;
-   align-items: baseline;
-   margin-bottom: 2vh;
+
+.quantity-sector {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 2vh;
 }
+
 .item-price {
   text-align: end;
 }
@@ -590,7 +592,7 @@ display: flex;
   transition: all .3s linear;
 }
 
-.change-quantity{
+.change-quantity {
   background-color: cadetblue;
   cursor: pointer;
   /* Green */
@@ -605,7 +607,8 @@ display: flex;
   transition: all .3s linear;
   float: right;
 }
-.change-quantity:hover{
+
+.change-quantity:hover {
   background-color: #476b6c;
 
 }
@@ -652,7 +655,7 @@ display: flex;
 }
 
 .modal-add-product {
-  height: 22vh;
+  height: 200px;
 }
 
 .modal-add-product .modal-header {
@@ -692,7 +695,7 @@ button.add-product-action {
 
 button.add-product-action:hover {
   background-color: #75959d;
-  color: #000;
+  color: white;
   cursor: pointer;
   transition: ease all 0.4s;
 
@@ -704,16 +707,15 @@ button.cancel {
   padding: 0.5em 1em;
   border-radius: 20px;
   text-align: center;
-  background-color: var(--color-primary-blue);
-  /* color: #000; */
+  background-color: #d2280e;
+  margin-bottom: 1vh;
 }
 
 button.cancel:hover {
   cursor: pointer;
-  background-color: #901103;
-  color: #000;
+  background-color: #a11f0b;
+  color: white;
   transition: ease all 0.4s;
-
 }
 
 #btn-more,
