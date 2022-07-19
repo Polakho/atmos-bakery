@@ -295,8 +295,8 @@ class Stripe extends Controller
                 }
                 // var_dump($line_items_array);
                 $session = $stripe->checkout->sessions->create([
-                    'success_url' => 'http://atmoscorp.xyz/stripe/success', //TODO: REMPLACER L'URL
-                    'cancel_url' => 'http://atmoscorp.xyz/stripe/cancel',
+                    'success_url' => 'http://atmoscorp.xyz:8455/stripe/success', //TODO: REMPLACER L'URL
+                    'cancel_url' => 'http://atmoscorp.xyz:8455/stripe/cancel',
                     'line_items' => $line_items_array,
                     'mode' => 'payment',
                 ]);

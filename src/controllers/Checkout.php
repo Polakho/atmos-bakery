@@ -66,7 +66,7 @@ class Checkout extends Controller
             header('Location: /checkout?status=unauthorized'); //response code 401 pour dire que l'accès n'est pas autorisé (vu que header et pas de include, obligé de passer par ca) 
         } else {
             $containModel->deleteContain($id);
-            header('Location: /checkout');
+            header('Location: /checkout?status=deleted');
         }
     }
 }

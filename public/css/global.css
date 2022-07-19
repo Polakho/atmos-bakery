@@ -233,6 +233,11 @@ nav {
 
 .small-header {
   visibility: hidden;
+  z-index: 4;
+}
+
+.large-header {
+  z-index: 4;
 }
 
 @media only screen and (max-width: 1100px) {
@@ -748,7 +753,7 @@ button.cancel:hover {
   border-radius: 2em;
 
   width: 600px;
-  height: 450px;
+  height: 500px;
 
   padding: 1em;
 
@@ -1384,12 +1389,15 @@ p.valid-transaction {
   border-radius: 50%;
   transition: all linear 0.2s;
 }
+
 #btn-next:hover {
   background-color: #75959d;
 }
+
 #btn-next:active {
   background-color: #75959d;
 }
+
 #btn-prev {
   outline: none;
   border: none;
@@ -1401,9 +1409,11 @@ p.valid-transaction {
   border-radius: 50%;
   transition: all linear 0.2s;
 }
+
 #btn-prev:hover {
   background-color: #75959d;
 }
+
 #btn-prev:active {
   background-color: #75959d;
 }
