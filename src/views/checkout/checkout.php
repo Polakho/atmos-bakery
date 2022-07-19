@@ -19,6 +19,26 @@
                 if ($status === 'unauthorized') { // Si verif cartId n'appartient pas à userId
                     echo "<div class='alert'>Vous ne pouvez pas modifier le panier de quelqu'un d'autre.</div>";
                 }
+
+                if ($status === 'changed') { // Si verif cartId n'appartient pas à userId
+                    echo '<script>
+                        notifQuantityChanged.classList.add("show");
+              setTimeout(() => {
+                notifQuantityChanged.classList.remove("show");
+              }, 3000);
+                      </script>';
+                }
+
+                if (isset($status)) {
+                    if ($status === 'deleted') { // Si verif cartId n'appartient pas à userId
+                        echo '<script>
+                        notifDel.classList.add("show");
+              setTimeout(() => {
+                notifDel.classList.remove("show");
+              }, 3000);
+                      </script>';
+                    }
+                }
             }
             ?>
             <div class="active-cart">
