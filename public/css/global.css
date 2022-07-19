@@ -1093,6 +1093,10 @@ footer {
   padding-top: 30vh;
 }
 
+.checkout-section footer{
+  position: relative;
+}
+
 .active-cart {
   display: flex;
   flex-flow: column;
