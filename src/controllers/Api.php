@@ -723,8 +723,6 @@ class Api extends Controller
                 $stripe = new \Stripe\StripeClient(
                     'sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul'
                 );
-
-
                 $prices = [];
                 $quantities = [];
                 $line_items_array = [];
@@ -776,6 +774,28 @@ class Api extends Controller
             echo 'ApiErrorException';
             // Display a very generic error to the user, and maybe send
             // yourself an email
+        }
+    }
+    public function success()
+    {
+        $params = $this->params();
+        $this->cartModel = new CartModel();
+        $userId = htmlspecialchars($params['user_id']);
+        if (isset($_SESSION['checkout_session'])) {
+            $checkout_session = $_SESSION['checkout_session'];
+            $stripe = new \Stripe\StripeClient(
+                'sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul'
+            );
+            $stripe->checkout->sessions->retrieve(
+                $checkout_session,
+                []
+            );
+            $cart = $this->cartModel->getActiveCartForUser($userId);
+            // var_dump($cart->getId());
+            include('../src/views/payment/success.php');
+            $this->cartModel->disableCart($cart->getId());
+        } else {
+            header('Location: /');
         }
     }
 }
