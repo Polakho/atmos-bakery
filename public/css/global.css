@@ -219,6 +219,7 @@ nav {
   background-color: var(--color-primary-pink);
 
   transition: 0.3s all linear;
+  cursor: pointer;
 }
 
 .show-cart:hover {
@@ -226,6 +227,24 @@ nav {
 }
 
 .show-cart:active {
+  background-color: var(--btn-color-hover-active-pink);
+}
+.show-cart-menu {
+  border: none;
+  border-radius: 2em;
+  width: 100px;
+  height: 25px;
+  background-color: var(--color-primary-pink);
+
+  transition: 0.3s all linear;
+  cursor: pointer;
+}
+
+.show-cart-menu:hover {
+  background-color: var(--btn-color-hover-active-pink);
+}
+
+.show-cart-menu:active {
   background-color: var(--btn-color-hover-active-pink);
 }
 
@@ -258,8 +277,8 @@ nav {
 }
 
 .menu-box {
-  height: 200px;
-  width: 150px;
+  height: 250px;
+  width: 170px;
   background-color: white;
   padding: 1em;
   display: flex;

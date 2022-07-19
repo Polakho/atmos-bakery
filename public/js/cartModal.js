@@ -188,7 +188,7 @@ function showCart() {
         });
 
 
-        p2.innerHTML = `Total : ${totalPrice}€`;
+        p2.innerHTML = `Total : ${totalPrice.toFixed(2)}€`;
 
         let btnCheckout = document.createElement("button");
         btnCheckout.classList.add('checkout')

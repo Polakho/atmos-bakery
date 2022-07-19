@@ -23,7 +23,11 @@
         <?php
         }
         ?>
-
+        <?php if ($_SERVER['REQUEST_URI'] <> '/checkout') { ?>
+          <button class="show-cart-menu" onClick="showCart()">Panier</button>
+        <?php
+        }
+        ?>
         <li class="menu-list-item"><a href="/auth/logout">Déconnexion</a></li>
         <?php
       } else {
