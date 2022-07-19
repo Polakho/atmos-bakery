@@ -250,7 +250,7 @@ class Stripe extends Controller
     }
 
 
-    public function payment()
+    public function payment() // Fonction utilisé pour créer une session de checkout/paiement
     {
         function random_str(
             int $length = 64,
@@ -295,7 +295,7 @@ class Stripe extends Controller
                 }
                 // var_dump($line_items_array);
                 $session = $stripe->checkout->sessions->create([
-                    'success_url' => 'http://atmoscorp.xyz:8455/stripe/success', //TODO: REMPLACER L'URL
+                    'success_url' => 'http://atmoscorp.xyz:8455/stripe/success',
                     'cancel_url' => 'http://atmoscorp.xyz:8455/stripe/cancel',
                     'line_items' => $line_items_array,
                     'mode' => 'payment',
@@ -335,7 +335,7 @@ class Stripe extends Controller
         }
     }
 
-    public function success()
+    public function success() // Si paiement stripe réussi --> redirection vers cette fonction
     {
         if (isset($_SESSION['checkout_session'])) {
             $checkout_session = $_SESSION['checkout_session'];
@@ -356,7 +356,7 @@ class Stripe extends Controller
     }
 
 
-    public function cancel()
+    public function cancel() // Si le paiment stripe a échoué --> redirection vers ici
     {
         if (isset($_SESSION['checkout_session'])) {
             $checkout_session = $_SESSION['checkout_session'];
