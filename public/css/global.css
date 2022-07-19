@@ -619,7 +619,19 @@ footer {
 }
 
 /* MODAL AJOUT PRODUIT AU PANIER */
-.modal-add-product {}
+.modal-addproduct-container {
+  height: 100%;
+  width: 100vw;
+  z-index: 10;
+  position: fixed;
+  background-color: #4e4e4e4d;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: end;
+  padding: 1em;
+  transition: ease all 0.4s;
+}
 
 /* LOGIN & REGISTER */
 .form-container {

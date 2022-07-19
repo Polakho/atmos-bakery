@@ -31,7 +31,7 @@ function changePage(number) {
 };
 changePage(currentPage);
 
-btnNext.addEventListener("click", function() {
+btnNext.addEventListener("click", function () {
   if (currentPage < totalPages) {
     currentPage++;
     document.querySelector("#page-nbr").innerHTML = (currentPage);
@@ -40,7 +40,7 @@ btnNext.addEventListener("click", function() {
   };
 });
 
-btnPrev.addEventListener("click", function() {
+btnPrev.addEventListener("click", function () {
   if (currentPage > 1) {
     currentPage--;
     document.querySelector("#page-nbr").innerHTML = (currentPage);
@@ -53,6 +53,7 @@ btnPrev.addEventListener("click", function() {
 let currentQuantity = document.querySelector("#product-quantity").textContent;
 let btnMore = document.querySelector("#btn-more");
 let btnLess = document.querySelector("#btn-less");
+let modalAddProductContainer = document.querySelector(".modal-addproduct-container");
 
 function visibleBtnQuantity() {
   if (currentQuantity == 1) {
@@ -63,13 +64,13 @@ function visibleBtnQuantity() {
 };
 visibleBtnQuantity();
 
-btnMore.addEventListener("click", function() {
+btnMore.addEventListener("click", function () {
   currentQuantity++;
   document.querySelector("#product-quantity").innerHTML = (currentQuantity);
   visibleBtnQuantity();
 });
 
-btnLess.addEventListener("click", function() {
+btnLess.addEventListener("click", function () {
   if (currentQuantity > 1) {
     currentQuantity--;
     document.querySelector("#product-quantity").innerHTML = (currentQuantity);
@@ -86,9 +87,15 @@ function showModal() {
   modalState = !modalState;
   if (modalState == false) {
     modal.classList.add("hidden");
+    modalAddProductContainer.style.visibility = "hidden";
+    modalAddProductContainer.style.opacity = "0";
+    body.style.overflow = "auto";
     clearBox(modalHeader);
   } else {
     modal.classList.remove("hidden");
+    modalAddProductContainer.style.visibility = "visible";
+    modalAddProductContainer.style.opacity = "1";
+    body.style.overflow = "hidden";
   }
 };
 
@@ -104,15 +111,15 @@ function clearBox(div) {
 
 let btnCancel = document.querySelector(".cancel");
 
-btnCancel.addEventListener("click", function(){
+btnCancel.addEventListener("click", function () {
   showModal();
   clearBox(modalHeader);
 })
 
 let AllBtnAdd = document.querySelectorAll(".add-product");
 
-AllBtnAdd.forEach(function(btn, index) {
-  btn.addEventListener("click", function() {
+AllBtnAdd.forEach(function (btn, index) {
+  btn.addEventListener("click", function () {
     showModal();
     let product_id = btn.getAttribute("data-product-id");
     let post = {
@@ -121,10 +128,10 @@ AllBtnAdd.forEach(function(btn, index) {
     fetch(baseUrl + "getProductById", {
       method: 'post',
       body: JSON.stringify(post),
-     /* headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      }*/
+      /* headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json',
+       }*/
     }).then((response) => {
       return response.json();
     }).then((res) => {
@@ -141,7 +148,7 @@ AllBtnAdd.forEach(function(btn, index) {
 let cart = document.querySelector(".data-cart");
 let btnAddProduct = document.querySelector(".add-product-action");
 let notif = document.querySelector('.notification-add-product');
-btnAddProduct.addEventListener("click", function() {
+btnAddProduct.addEventListener("click", function () {
   let product_id = modalHeader.getAttribute("data-product-id");
   let quantity = document.querySelector("#product-quantity").textContent;
   let post = {
