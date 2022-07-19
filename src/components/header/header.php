@@ -9,7 +9,7 @@
       <img class="header-logo" src="../../assets/img/Logos/logoAC2.png" alt="top">
     </a>
     <a href="/product">Les produits</a>
-    <a href="/about">À propos</a>
+    <a href="/about">Les magasins</a>
   </div>
   <nav>
     <?php

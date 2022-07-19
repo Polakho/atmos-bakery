@@ -13,7 +13,7 @@
     <ul class="menu-list">
       <li class="menu-list-item"><a href="/">Accueil</a></li>
       <li class="menu-list-item"><a href="/product">Produits</a></li>
-      <li class="menu-list-item"><a href="/about">À propos</a></li>
+      <li class="menu-list-item"><a href="/about">Magasins</a></li>
 
       <?php
       if (isset($_SESSION['user']['id'])) {
