@@ -6,15 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="shortcut icon" href="../../assets/favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href='../../css/global.css'>
     <title>ATMOS ADMIN - PRODUCTS</title>
 </head>
 
 <body>
     <?php
-    if ($_SESSION['user']['roles'] !== 'ADMIN') {
+    if (!isset($_SESSION['user'])) {
     ?>
         <section>
-            <img class="product-logo" s3c="../../assets/img/Logos/logoAC2.png" alt="logo">
+            <img class="header-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo">
+            <h3>Il semblerait que vous vous soyez perdu...</h3>
+            <a href="/">Retourner au site</a>
+        </section>
+    <?php
+        exit();
+    }
+    if ($_SESSION['user']['roles'] !== 'ADMIN') {
+    ?>
+        <section class="roles-error">
+            <img class="product-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo">
             <h3>Il semblerait que vous vous soyez perdu...</h3>
             <a href="/">Retourner au site</a>
         </section>
@@ -26,14 +38,23 @@
                 <a href="/admin"><img class="product-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo"></a>
                 <h1 class="product-title">GESTION DES PRODUITS</h1>
             </div>
-
             <div class="product-add-wrapper">
                 <h3>Liste des produits :</h3>
 
                 <button class="btn btn-primary crud-btn"><a href="/admin/addProduct" class="text-crud">Ajouter un produit</a></button>
+                <?php if (isset(explode('=', $_SERVER['REQUEST_URI'])[1])) {
+                    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+                    if ($id === "success") {
+                ?>
+                        <div class="alert alert-success" style="width:200px" role="alert">
+                            Modification effectuée
+                        </div>
+                <?php
+                    }
+                }
+                ?>
                 <div class="overflowauto">
                     <?php
-                    // var_dump($products);
                     if (isset($products)) {
                         $categories = $productModel->getCategories();
                     ?>
@@ -99,5 +120,13 @@
     }
     ?>
 </body>
+
+<script>
+    let alert = document.querySelector(".alert-success")
+
+    setTimeout(() => {
+        alert.style.display = "none";
+    }, 3000);
+</script>
 
 </html>

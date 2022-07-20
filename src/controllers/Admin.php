@@ -212,7 +212,7 @@ class Admin extends Controller
     <style>
       <?php include './css/global.css'; ?>
     </style>
-  <?php
+<?php
     $userModel = new UserModel();
     $users = $userModel->getAllUsers();
     // return $users;
@@ -241,15 +241,17 @@ class Admin extends Controller
       echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
     }
   }
-  //PARTIE LEANDRE
+
+
+
+  ////////////////////
+  // PARTIE LEANDRE //
+  ////////////////////
+
+  // Redirections
+
   public function products()
   {
-  ?>
-    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-    <style>
-      <?php include './css/global.css'; ?>
-    </style>
-  <?php
     $productModel = new ProductModel();
     $products = $productModel->getAllProductJson();
     include '../src/views/CRUDs/ld_crud_products/products.php';
@@ -257,31 +259,25 @@ class Admin extends Controller
 
   public function addProduct()
   {
-  ?>
-    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-    <style>
-      <?php
-      $productModel = new ProductModel();
-      include './css/global.css'; ?>
-    </style>
-  <?php
+
+    $productModel = new ProductModel();
     include '../src/views/CRUDs/ld_crud_products/addProduct.php';
   }
 
 
   public function updateProduct()
   {
-  ?>
-    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
-    <style>
-      <?php include './css/global.css'; ?>
-    </style>
-<?php
-    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
-    $productModel = new ProductModel();
-    $product = $productModel->arrayGetProductById($id);
-    include '../src/views/CRUDs/ld_crud_products/updateProduct.php';
+    if (isset(explode('=', $_SERVER['REQUEST_URI'])[1])) {
+      $id = explode('=', $_SERVER['REQUEST_URI'])[1];
+      $productModel = new ProductModel();
+      $product = $productModel->arrayGetProductById($id);
+      include '../src/views/CRUDs/ld_crud_products/updateProduct.php';
+    } else {
+      include '../src/views/CRUDs/ld_crud_products/updateProduct.php';
+    }
   }
+
+  // METHODS
 
   public function deleteProduct()
   {
@@ -295,33 +291,37 @@ class Admin extends Controller
         header('Location: /admin/products?status=failed');
       }
     } else {
-      echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
+      include '../src/views/CRUDs/ld_crud_products/updateProduct.php';
     }
   }
 
-  // METHODS
   public function addingProduct()
   {
-    $productModel = new ProductModel();
-    if (isset($_POST['name']) && isset($_POST['price']) && isset($_POST['category'])) {
-      //$name, $price, $categoryId, $description = '', $compo = '', $image = '', $weight = ''
-      $newProductId = $productModel->addProduct($_POST['name'], $_POST['price'], $_POST['category'], $_POST['description'], $_POST['compo'], $_POST['image'], $_POST['weight']);
-      if ($newProductId !== 0) {
-        header('Location: /admin/products?status=success');
+    if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
+      $productModel = new ProductModel();
+
+      if (isset($_POST['name']) && isset($_POST['price']) && isset($_POST['category'])) {
+        //$name, $price, $categoryId, $description = '', $compo = '', $image = '', $weight = ''
+        $newProductId = $productModel->addProduct($_POST['name'], $_POST['price'], $_POST['category'], $_POST['description'], $_POST['compo'], $_POST['image'], $_POST['weight']);
+        if ($newProductId !== 0) {
+          header('Location: /admin/products?status=success');
+        } else {
+          header('Location: /admin/products?status=failed');
+        }
       } else {
-        header('Location: /admin/products?status=failed');
+        $errorMsg = "Veuillez remplir tous les champs.";
+        header('Location: /admin/addProduct');
       }
     } else {
-      $errorMsg = "Veuillez remplir tous les champs.";
-      header('Location: /admin/addProduct');
+      include '../src/views/CRUDs/ld_crud_products/addProduct.php';
     }
   }
 
   public function updatingProduct()
   {
-    $productModel = new ProductModel();
-    $id = explode('=', $_SERVER['REQUEST_URI'])[1];
     if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
+      $productModel = new ProductModel();
+      $id = explode('=', $_SERVER['REQUEST_URI'])[1];
       //$id, $name, $price, $categoryId, $image, $description, $compo = '', $weight = 0
       $check = $productModel->updateProduct($id, $_POST['name'], $_POST['price'], $_POST['category'], $_POST['image'], $_POST['description'], $_POST['compo'], $_POST['weight']);
       if ($check === true) {
@@ -330,7 +330,7 @@ class Admin extends Controller
         header('Location: /admin/products?status=failed');
       }
     } else {
-      echo 'Vous n\'avez pas les droits nécessaires pour effectuer cette action.';
+      include '../src/views/CRUDs/ld_crud_products/updateProduct.php';
     }
   }
 
