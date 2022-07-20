@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>ATMOS ADMIN - STORE</title>
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <style>
+        <?php include './css/global.css'; ?>
+    </style>
+</head>
 <body>
 <?php
 if ($_SESSION['user']['roles'] !== 'ADMIN') {
@@ -12,8 +26,8 @@ if ($_SESSION['user']['roles'] !== 'ADMIN') {
     ?>
     <div class="store-page">
         <div class="store-head-wrapper">
-            <img class="store-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo">
-            <h1 class="store-title">GESTION DES HORRAIRES</h1>
+            <a href="/admin"><img class="store-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo"></a>
+            <h1 class="store-title">GESTION DES HORAIRES</h1>
         </div>
 
         <div class="store-add-wrapper">

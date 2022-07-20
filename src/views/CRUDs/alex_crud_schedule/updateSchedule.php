@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>ATMOS ADMIN - STORE</title>
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <style>
+        <?php include './css/global.css'; ?>
+    </style>
 </head>
 <body>
 <?php
@@ -21,12 +25,12 @@ if ($_SESSION['user']['roles'] !== 'ADMIN') {
     ?>
     <div class="store-page">
         <div class="store-head-wrapper">
-            <img class="store-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo">
-            <a href="/admin/schedule"><h1 class="store-title">GESTION DE L'HORRAIRE</h1></a>
+            <a href="/admin/schedule"><img class="store-logo" src="../../assets/img/Logos/logoAC2.png" alt="logo"></a>
+            <a href="/admin/schedule"><h1 class="store-title">GESTION DE L'HORAIRE</h1></a>
         </div>
         <div class="schedule-edit">
             <div class="edit-info">
-                <h3>Modification des horraires :</h3>
+                <h3>Modification des horaires :</h3>
                 <?php
                 foreach($schedules as $schedule){
                     $day = $schedule->getDay();
@@ -104,7 +108,6 @@ if ($_SESSION['user']['roles'] !== 'ADMIN') {
 ?>
 </body>
 <script>
-    let baseUrl = "http://atmosdev.com/admin/"
     let btn = document.querySelector(".update-schedule")
     let semaine = {};
     let jours = document.querySelectorAll(".jour")
