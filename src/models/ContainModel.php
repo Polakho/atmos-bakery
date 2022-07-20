@@ -125,7 +125,7 @@ class ContainModel
         $row = $stmt->fetch();
         if (isset($row[0])) {
             $cartId = $row[0];
-            $sql = "SELECT user_id FROM cart  WHERE id = :cartId ";
+            $sql = "SELECT user_id FROM cart  WHERE id = :cartId AND status = 1 ";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 "cartId" => $cartId
@@ -136,12 +136,15 @@ class ContainModel
                     return true;
                 } else {
                     return false;
+                    // var_dump('1');
                 }
             } else {
                 return false;
+                // var_dump('2');
             }
         } else {
             return false;
+            // var_dump('3');
         }
     }
 }
