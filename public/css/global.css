@@ -738,7 +738,7 @@ button.cancel:hover {
   color: white;
   border: none;
   cursor: pointer;
-  padding:  0.1em 0.3em;
+  padding: 0.1em 0.3em;
   font-weight: bold;
   font-size: 20px;
   margin-left: 2px;
@@ -970,6 +970,22 @@ button.cancel:hover {
   margin: 5px 0;
 }
 
+.admin-list-wrapper a {
+  color: white;
+  font-size: 16px;
+}
+
+.admin-list-wrapper a:hover {
+  color: rgb(225, 225, 225);
+}
+
+.horizental-crud {
+  border-top: 2px solid var(--color-primary-blue);
+  width: auto;
+  display: inline-block;
+  margin: 15px 0;
+}
+
 /* ANTOINE STORE MANAGMENT */
 .store-logo {
   height: 202px;
@@ -1159,6 +1175,15 @@ button.cancel:hover {
 }
 
 /*PRODUCT MANAGEMENT LEANDRE*/
+section.roles-error {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .product-logo {
   height: 202px;
 }
@@ -1208,7 +1233,7 @@ button.cancel:hover {
   align-items: center;
   justify-content: center;
   width: 35vw;
-  height: 55vh;
+  height: 65vh;
   background-color: var(--color-primary-pink);
   border-radius: 2em;
   padding: 1em;
@@ -1218,7 +1243,7 @@ button.cancel:hover {
 
 .product-display img {
   width: 100%;
-  height: 100%;
+  height: 80%;
 
   object-fit: contain;
 }
@@ -1252,6 +1277,18 @@ button.cancel:hover {
     width: 90vw;
   }
 }
+
+.product-add-wrapper a {
+  color: white;
+  text-decoration: none;
+}
+
+.product-add-wrapper .text-crud:hover {
+  color: rgb(215, 213, 213);
+  transition: all 0.4s;
+}
+
+/* FIN PARTIE PRODUCT MANAGEMENT LEANDRE */
 
 .overflowauto {
   overflow-x: auto;

@@ -63,9 +63,10 @@ class Checkout extends Controller
         $id = explode('&', $id)[0];
         $verif = $containModel->verifyCartUserByContainId($id);
         if ($verif === false) {
-            header('Location: /checkout?status=unauthorized'); //response code 401 pour dire que l'accès n'est pas autorisé (vu que header et pas de include, obligé de passer par ca) 
+            header('Location: /checkout?status=unauthorized'); //response code 401 pour dire que l'accès n'est pas autorisé (vu que header et pas de include, obligé de passer par ca) OU Session
         } else {
             $containModel->deleteContain($id);
+            var_dump($verif);
             header('Location: /checkout?status=deleted');
         }
     }

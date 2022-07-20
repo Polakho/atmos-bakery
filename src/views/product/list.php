@@ -72,7 +72,6 @@
         <?php $this->frontController->footer(); ?>
     </section>
     <div>
-        <!-- Reprendre -->
         <div class="notification-add-product">
             Le produit a bien été ajouté
         </div>

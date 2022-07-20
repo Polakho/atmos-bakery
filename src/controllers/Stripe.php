@@ -21,13 +21,14 @@ class Stripe extends Controller
         $this->containModel = new ContainModel();
         $this->productModel = new ProductModel();
         $this->dotenv  = Dotenv::createImmutable(__DIR__ . "/../../");
+        $this->dotenv->load();
     }
 
 
     public function list()
     {
         header('Content-Type: application/json');
-        $stripe = new \Stripe\StripeClient("sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul");
+        $stripe = new \Stripe\StripeClient($_ENV["STRIPE_SK"]);
         try {
             echo json_decode($stripe->products->all(['limit' => 3]));
         } catch (\Stripe\Exception\CardException $e) {
@@ -62,7 +63,7 @@ class Stripe extends Controller
     public function create($name)
     {
         if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
-            $stripe = new \Stripe\StripeClient("sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul");
+            $stripe = new \Stripe\StripeClient($_ENV["STRIPE_SK"]);
             try {
                 $stripe->products->create([
                     'name' => $name,
@@ -100,7 +101,7 @@ class Stripe extends Controller
 
     public function retrieve($id)
     {
-        $stripe = new \Stripe\StripeClient("sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul");
+        $stripe = new \Stripe\StripeClient($_ENV["STRIPE_SK"]);
         try {
             $stripe->products->retrieve(
                 $id
@@ -140,7 +141,7 @@ class Stripe extends Controller
         if (isset($_SESSION['user']) && $_SESSION['user']['roles'] === 'ADMIN') {
             $productModel = new ProductModel;
             $products = $productModel->getAllProductJson();
-            $stripe = new \Stripe\StripeClient("sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul");
+            $stripe = new \Stripe\StripeClient($_ENV["STRIPE_SK"]);
 
             foreach ($products as $product) {
                 try {
@@ -208,7 +209,7 @@ class Stripe extends Controller
             }
             $productModel = new ProductModel;
             $products = $productModel->getAllProductJson();
-            $stripe = new \Stripe\StripeClient("sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul");
+            $stripe = new \Stripe\StripeClient($_ENV["STRIPE_SK"]);
             try {
                 foreach ($products as $product) {
                     $stripe->products->delete(
@@ -252,25 +253,10 @@ class Stripe extends Controller
 
     public function payment() // Fonction utilisé pour créer une session de checkout/paiement
     {
-        function random_str(
-            int $length = 64,
-            string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        ): string {
-            if ($length < 1) {
-                throw new \RangeException("Length must be a positive integer");
-            }
-            $pieces = [];
-            $max = mb_strlen($keyspace, '8bit') - 1;
-            for ($i = 0; $i < $length; ++$i) {
-                $pieces[] = $keyspace[random_int(0, $max)];
-            }
-            return implode('', $pieces);
-        }
+
         try {
             //go fetch le contain cart pr userid
             if (isset($_SESSION['user'])) {
-
-                $_SESSION['checkout_session'] = random_str();
 
                 $cart = $this->cartModel->getActiveCartForUser($_SESSION['user']['id']);
                 $contains = $this->containModel->getContainsForCart($cart->getId());
@@ -295,8 +281,8 @@ class Stripe extends Controller
                 }
                 // var_dump($line_items_array);
                 $session = $stripe->checkout->sessions->create([
-                    'success_url' => 'http://atmoscorp.xyz:8455/stripe/success',
-                    'cancel_url' => 'http://atmoscorp.xyz:8455/stripe/cancel',
+                    'success_url' => 'http://atmosdev.com/stripe/success',
+                    'cancel_url' => 'http://atmosdev.com/stripe/cancel',
                     'line_items' => $line_items_array,
                     'mode' => 'payment',
                 ]);
@@ -351,7 +337,7 @@ class Stripe extends Controller
             include('../src/views/payment/success.php');
             $this->cartModel->disableCart($cart->getId());
         } else {
-            header('Location: /');
+            include('../src/views/errors/error.php');
         }
     }
 
@@ -371,7 +357,7 @@ class Stripe extends Controller
             header("Refresh:4; Url=/checkout");
             include('../src/views/payment/failed.php');
         } else {
-            header('Location: /');
+            include('../src/views/errors/error.php');
         }
     }
 }
