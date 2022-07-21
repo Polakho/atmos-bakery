@@ -262,7 +262,7 @@ class Stripe extends Controller
                 $contains = $this->containModel->getContainsForCart($cart->getId());
 
                 $stripe = new \Stripe\StripeClient(
-                    'sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul'
+                    $_ENV["STRIPE_SK"]
                 );
 
 
@@ -281,8 +281,8 @@ class Stripe extends Controller
                 }
                 // var_dump($line_items_array);
                 $session = $stripe->checkout->sessions->create([
-                    'success_url' => 'http://atmosdev.com/stripe/success',
-                    'cancel_url' => 'http://atmosdev.com/stripe/cancel',
+                    'success_url' => 'http://atmos:8888/stripe/success',
+                    'cancel_url' => 'http://atmos:8888/stripe/cancel',
                     'line_items' => $line_items_array,
                     'mode' => 'payment',
                 ]);
@@ -326,7 +326,7 @@ class Stripe extends Controller
         if (isset($_SESSION['checkout_session'])) {
             $checkout_session = $_SESSION['checkout_session'];
             $stripe = new \Stripe\StripeClient(
-                'sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul'
+                $_ENV["STRIPE_SK"]
             );
             $stripe->checkout->sessions->retrieve(
                 $checkout_session,
@@ -348,7 +348,7 @@ class Stripe extends Controller
             $checkout_session = $_SESSION['checkout_session'];
 
             $stripe = new \Stripe\StripeClient(
-                'sk_test_51LMubWEwkB3AlPNOHdSWpQtXjSuqPCZHdxL0dKhMeavcVV4b7VMJfvFJzMsOkSwojslHH55BbQFZAPHXNJ1yfnID00mquLbGul'
+                $_ENV["STRIPE_SK"]
             );
             $stripe->checkout->sessions->retrieve(
                 $checkout_session,

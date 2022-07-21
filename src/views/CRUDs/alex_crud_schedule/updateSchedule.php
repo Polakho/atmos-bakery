@@ -108,6 +108,7 @@ if ($_SESSION['user']['roles'] !== 'ADMIN') {
 ?>
 </body>
 <script>
+// RECUPERATION DES HORAIRES
     let btn = document.querySelector(".update-schedule")
     let semaine = {};
     let jours = document.querySelectorAll(".jour")
@@ -128,7 +129,7 @@ if ($_SESSION['user']['roles'] !== 'ADMIN') {
             semaine,
             storeId : <?= $id ?>
         }
-        fetch(/*baseUrl + */"http://atmos:8888/admin/updatingSchedules", {
+        fetch(window.location.origin + "/admin/updatingSchedules", {
             method: 'post',
             body: JSON.stringify(post),
             headers: {
@@ -145,5 +146,7 @@ if ($_SESSION['user']['roles'] !== 'ADMIN') {
             console.log(error);
         });
     })
+// RECUPERATION DES HORAIRES
+
 </script>
 </html>

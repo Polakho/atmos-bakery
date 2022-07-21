@@ -353,6 +353,11 @@ class Admin extends Controller
     $storeModel = new StoreModel();
     $store = $storeModel->getStoreById($id);
 
+    if ($store == false){
+        include '../src/views/errors/404.php';
+        exit();
+    }
+
     $scheduleModel = new ScheduleModel();
     $schedules = $scheduleModel->getSchedulesByStoreId($id);
 
