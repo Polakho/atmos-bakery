@@ -1,3 +1,3 @@
 # ATMOS BAKERY FRONT
 
-C'est le repo du front pour notre site. J'essaie de faire une structure fluide et reactive en séparant le plus possibles les composants des pages pour qu'ils puissent etre indépendants sans se faire modifier des aspects par d'autres pages.
+Bakery website done in MVC PHP without framework. In this website you can find a presentation of the company, a listing of the different products and a ordering system for client.
